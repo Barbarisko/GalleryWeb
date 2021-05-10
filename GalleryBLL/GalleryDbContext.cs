@@ -1,19 +1,19 @@
 ﻿using System;
-using GalleryBLL.Models;
+using GalleryDAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
-namespace GalleryBLL
+namespace GalleryDAL
 {
-    public partial class postgresContext : DbContext
+    public partial class GalleryDbContext : DbContext
     {
-        public postgresContext()
+        public GalleryDbContext()
         {
         }
 
-        public postgresContext(DbContextOptions<postgresContext> options)
+        public GalleryDbContext(DbContextOptions<GalleryDbContext> options)
             : base(options)
         {
         }
@@ -38,7 +38,7 @@ namespace GalleryBLL
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseNpgsql("Server=165.232.107.123;Database=postgres;Username=postgres;Password=1;Persist Security Info=True;");
+                optionsBuilder.UseNpgsql("Host=165.232.107.123;Username=postgres;Password=1;Database=postgres;Persist Security Info=True;");
             }
         }
 
@@ -48,15 +48,14 @@ namespace GalleryBLL
 
             modelBuilder.Entity<Artist>(entity =>
             {
-                entity.HasKey(e => e.IdArtist)
-                    .HasName("artists_pkey");
-
                 entity.ToTable("artists");
 
                 entity.HasIndex(e => e.Telephone, "artists_telephone_key")
                     .IsUnique();
 
-                entity.Property(e => e.IdArtist).HasColumnName("id_artist");
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasDefaultValueSql("nextval('artists_id_artist_seq'::regclass)");
 
                 entity.Property(e => e.ArtDirection)
                     .HasMaxLength(15)
@@ -97,12 +96,11 @@ namespace GalleryBLL
 
             modelBuilder.Entity<City>(entity =>
             {
-                entity.HasKey(e => e.IdCity)
-                    .HasName("cities_pkey");
-
                 entity.ToTable("cities");
 
-                entity.Property(e => e.IdCity).HasColumnName("id_city");
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasDefaultValueSql("nextval('cities_id_city_seq'::regclass)");
 
                 entity.Property(e => e.IdCountry).HasColumnName("id_country");
 
@@ -128,15 +126,14 @@ namespace GalleryBLL
 
             modelBuilder.Entity<Country>(entity =>
             {
-                entity.HasKey(e => e.IdCountry)
-                    .HasName("countries_pkey");
-
                 entity.ToTable("countries");
 
                 entity.HasIndex(e => e.Name, "countries_name_key")
                     .IsUnique();
 
-                entity.Property(e => e.IdCountry).HasColumnName("id_country");
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasDefaultValueSql("nextval('countries_id_country_seq'::regclass)");
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(20)
@@ -145,12 +142,11 @@ namespace GalleryBLL
 
             modelBuilder.Entity<CurrentExhibition>(entity =>
             {
-                entity.HasKey(e => e.IdCurrExh)
-                    .HasName("current_exhibitions_pkey");
-
                 entity.ToTable("current_exhibitions");
 
-                entity.Property(e => e.IdCurrExh).HasColumnName("id_curr_exh");
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasDefaultValueSql("nextval('current_exhibitions_id_curr_exh_seq'::regclass)");
 
                 entity.Property(e => e.IdEmployee).HasColumnName("id_employee");
 
@@ -179,15 +175,14 @@ namespace GalleryBLL
 
             modelBuilder.Entity<Employee>(entity =>
             {
-                entity.HasKey(e => e.IdEmployee)
-                    .HasName("employees_pkey");
-
                 entity.ToTable("employees");
 
                 entity.HasIndex(e => e.Telephone, "employees_telephone_key")
                     .IsUnique();
 
-                entity.Property(e => e.IdEmployee).HasColumnName("id_employee");
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasDefaultValueSql("nextval('employees_id_employee_seq'::regclass)");
 
                 entity.Property(e => e.AddInfo).HasColumnName("add_info");
 
@@ -229,12 +224,11 @@ namespace GalleryBLL
 
             modelBuilder.Entity<ExhibitPlace>(entity =>
             {
-                entity.HasKey(e => e.IdExhPlace)
-                    .HasName("exhibit_places_pkey");
-
                 entity.ToTable("exhibit_places");
 
-                entity.Property(e => e.IdExhPlace).HasColumnName("id_exh_place");
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasDefaultValueSql("nextval('exhibit_places_id_exh_place_seq'::regclass)");
 
                 entity.Property(e => e.IdCity).HasColumnName("id_city");
 
@@ -253,12 +247,11 @@ namespace GalleryBLL
 
             modelBuilder.Entity<ExhibitedPicture>(entity =>
             {
-                entity.HasKey(e => e.IdExhPic)
-                    .HasName("exhibited_pictures_pkey");
-
                 entity.ToTable("exhibited_pictures");
 
-                entity.Property(e => e.IdExhPic).HasColumnName("id_exh_pic");
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasDefaultValueSql("nextval('exhibited_pictures_id_exh_pic_seq'::regclass)");
 
                 entity.Property(e => e.IdCurrExh).HasColumnName("id_curr_exh");
 
@@ -281,12 +274,11 @@ namespace GalleryBLL
 
             modelBuilder.Entity<Exhibition>(entity =>
             {
-                entity.HasKey(e => e.IdExh)
-                    .HasName("exhibitions_pkey");
-
                 entity.ToTable("exhibitions");
 
-                entity.Property(e => e.IdExh).HasColumnName("id_exh");
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasDefaultValueSql("nextval('exhibitions_id_exh_seq'::regclass)");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -298,7 +290,7 @@ namespace GalleryBLL
 
             modelBuilder.Entity<OwnedPicture>(entity =>
             {
-                entity.HasKey(e => e.IdOwnedPicture)
+                entity.HasKey(e => e.Id)
                     .HasName("owned_pictures_pkey");
 
                 entity.ToTable("owned_pictures");
@@ -306,7 +298,7 @@ namespace GalleryBLL
                 entity.HasIndex(e => e.IdPicture, "owned_pictures_id_picture_key")
                     .IsUnique();
 
-                entity.Property(e => e.IdOwnedPicture).HasColumnName("id_owned_picture");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.BuyDate)
                     .HasColumnType("date")
@@ -330,9 +322,6 @@ namespace GalleryBLL
 
             modelBuilder.Entity<Owner>(entity =>
             {
-                entity.HasKey(e => e.IdOwner)
-                    .HasName("owners_pkey");
-
                 entity.ToTable("owners");
 
                 entity.HasIndex(e => e.BankAcc, "owners_bank_acc_key")
@@ -341,7 +330,9 @@ namespace GalleryBLL
                 entity.HasIndex(e => e.Telephone, "owners_telephone_key")
                     .IsUnique();
 
-                entity.Property(e => e.IdOwner).HasColumnName("id_owner");
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasDefaultValueSql("nextval('owners_id_owner_seq'::regclass)");
 
                 entity.Property(e => e.BankAcc)
                     .HasMaxLength(100)
@@ -369,12 +360,11 @@ namespace GalleryBLL
 
             modelBuilder.Entity<Picture>(entity =>
             {
-                entity.HasKey(e => e.IdPicture)
-                    .HasName("pictures_pkey");
-
                 entity.ToTable("pictures");
 
-                entity.Property(e => e.IdPicture).HasColumnName("id_picture");
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasDefaultValueSql("nextval('pictures_id_picture_seq'::regclass)");
 
                 entity.Property(e => e.AddInfo).HasColumnName("add_info");
 
@@ -412,15 +402,14 @@ namespace GalleryBLL
 
             modelBuilder.Entity<Technique>(entity =>
             {
-                entity.HasKey(e => e.IdTechnique)
-                    .HasName("techniques_pkey");
-
                 entity.ToTable("techniques");
 
                 entity.HasIndex(e => e.Name, "techniques_name_key")
                     .IsUnique();
 
-                entity.Property(e => e.IdTechnique).HasColumnName("id_technique");
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasDefaultValueSql("nextval('techniques_id_technique_seq'::regclass)");
 
                 entity.Property(e => e.Base)
                     .IsRequired()
@@ -440,12 +429,11 @@ namespace GalleryBLL
 
             modelBuilder.Entity<Ticket>(entity =>
             {
-                entity.HasKey(e => e.IdTicket)
-                    .HasName("tickets_pkey");
-
                 entity.ToTable("tickets");
 
-                entity.Property(e => e.IdTicket).HasColumnName("id_ticket");
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasDefaultValueSql("nextval('tickets_id_ticket_seq'::regclass)");
 
                 entity.Property(e => e.BuyDate)
                     .HasColumnType("date")

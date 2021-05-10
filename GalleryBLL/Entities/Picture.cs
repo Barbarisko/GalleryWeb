@@ -3,16 +3,15 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace GalleryBLL.Models
+namespace GalleryDAL.Entities
 {
-    public partial class Picture
+    public partial class Picture : BaseEntity
     {
         public Picture()
         {
             ExhibitedPictures = new HashSet<ExhibitedPicture>();
         }
 
-        public int IdPicture { get; set; }
         public string Name { get; set; }
         public DateTime CreateDate { get; set; }
         public int? Price { get; set; }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace GalleryBLL.Models
+namespace GalleryDAL.Entities
 {
     public partial class CmdExec
     {

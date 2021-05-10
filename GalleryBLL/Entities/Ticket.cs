@@ -3,11 +3,10 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace GalleryBLL.Models
+namespace GalleryDAL.Entities
 {
-    public partial class Ticket
+    public partial class Ticket : BaseEntity
     {
-        public int IdTicket { get; set; }
         public int IdCurrExh { get; set; }
         public DateTime BuyDate { get; set; }
 

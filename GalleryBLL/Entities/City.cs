@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace GalleryBLL.Models
+namespace GalleryDAL.Entities
 {
-    public partial class City
+    public partial class City : BaseEntity
     {
         public City()
         {
@@ -14,7 +14,6 @@ namespace GalleryBLL.Models
             ExhibitPlaces = new HashSet<ExhibitPlace>();
         }
 
-        public int IdCity { get; set; }
         public string Name { get; set; }
         public int IdCountry { get; set; }
 

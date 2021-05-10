@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace GalleryBLL.Models
+namespace GalleryDAL.Entities
 {
-    public partial class CurrentExhibition
+    public partial class CurrentExhibition : BaseEntity
     {
         public CurrentExhibition()
         {
@@ -13,7 +13,6 @@ namespace GalleryBLL.Models
             Tickets = new HashSet<Ticket>();
         }
 
-        public int IdCurrExh { get; set; }
         public int IdEmployee { get; set; }
         public int IdExh { get; set; }
         public int IdExhPlace { get; set; }

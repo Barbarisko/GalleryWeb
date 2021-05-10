@@ -3,11 +3,10 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace GalleryBLL.Models
+namespace GalleryDAL.Entities
 {
-    public partial class OwnedPicture
+    public partial class OwnedPicture : BaseEntity
     {
-        public int IdOwnedPicture { get; set; }
         public int? IdOwner { get; set; }
         public int IdPicture { get; set; }
         public DateTime BuyDate { get; set; }

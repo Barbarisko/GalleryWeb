@@ -3,25 +3,15 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace GalleryBLL.Models
+namespace GalleryDAL.Entities
 {
-    public partial class Artist
+    public partial class Artist: BaseEntity
     {
         public Artist()
         {
             Pictures = new HashSet<Picture>();
         }
 
-        //private string surname;
-        //private string name;
-        //private string last_name;
-        //private DateTime bday;
-        //private DateTime death;
-        //private string art_direction;
-        //private string telephone;
-        //private CityDTO id_city;
-
-        public int IdArtist { get; set; }
         public string Surname { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }

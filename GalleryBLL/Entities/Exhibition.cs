@@ -3,21 +3,18 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace GalleryBLL.Models
+namespace GalleryDAL.Entities
 {
-    public partial class ExhibitPlace
+    public partial class Exhibition : BaseEntity
     {
-        public ExhibitPlace()
+        public Exhibition()
         {
             CurrentExhibitions = new HashSet<CurrentExhibition>();
         }
 
-        public int IdExhPlace { get; set; }
         public string Name { get; set; }
-        public int? Telephone { get; set; }
-        public int IdCity { get; set; }
+        public int? Price { get; set; }
 
-        public virtual City IdCityNavigation { get; set; }
         public virtual ICollection<CurrentExhibition> CurrentExhibitions { get; set; }
     }
 }
