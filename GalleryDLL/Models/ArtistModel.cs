@@ -16,6 +16,7 @@ namespace GalleryBLL.Models
         private string telephone;
         private CityModel city;
         private List<PictureModel> pictures;
+        private int? idCity;
 
         public string Surname { get => surname; set => surname = value; }
         public string Name { get => name; set => name = value; }
@@ -24,7 +25,7 @@ namespace GalleryBLL.Models
         public DateTime? Death { get => death; set => death = value; }
         public string ArtDirection { get => artDirection; set => artDirection = value; }
         public string Telephone { get => telephone; set => telephone = value; }
-        //public int? IdCity { get; set; }
+        public int? IdCity { get => idCity; set => idCity = value; }
 
         public CityModel City { get => city; set => city = value; }
         public List<PictureModel> Pictures { get => pictures; set => pictures = value; }

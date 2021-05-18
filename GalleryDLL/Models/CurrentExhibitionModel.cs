@@ -12,10 +12,13 @@ namespace GalleryBLL.Models
         private ExhibitPlaceModel exhibitPlace;
         private List<ExhibitedPictureModel> exhibitedPictures;
         private List<TicketModel> tickets;
+        private int idEmployee;
+        private int idExh;
+        private int idExhPlace;
 
-        //public int IdEmployee { get; set; }
-        //public int IdExh { get; set; }
-        //public int IdExhPlace { get; set; }
+        public int IdEmployee { get => idEmployee; set => idEmployee = value; }
+        public int IdExh { get => idExh; set => idExh = value; }
+        public int IdExhPlace { get => idExhPlace; set => idExhPlace = value; }
 
         //public Employee IdEmployeeNavigation { get; set; }
         //public Exhibition IdExhNavigation { get; set; }

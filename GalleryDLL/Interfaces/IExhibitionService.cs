@@ -7,8 +7,8 @@ namespace GalleryBLL.Interfaces
 {
     public interface IExhibitionService
     {
-        void AddNewExhibition(ExhibitionModel exhibition);
-        void AddPictureToExhibition(ExhibitionModel exhibition, PictureModel picture);
+        void AddNewExhibition(int exhId);
+        void AddPictureToExhibition(PictureModel picture, int exhId, int roomNum);
         void UpdateExhibition(string oldId, string newId);
         List<ExhibitedPictureModel> GetAllPicsFromExhibition(string exhId);
         decimal CountEstimatePrice(string currexhId);

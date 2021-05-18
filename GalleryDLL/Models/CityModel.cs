@@ -12,9 +12,10 @@ namespace GalleryBLL.Models
         private List<ArtistModel> artists;
         private List<EmployeeModel> employees;
         private List<ExhibitPlaceModel> exhibitPlaces;
+        private int idCountry;
 
         public string Name { get => name; set => name = value; }
-        //public int IdCountry { get; set; }
+        public int IdCountry { get => idCountry; set => idCountry = value; }
         public CountryModel Country { get => country; set => country = value; }
         //public Country IdCountryNavigation { get; set; }
         public List<ArtistModel> Artists { get => artists; set => artists = value; }

@@ -10,9 +10,11 @@ namespace GalleryBLL.Models
         private DateTime buyDate;
         private OwnerModel owner;
         private PictureModel picture;
+        private int? idOwner;
+        private int idPicture;
 
-        //public int? IdOwner { get; set; }
-        //public int IdPicture { get; set; }
+        public int? IdOwner { get => idOwner; set => idOwner = value; }
+        public int IdPicture { get => idPicture; set => idPicture = value; }
         public DateTime BuyDate { get => buyDate; set => buyDate = value; }
         public OwnerModel? Owner { get => owner; set => owner = value; }
         public PictureModel Picture { get => picture; set => picture = value; }
