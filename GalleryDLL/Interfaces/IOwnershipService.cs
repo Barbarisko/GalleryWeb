@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GalleryBLL.Interfaces
 {
-    interface IOwnershipService
+    public interface IOwnershipService
     {
     }
 }

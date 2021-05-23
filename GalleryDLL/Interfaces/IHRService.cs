@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GalleryBLL.Interfaces
 {
-    public interface IPictureService
+    public interface  IHRService
     {
     }
 }

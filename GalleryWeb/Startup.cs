@@ -1,6 +1,14 @@
+using AutoMapper;
+using GalleryBLL.Interfaces;
+using GalleryBLL.Services;
+using GalleryDAL;
+using GalleryDAL.Entities;
+using GalleryDAL.Repository;
+using GalleryDAL.UnitOfWork;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -23,6 +31,28 @@ namespace GalleryWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddEntityFrameworkNpgsql().AddDbContext<GalleryDbContext>(opt =>
+                                 opt.UseNpgsql("Host = 165.232.107.123; Username = postgres; Password = 1; Database = postgres;" +
+                                                " Persist Security Info = True"));
+
+            services.AddScoped<IRepository<Artist>, Repository<Artist>>();
+            services.AddScoped<IRepository<City>, Repository<City>>();
+            services.AddScoped<IRepository<Country>, Repository<Country>>();
+            services.AddScoped<IRepository<CurrentExhibition>, Repository<CurrentExhibition>>();
+            services.AddScoped<IRepository<Employee>, Repository<Employee>>();
+            services.AddScoped<IRepository<ExhibitedPicture>, Repository<ExhibitedPicture>>();
+            services.AddScoped<IRepository<Exhibition>, Repository<Exhibition>>();
+            services.AddScoped<IRepository<ExhibitPlace>, Repository<ExhibitPlace>>();
+            services.AddScoped<IRepository<OwnedPicture>, Repository<OwnedPicture>>();
+            services.AddScoped<IRepository<Owner>, Repository<Owner>>();
+            services.AddScoped<IRepository<Picture>, Repository<Picture>>();
+            services.AddScoped<IRepository<Technique>, Repository<Technique>>();
+            services.AddScoped<IRepository<Ticket>, Repository<Ticket>>();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddSingleton(new MapperConfiguration(c => c.AddProfile(new GalleryBLL.Mapper())).CreateMapper());
+            services.AddTransient<IArtistService, ArtistService>();
+
             services.AddControllersWithViews();
         }
 

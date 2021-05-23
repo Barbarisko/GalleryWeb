@@ -1,10 +1,13 @@
-﻿using System;
+﻿using GalleryBLL.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace GalleryBLL.Interfaces
 {
-    interface IArtistService
+    public interface IArtistService
     {
+        IEnumerable<ArtistModel> GetAllCategories();
+
     }
 }

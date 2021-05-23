@@ -1,4 +1,5 @@
-﻿using GalleryWeb.Models;
+﻿using GalleryBLL.Interfaces;
+using GalleryWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,10 +13,12 @@ namespace GalleryWeb.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        IArtistService artistsService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IArtistService artistsService)
         {
             _logger = logger;
+            this.artistsService = artistsService;
         }
 
         public IActionResult Index()
@@ -24,6 +27,23 @@ namespace GalleryWeb.Controllers
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+        public IActionResult Artists()
+        {
+            Artists model = new Artists(artistsService.GetAllCategories().ToList());
+            return View(model);
+        }
+        public IActionResult Collections()
+        {
+            return View();
+        }
+        public IActionResult Cart()
+        {
+            return View();
+        }
+        public IActionResult Contacts()
         {
             return View();
         }

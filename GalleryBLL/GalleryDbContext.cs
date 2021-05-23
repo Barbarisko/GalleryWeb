@@ -16,11 +16,11 @@ namespace GalleryDAL
         public GalleryDbContext(DbContextOptions<GalleryDbContext> options)
             : base(options)
         {
+           // DbInitializer.Initialize(this);
         }
 
         public virtual DbSet<Artist> Artists { get; set; }
         public virtual DbSet<City> Cities { get; set; }
-        public virtual DbSet<CmdExec> CmdExecs { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<CurrentExhibition> CurrentExhibitions { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
@@ -113,15 +113,6 @@ namespace GalleryDAL
                     .HasForeignKey(d => d.IdCountry)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("cities_id_country_fkey");
-            });
-
-            modelBuilder.Entity<CmdExec>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToTable("cmd_exec");
-
-                entity.Property(e => e.CmdOutput).HasColumnName("cmd_output");
             });
 
             modelBuilder.Entity<Country>(entity =>

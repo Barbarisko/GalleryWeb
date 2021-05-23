@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GalleryBLL.Interfaces
 {
-    interface ICartService
+    public interface ICartService
     {
         //mb обьединю с тикетсервисом
     }
