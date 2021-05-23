@@ -19,6 +19,7 @@ namespace GalleryDAL.Entities
         public string AddInfo { get; set; }
         public int IdArtist { get; set; }
         public int IdTechnique { get; set; }
+        public string Url { get; set ; }
 
         public Artist IdArtistNavigation { get; set; }
         public Technique IdTechniqueNavigation { get; set; }

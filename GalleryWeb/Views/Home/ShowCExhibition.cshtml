@@ -1,0 +1,45 @@
+﻿@using GalleryBLL.Models
+@model GalleryWeb.Models.SingleExh
+@{
+    ViewData["Title"] = "[ Exhibition ]";
+}
+
+<section class="py-5">
+    <div class="container">
+        <!-- Page Heading/Breadcrumbs-->
+        <h1>
+            Exhibition Name
+            <small>status(current, archive, future)</small>
+        </h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item active">Name</li>
+        </ol>
+        <!-- Image Header-->
+        <img class="img-fluid rounded mb-4" src="https://via.placeholder.com/1200x300" alt="..." />
+        <!-- Marketing Icons Section-->
+        <div class="row">
+            <div class="col-lg-4 mb-4 mb-lg-0">
+                <div class="card h-100">
+                    <h4 class="card-header">Picture Title 1</h4>
+                    <div class="card-body"><p class="card-text">Picture description</p></div>
+                    <div class="card-footer"><a asp-controller="Home" asp-action="ShowPicture">Learn More</a></div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4 mb-lg-0">
+                <div class="card h-100">
+                    <h4 class="card-header">Picture Title 2</h4>
+                    <div class="card-body"><p class="card-text">Picture description</p></div>
+                    <div class="card-footer"><a asp-controller="Home" asp-action="ShowPicture">Learn More</a></div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4 mb-lg-0">
+                <div class="card h-100">
+                    <h4 class="card-header">Picture Title 3</h4>
+                    <div class="card-body"><p class="card-text">Picture description</p></div>
+                    <div class="card-footer"><a asp-controller="Home" asp-action="ShowPicture">Learn More</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

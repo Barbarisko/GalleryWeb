@@ -24,4 +24,9 @@
     <ProjectReference Include="..\GalleryDLL\GalleryBLL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Artists\" />
+    <Folder Include="Views\Explore\" />
+  </ItemGroup>
+
 </Project>

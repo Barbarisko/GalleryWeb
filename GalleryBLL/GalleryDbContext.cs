@@ -368,6 +368,11 @@ namespace GalleryDAL
                     .HasMaxLength(20)
                     .HasColumnName("genre");
 
+                entity.Property(e => e.Url)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnName("url");
+
                 entity.Property(e => e.IdArtist).HasColumnName("id_artist");
 
                 entity.Property(e => e.IdTechnique).HasColumnName("id_technique");

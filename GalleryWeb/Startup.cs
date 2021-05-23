@@ -50,8 +50,13 @@ namespace GalleryWeb
             services.AddScoped<IRepository<Ticket>, Repository<Ticket>>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             services.AddSingleton(new MapperConfiguration(c => c.AddProfile(new GalleryBLL.Mapper())).CreateMapper());
+
+            services.AddTransient<IHRService, HRService>();
             services.AddTransient<IArtistService, ArtistService>();
+            services.AddTransient<IExhibitionService, ExhibitionService>();
+            services.AddTransient<IPictureService, PictureService>();
 
             services.AddControllersWithViews();
         }

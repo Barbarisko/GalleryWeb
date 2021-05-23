@@ -7,10 +7,13 @@ namespace GalleryBLL.Interfaces
 {
     public interface IExhibitionService
     {
+        IEnumerable<ExhibitionModel> GetAllExhibitions();
+        ExhibitionModel GetExhById(int Id);
+ 
         void AddNewExhibition(int exhId);
         void AddPictureToExhibition(PictureModel picture, int exhId, int roomNum);
         void UpdateExhibition(string oldId, string newId);
-        List<ExhibitedPictureModel> GetAllPicsFromExhibition(string exhId);
+        List<ExhibitedPictureModel> GetAllPicsFromExhibition(int exhId);
         decimal CountEstimatePrice(string currexhId);
         void DeleteExhibition(int exhId);
         void DeletePicFromExhibition(int picId, int currexhId);

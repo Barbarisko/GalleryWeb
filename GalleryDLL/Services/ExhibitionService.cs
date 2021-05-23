@@ -21,11 +21,20 @@ namespace GalleryBLL.Services
             _mapper = mapper;
         }
 
+
+        public IEnumerable<ExhibitionModel> GetAllExhibitions()
+        {
+            IEnumerable<Exhibition> exhEntities = _unitOfWork.ExhibitionRepository.GetAll();
+            return _mapper.Map<IEnumerable<ExhibitionModel>>(exhEntities);
+        }
+        public ExhibitionModel GetExhById(int id)
+        {
+            return _mapper.Map<ExhibitionModel>(_unitOfWork.ExhibitionRepository.Get(id));       
+        }
         public void AddNewExhibition(int exhId)
         {
             throw new NotImplementedException();
         }
-
         public void AddPictureToExhibition(PictureModel picture, int currexhId, int roomNum)
         {
             ExhibitedPicture picEntity = _unitOfWork.ExhibitedPictureRepository.GetAll().ToList().Find(
@@ -64,9 +73,12 @@ namespace GalleryBLL.Services
             throw new NotImplementedException();
         }
 
-        public List<ExhibitedPictureModel> GetAllPicsFromExhibition(string exhId)
+        public List<ExhibitedPictureModel> GetAllPicsFromExhibition(int cexhId)
         {
-            throw new NotImplementedException();
+            List<ExhibitedPicture> exhPicEntities = _unitOfWork.ExhibitedPictureRepository.GetAll().ToList();
+                //.FindAll(e=>e.IdCurrExh == cexhId);
+
+            return _mapper.Map<List<ExhibitedPictureModel>>(exhPicEntities);
         }
 
         public void UpdateExhibition(string oldId, string newId)

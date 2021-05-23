@@ -25,7 +25,7 @@
                     <div class="card h-100">
                         <a href="#!"><img class="card-img-top" src="https://via.placeholder.com/700x400" alt="..." /></a>
                         <div class="card-body">
-                            <h4 class="card-title"><a href="#!">@a.Name @a.LastName </a></h4>
+                            <h4 class="card-title"><a asp-controller="Home" asp-action="ShowArtist" asp-route-artistId="@a.Id">@a.Name @a.LastName </a></h4>
                             <p class="card-text">@a.ArtDirection</p>
                         </div>
                     </div>
@@ -42,8 +42,6 @@
                 </a>
             </li>
             <li class="page-item"><a class="page-link" href="#!">1</a></li>
-            <li class="page-item"><a class="page-link" href="#!">2</a></li>
-            <li class="page-item"><a class="page-link" href="#!">3</a></li>
             <li class="page-item">
                 <a class="page-link" href="#" aria-label="Next">
                     <span aria-hidden="true">»</span>

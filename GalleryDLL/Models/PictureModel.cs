@@ -12,6 +12,7 @@ namespace GalleryBLL.Models
         private int? price;
         private string genre;
         private string addInfo;
+        private string url;
         private ArtistModel artist;
         private TechniqueModel technique;
         private OwnedPictureModel ownedPicture;
@@ -24,6 +25,7 @@ namespace GalleryBLL.Models
         public int? Price { get => price; set => price = value; }
         public string Genre { get => genre; set => genre = value; }
         public string AddInfo { get => addInfo; set => addInfo = value; }
+        public string Url { get => url; set => url = value; }
         public int IdArtist { get => idArtist; set => idArtist = value; }
         public int IdTechnique { get => idTechnique; set => idTechnique = value; }
         public ArtistModel Artist { get => artist; set => artist = value; }

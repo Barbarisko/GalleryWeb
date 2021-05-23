@@ -7,7 +7,8 @@ namespace GalleryBLL.Interfaces
 {
     public interface IArtistService
     {
-        IEnumerable<ArtistModel> GetAllCategories();
+        IEnumerable<ArtistModel> GetAllArtists();
+        ArtistModel GetArtistById(int id);
 
     }
 }
