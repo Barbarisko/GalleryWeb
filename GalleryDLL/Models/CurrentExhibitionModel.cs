@@ -12,6 +12,7 @@ namespace GalleryBLL.Models
         private ExhibitPlaceModel exhibitPlace;
         private List<ExhibitedPictureModel> exhibitedPictures;
         private List<TicketModel> tickets;
+        private int maxTicketNumber;
         private int idEmployee;
         private int idExh;
         private int idExhPlace;
@@ -28,5 +29,6 @@ namespace GalleryBLL.Models
         public ExhibitPlaceModel ExhibitPlace { get => exhibitPlace; set => exhibitPlace = value; }
         public List<ExhibitedPictureModel> ExhibitedPictures { get => exhibitedPictures; set => exhibitedPictures = value; }
         public List<TicketModel> Tickets { get => tickets; set => tickets = value; }
+        public int MaxTicketNumber { get => maxTicketNumber; set => maxTicketNumber = value; }
     }
 }

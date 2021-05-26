@@ -9,12 +9,11 @@ namespace GalleryWeb.Models
     public class SingleArtist
     {
         public ArtistModel artist;
-        public List<PictureModel> pics;
 
         public SingleArtist(ArtistModel artist, List<PictureModel> pics)
         {
             this.artist = artist;
-            this.pics = pics;
+            artist.Pictures = pics;
         }
     }
 }

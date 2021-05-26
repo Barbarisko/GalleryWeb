@@ -437,7 +437,7 @@ namespace GalleryDAL
 
                 entity.Property(e => e.IdCurrExh).HasColumnName("id_curr_exh");
 
-                entity.HasOne(d => d.IdCurrExhNavigation)
+                entity.HasOne(d => d.CurrentExhibition)
                     .WithMany(p => p.Tickets)
                     .HasForeignKey(d => d.IdCurrExh)
                     .OnDelete(DeleteBehavior.ClientSetNull)

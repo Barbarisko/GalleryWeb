@@ -53,13 +53,14 @@ namespace GalleryWeb.Controllers
         {
             return View();
         }
-        public IActionResult ShowPicture()
+        public IActionResult ShowPicture(int picId)
         {
+
             return View();
         }
-        public IActionResult ShowCExhibition(int id)
+        public IActionResult ShowCExhibition(int eId)
         {
-            SingleExh model = new SingleExh(exhibitionService.GetExhById(id));
+            SingleExh model = new SingleExh(exhibitionService.GetExhById(eId));
             return View(model);
         }
         public IActionResult ShowArtist(int artistId)

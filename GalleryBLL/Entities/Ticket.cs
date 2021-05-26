@@ -10,6 +10,8 @@ namespace GalleryDAL.Entities
         public int IdCurrExh { get; set; }
         public DateTime BuyDate { get; set; }
 
-        public virtual CurrentExhibition IdCurrExhNavigation { get; set; }
+        public CurrentExhibition CurrentExhibition { get; set; }
+        public string CartId { get ; set; }
+        public int Quantity { get; set; }
     }
 }

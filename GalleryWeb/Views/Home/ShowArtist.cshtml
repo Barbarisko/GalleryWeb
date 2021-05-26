@@ -15,7 +15,7 @@
                 </ol>
                 <!-- Intro Content-->
                 <div class="row">
-                    <div class="col-lg-6"><img class="img-fluid rounded mb-4" src="https://via.placeholder.com/750x450" alt="..." /></div>
+                    <div class="col-lg-6"><img class="img-fluid rounded mb-4" src="https://drive.google.com/file/d/1yj8zu7RGPm0ENPeYXdGXeqxjspmf-F5_/view?usp=sharing" alt="..." /></div>
                     <div class="col-lg-6">
                         <h2>@Model.artist.Name</h2>
                         <p>
@@ -38,24 +38,22 @@
                 <div class="row">
                     @foreach (PictureModel p in Model.artist.Pictures)
                     {
-
-                         <div class="col-lg-4 mb-4 mb-lg-0">
+                        <div class="col-lg-4 mb-4 mb-lg-0">
                             <div class="card h-100 text-center">
-                                <img class="card-img-top" src="https://via.placeholder.com/750x450" @*@p.Url*@ alt="..." />
+                                <img class="card-img-top" src="@p.Url" alt="..." />
                                 <div class="card-body">
                                     <h4 class="card-title">
-                                        <a asp-controller="Home" asp-action="ShowPicture">@p.Name</a>
+                                        <a asp-controller="Home" asp-action="ShowPicture" asp-route-picId="@p.Id">
+                                            @p.Name
+                                        </a>
                                     </h4>
                                     <h6 class="card-subtitle mb-2 text-muted">@p.Genre</h6>
                                     <p class="card-text">@p.AddInfo</p>
                                 </div>
                                 <div class="card-footer"><a href="#!"></a></div>
                             </div>
-                        </div> 
-
-
-                    }
-
+                        </div>
+            }
                 </div>
             </div>
         </section>
