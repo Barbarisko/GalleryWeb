@@ -48,6 +48,8 @@ namespace GalleryWeb
             services.AddScoped<IRepository<Picture>, Repository<Picture>>();
             services.AddScoped<IRepository<Technique>, Repository<Technique>>();
             services.AddScoped<IRepository<Ticket>, Repository<Ticket>>();
+            services.AddScoped<IRepository<News>, Repository<News>>();
+            services.AddScoped<IRepository<TicketsInCart>, Repository<TicketsInCart>>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -57,6 +59,9 @@ namespace GalleryWeb
             services.AddTransient<IArtistService, ArtistService>();
             services.AddTransient<IExhibitionService, ExhibitionService>();
             services.AddTransient<IPictureService, PictureService>();
+            services.AddTransient<ICurrentExhibitionService, CurrentExhibitionService>();
+            services.AddTransient<IOwnershipService, OwnershipService>();
+            services.AddTransient<ITicketService, TicketService>();
 
             services.AddControllersWithViews();
         }

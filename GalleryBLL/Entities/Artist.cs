@@ -5,14 +5,13 @@ using System.Collections.Generic;
 
 namespace GalleryDAL.Entities
 {
-    public partial class Artist: BaseEntity
+    public partial class Artist:BaseEntity
     {
         public Artist()
         {
             Pictures = new HashSet<Picture>();
         }
 
-        public string Surname { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
         public DateTime Bday { get; set; }
@@ -20,8 +19,11 @@ namespace GalleryDAL.Entities
         public string ArtDirection { get; set; }
         public string Telephone { get; set; }
         public int? IdCity { get; set; }
+        public string Surname { get; set; }
+        public string Url { get; set; }
+        public string AddInfo { get; set; }
 
-        public virtual City IdCityNavigation { get; set; }
-        public virtual ICollection<Picture> Pictures { get; set; }
+        public  City City { get; set; }
+        public  ICollection<Picture> Pictures { get; set; }
     }
 }

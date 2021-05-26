@@ -15,6 +15,7 @@ namespace GalleryDAL.Entities
         public string Name { get; set; }
         public string Paint { get; set; }
         public string Base { get; set; }
+        public string PicUrl { get; set; }
 
         public virtual ICollection<Picture> Pictures { get; set; }
     }

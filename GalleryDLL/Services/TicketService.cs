@@ -23,127 +23,127 @@ namespace GalleryBLL.Services
 		}
 
 
-		//public void AddItemToCart(CurrentExhibitionModel currentExhibition, int quantity, string cartId)
-		//{
-		//	Ticket ticketEntity = _unitOfWork.TicketRepository.GetAll().ToList().Find(
-		//				i => i.CartId == cartId && i.IdCurrExh == currentExhibition.Id);
+        //public void AddItemToCart(Exhibition Exhibition, int quantity, string cartId)
+        //{
+        //    TicketsInCart ticketincartEntity = _unitOfWork.TicketsInCartRepository.GetAll().ToList().Find(
+        //                i => i.CartId == cartId && i.Ticket.CurExh.IdExh == Exhibition.Id);
 
-		//	if (ticketEntity != null)
-		//	{
-		//		ticketEntity.Quantity += quantity;
-		//		ticketEntity.Price = itemEntity.Stock.Price * itemEntity.Quantity;
-		//		_unitOfWork.CartOrderItemRepository.Update(itemEntity);
-		//	}
-		//	else
-		//	{
-		//		CartOrderItem newItem = new CartOrderItem()
-		//		{
-		//			StockId = stock.Id,
-		//			Quantity = quantity,
-		//			CartId = cartId,
-		//			Price = stock.Price * quantity
-		//		};
+        //    if (ticketincartEntity != null)
+        //    {
+        //        ticketincartEntity.Quantity += quantity;
+        //        ticketincartEntity.TotalPrice = ticketincartEntity.Ticket.CurExh.IdExhNavigation.Price * ticketincartEntity.Quantity;
+        //        _unitOfWork.TicketsInCartRepository.Update(ticketincartEntity);
+        //    }
+        //    else
+        //    {
+        //        TicketInCartModel newItem = new TicketInCartModel()
+        //        {
+        //            ,
+        //            Quantity = quantity,
+        //            CartId = cartId,
+        //            Price = stock.Price * quantity
+        //        };
 
-		//		CartOrderItemEntity newItemEntity = _mapper.Map<CartOrderItemEntity>(newItem);
-		//		_unitOfWork.CartOrderItemRepository.Add(newItemEntity);
-		//	}
+        //        CartOrderItemEntity newItemEntity = _mapper.Map<CartOrderItemEntity>(newItem);
+        //        _unitOfWork.CartOrderItemRepository.Add(newItemEntity);
+        //    }
 
-		//	StockEntity stockEntity = _unitOfWork.StockRepository.Get(stock.Id);
-		//	stockEntity.Quantity -= quantity;
-		//	_unitOfWork.StockRepository.Update(stockEntity);
+        //    StockEntity stockEntity = _unitOfWork.StockRepository.Get(stock.Id);
+        //    stockEntity.Quantity -= quantity;
+        //    _unitOfWork.StockRepository.Update(stockEntity);
 
-		//	_unitOfWork.Save();
-		//}
+        //    _unitOfWork.Save();
+        //}
 
-		//public void RemoveItemFromCart(int itemId, int stockId)
-		//{
-		//	CartOrderItemEntity itemEntity = _unitOfWork.CartOrderItemRepository.Get(itemId);
+        //public void RemoveItemFromCart(int itemId, int stockId)
+        //{
+        //    CartOrderItemEntity itemEntity = _unitOfWork.CartOrderItemRepository.Get(itemId);
 
-		//	if (itemEntity.Quantity > 1)
-		//	{
-		//		itemEntity.Quantity--;
-		//		itemEntity.Price = itemEntity.Stock.Price * itemEntity.Quantity;
-		//		_unitOfWork.CartOrderItemRepository.Update(itemEntity);
-		//	}
-		//	else if (itemEntity.Quantity == 1)
-		//	{
-		//		_unitOfWork.CartOrderItemRepository.Delete(itemEntity.Id);
-		//	}
+        //    if (itemEntity.Quantity > 1)
+        //    {
+        //        itemEntity.Quantity--;
+        //        itemEntity.Price = itemEntity.Stock.Price * itemEntity.Quantity;
+        //        _unitOfWork.CartOrderItemRepository.Update(itemEntity);
+        //    }
+        //    else if (itemEntity.Quantity == 1)
+        //    {
+        //        _unitOfWork.CartOrderItemRepository.Delete(itemEntity.Id);
+        //    }
 
-		//	StockEntity stockEntity = _unitOfWork.StockRepository.Get(stockId);
-		//	stockEntity.Quantity++;
-		//	_unitOfWork.StockRepository.Update(stockEntity);
+        //    StockEntity stockEntity = _unitOfWork.StockRepository.Get(stockId);
+        //    stockEntity.Quantity++;
+        //    _unitOfWork.StockRepository.Update(stockEntity);
 
-		//	_unitOfWork.Save();
-		//}
-
-
-
-		//public void DeleteItem(int itemId, int stockId)
-		//{
-		//	int quantity = _unitOfWork.CartOrderItemRepository.Get(itemId).Quantity;
-
-		//	StockEntity stockEntity = _unitOfWork.StockRepository.Get(stockId);
-		//	stockEntity.Quantity += quantity;
-		//	_unitOfWork.StockRepository.Update(stockEntity);
-
-		//	_unitOfWork.Save();
-		//}
+        //    _unitOfWork.Save();
+        //}
 
 
-		//public List<CartOrderItem> GetAllItemsFromCart(string cartId)
-		//{
-		//	List<CartOrderItemEntity> sortedItemEntities = _unitOfWork.CartOrderItemRepository.GetAll()
-		//		.ToList().FindAll(i => i.CartId == cartId);
-		//	return _mapper.Map<List<CartOrderItem>>(sortedItemEntities);
-		//}
 
-		//public void UpdateCartId(string oldId, string newId)
-		//{
-		//	List<CartOrderItemEntity> sortedItemEntities = _unitOfWork.CartOrderItemRepository.GetAll()
-		//		.ToList().FindAll(i => i.CartId == oldId);
-		//	if (sortedItemEntities.Any())
-		//	{
-		//		foreach (CartOrderItemEntity i in sortedItemEntities)
-		//		{
-		//			i.CartId = newId;
-		//			_unitOfWork.CartOrderItemRepository.Update(i);
-		//			_unitOfWork.Save();
-		//		}
-		//	}
-		//}
+        //public void DeleteItem(int itemId, int stockId)
+        //{
+        //    int quantity = _unitOfWork.CartOrderItemRepository.Get(itemId).Quantity;
 
-		//public void SetOrderId(string cartId, int orderId)
-		//{
-		//	List<CartOrderItemEntity> sortedItemEntities = _unitOfWork.CartOrderItemRepository.GetAll()
-		//		.ToList().FindAll(i => i.CartId == cartId);
-		//	if (sortedItemEntities.Any())
-		//	{
-		//		foreach (CartOrderItemEntity i in sortedItemEntities)
-		//		{
-		//			i.OrderId = orderId;
-		//			_unitOfWork.CartOrderItemRepository.Update(i);
-		//			_unitOfWork.Save();
-		//		}
-		//	}
-		//}
+        //    StockEntity stockEntity = _unitOfWork.StockRepository.Get(stockId);
+        //    stockEntity.Quantity += quantity;
+        //    _unitOfWork.StockRepository.Update(stockEntity);
 
-		//public decimal CountTotalAmount(string cartId)
-		//{
-		//	decimal totalAmount = 0;
+        //    _unitOfWork.Save();
+        //}
 
-		//	List<CartOrderItemEntity> sortedItemEntities = _unitOfWork.CartOrderItemRepository.GetAll()
-		//		.ToList().FindAll(i => i.CartId == cartId);
 
-		//	if (sortedItemEntities.Any())
-		//	{
-		//		foreach (CartOrderItemEntity i in sortedItemEntities)
-		//		{
-		//			totalAmount += i.Price;
-		//		}
-		//	}
+        //public List<CartOrderItem> GetAllItemsFromCart(string cartId)
+        //{
+        //    List<CartOrderItemEntity> sortedItemEntities = _unitOfWork.CartOrderItemRepository.GetAll()
+        //        .ToList().FindAll(i => i.CartId == cartId);
+        //    return _mapper.Map<List<CartOrderItem>>(sortedItemEntities);
+        //}
 
-		//	return totalAmount;
-		//}
-	}
+        //public void UpdateCartId(string oldId, string newId)
+        //{
+        //    List<CartOrderItemEntity> sortedItemEntities = _unitOfWork.CartOrderItemRepository.GetAll()
+        //        .ToList().FindAll(i => i.CartId == oldId);
+        //    if (sortedItemEntities.Any())
+        //    {
+        //        foreach (CartOrderItemEntity i in sortedItemEntities)
+        //        {
+        //            i.CartId = newId;
+        //            _unitOfWork.CartOrderItemRepository.Update(i);
+        //            _unitOfWork.Save();
+        //        }
+        //    }
+        //}
+
+        //public void SetOrderId(string cartId, int orderId)
+        //{
+        //    List<CartOrderItemEntity> sortedItemEntities = _unitOfWork.CartOrderItemRepository.GetAll()
+        //        .ToList().FindAll(i => i.CartId == cartId);
+        //    if (sortedItemEntities.Any())
+        //    {
+        //        foreach (CartOrderItemEntity i in sortedItemEntities)
+        //        {
+        //            i.OrderId = orderId;
+        //            _unitOfWork.CartOrderItemRepository.Update(i);
+        //            _unitOfWork.Save();
+        //        }
+        //    }
+        //}
+
+        //public decimal CountTotalAmount(string cartId)
+        //{
+        //    decimal totalAmount = 0;
+
+        //    List<CartOrderItemEntity> sortedItemEntities = _unitOfWork.CartOrderItemRepository.GetAll()
+        //        .ToList().FindAll(i => i.CartId == cartId);
+
+        //    if (sortedItemEntities.Any())
+        //    {
+        //        foreach (CartOrderItemEntity i in sortedItemEntities)
+        //        {
+        //            totalAmount += i.Price;
+        //        }
+        //    }
+
+        //    return totalAmount;
+        //}
+    }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GalleryDAL.Entities;
+using System;
 using System.Collections.Generic;
 
 #nullable disable
@@ -17,7 +18,6 @@ namespace GalleryBLL.Models
         public string Name { get => name; set => name = value; }
         public int IdCountry { get => idCountry; set => idCountry = value; }
         public CountryModel Country { get => country; set => country = value; }
-        //public Country IdCountryNavigation { get; set; }
         public List<ArtistModel> Artists { get => artists; set => artists = value; }
         public List<EmployeeModel> Employees { get => employees; set => employees = value; }
         public List<ExhibitPlaceModel> ExhibitPlaces { get => exhibitPlaces; set => exhibitPlaces = value; }

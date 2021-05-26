@@ -23,11 +23,13 @@ namespace GalleryDAL.UnitOfWork
         public IRepository<Picture> PictureRepository { get; }
         public IRepository<Technique> TechniqueRepository { get; }
         public IRepository<Ticket> TicketRepository { get; }
+        public IRepository<TicketsInCart> TicketsInCartRepository { get; }
+        public IRepository<News> NewsRepository { get; }
 
         public UnitOfWork(GalleryDbContext context, IRepository<Artist> artistrepository, IRepository<City> cityrepo, IRepository<Country> countryrepo,
                             IRepository<CurrentExhibition> currexhrepo, IRepository<Employee> employeerepo, IRepository<ExhibitedPicture> exhpicrepo,
                             IRepository<Exhibition> exibitionrepo, IRepository<ExhibitPlace> exhplacerepo, IRepository<OwnedPicture> ownpicrepo,
-                            IRepository<Owner> ownerrepo, IRepository<Picture> picturerepo, IRepository<Technique> techniquerepo, IRepository<Ticket> ticketrepo)
+                            IRepository<Owner> ownerrepo, IRepository<Picture> picturerepo, IRepository<Technique> techniquerepo, IRepository<Ticket> ticketrepo, IRepository<TicketsInCart> ticketsInCartRepository, IRepository<News> newsRepository)
         {
             _context = context;
             ArtistRepository = artistrepository;
@@ -43,6 +45,8 @@ namespace GalleryDAL.UnitOfWork
             PictureRepository = picturerepo;
             TechniqueRepository = techniquerepo;
             TicketRepository = ticketrepo;
+            TicketsInCartRepository = ticketsInCartRepository;
+            NewsRepository = newsRepository;
         }
         public void Save()
         {

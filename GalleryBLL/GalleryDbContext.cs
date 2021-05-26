@@ -16,7 +16,6 @@ namespace GalleryDAL
         public GalleryDbContext(DbContextOptions<GalleryDbContext> options)
             : base(options)
         {
-           // DbInitializer.Initialize(this);
         }
 
         public virtual DbSet<Artist> Artists { get; set; }
@@ -27,18 +26,20 @@ namespace GalleryDAL
         public virtual DbSet<ExhibitPlace> ExhibitPlaces { get; set; }
         public virtual DbSet<ExhibitedPicture> ExhibitedPictures { get; set; }
         public virtual DbSet<Exhibition> Exhibitions { get; set; }
+        public virtual DbSet<News> News { get; set; }
         public virtual DbSet<OwnedPicture> OwnedPictures { get; set; }
         public virtual DbSet<Owner> Owners { get; set; }
         public virtual DbSet<Picture> Pictures { get; set; }
         public virtual DbSet<Technique> Techniques { get; set; }
         public virtual DbSet<Ticket> Tickets { get; set; }
+        public virtual DbSet<TicketsInCart> TicketsInCarts { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseNpgsql("Host=165.232.107.123;Username=postgres;Password=1;Database=postgres;Persist Security Info=True;");
+                optionsBuilder.UseNpgsql("Server=165.232.107.123;Database=postgres;Username=postgres;Password=1;Persist Security Info=True;");
             }
         }
 
@@ -56,6 +57,10 @@ namespace GalleryDAL
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasDefaultValueSql("nextval('artists_id_artist_seq'::regclass)");
+
+                entity.Property(e => e.AddInfo)
+                    .HasColumnType("character varying")
+                    .HasColumnName("add_info");
 
                 entity.Property(e => e.ArtDirection)
                     .HasMaxLength(15)
@@ -81,14 +86,18 @@ namespace GalleryDAL
                     .HasColumnName("name");
 
                 entity.Property(e => e.Surname)
-                    .HasMaxLength(200)
+                    .HasColumnType("character varying")
                     .HasColumnName("surname");
 
                 entity.Property(e => e.Telephone)
                     .HasMaxLength(10)
                     .HasColumnName("telephone");
 
-                entity.HasOne(d => d.IdCityNavigation)
+                entity.Property(e => e.Url)
+                    .HasMaxLength(200)
+                    .HasColumnName("url");
+
+                entity.HasOne(d => d.City)
                     .WithMany(p => p.Artists)
                     .HasForeignKey(d => d.IdCity)
                     .HasConstraintName("artists_id_city_fkey");
@@ -138,6 +147,16 @@ namespace GalleryDAL
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasDefaultValueSql("nextval('current_exhibitions_id_curr_exh_seq'::regclass)");
+
+                entity.Property(e => e.DateBegin)
+                    .HasColumnType("date")
+                    .HasColumnName("date_begin")
+                    .HasDefaultValueSql("now()");
+
+                entity.Property(e => e.DateEnd)
+                    .HasColumnType("date")
+                    .HasColumnName("date_end")
+                    .HasDefaultValueSql("now()");
 
                 entity.Property(e => e.IdEmployee).HasColumnName("id_employee");
 
@@ -221,6 +240,10 @@ namespace GalleryDAL
                     .HasColumnName("id")
                     .HasDefaultValueSql("nextval('exhibit_places_id_exh_place_seq'::regclass)");
 
+                entity.Property(e => e.Description)
+                    .HasColumnType("character varying")
+                    .HasColumnName("description");
+
                 entity.Property(e => e.IdCity).HasColumnName("id_city");
 
                 entity.Property(e => e.Name)
@@ -271,25 +294,46 @@ namespace GalleryDAL
                     .HasColumnName("id")
                     .HasDefaultValueSql("nextval('exhibitions_id_exh_seq'::regclass)");
 
+                entity.Property(e => e.Description)
+                    .HasMaxLength(200)
+                    .HasColumnName("description");
+
                 entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasMaxLength(10)
+                    .HasMaxLength(30)
                     .HasColumnName("name");
 
                 entity.Property(e => e.Price).HasColumnName("price");
             });
 
+            modelBuilder.Entity<News>(entity =>
+            {
+                entity.ToTable("news");
+
+                entity.HasIndex(e => e.Id, "news_id_uindex")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Description)
+                    .HasColumnType("character varying")
+                    .HasColumnName("description");
+
+                entity.Property(e => e.Name)
+                    .HasColumnType("character varying")
+                    .HasColumnName("name");
+            });
+
             modelBuilder.Entity<OwnedPicture>(entity =>
             {
-                entity.HasKey(e => e.Id)
-                    .HasName("owned_pictures_pkey");
-
                 entity.ToTable("owned_pictures");
 
                 entity.HasIndex(e => e.IdPicture, "owned_pictures_id_picture_key")
                     .IsUnique();
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasDefaultValueSql("nextval('owned_pictures_id_owned_picture_seq'::regclass)");
 
                 entity.Property(e => e.BuyDate)
                     .HasColumnType("date")
@@ -368,11 +412,6 @@ namespace GalleryDAL
                     .HasMaxLength(20)
                     .HasColumnName("genre");
 
-                entity.Property(e => e.Url)
-                    .IsRequired()
-                    .HasMaxLength(100)
-                    .HasColumnName("url");
-
                 entity.Property(e => e.IdArtist).HasColumnName("id_artist");
 
                 entity.Property(e => e.IdTechnique).HasColumnName("id_technique");
@@ -382,6 +421,10 @@ namespace GalleryDAL
                     .HasColumnName("name");
 
                 entity.Property(e => e.Price).HasColumnName("price");
+
+                entity.Property(e => e.Url)
+                    .HasMaxLength(200)
+                    .HasColumnName("url");
 
                 entity.HasOne(d => d.IdArtistNavigation)
                     .WithMany(p => p.Pictures)
@@ -421,6 +464,10 @@ namespace GalleryDAL
                     .IsRequired()
                     .HasMaxLength(10)
                     .HasColumnName("paint");
+
+                entity.Property(e => e.PicUrl)
+                    .HasColumnType("character varying")
+                    .HasColumnName("picUrl");
             });
 
             modelBuilder.Entity<Ticket>(entity =>
@@ -435,13 +482,37 @@ namespace GalleryDAL
                     .HasColumnType("date")
                     .HasColumnName("buy_date");
 
-                entity.Property(e => e.IdCurrExh).HasColumnName("id_curr_exh");
+                entity.Property(e => e.CurExhId).HasColumnName("curExhId");
 
-                entity.HasOne(d => d.CurrentExhibition)
+                entity.HasOne(d => d.CurExh)
                     .WithMany(p => p.Tickets)
-                    .HasForeignKey(d => d.IdCurrExh)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("tickets_id_curr_exh_fkey");
+                    .HasForeignKey(d => d.CurExhId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("tickets_current_exhibitions_id_fk");
+            });
+
+            modelBuilder.Entity<TicketsInCart>(entity =>
+            {
+                entity.ToTable("tickets_in_cart");
+
+                entity.HasIndex(e => e.Id, "ticket_in_cart_id_uindex")
+                    .IsUnique();
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasDefaultValueSql("nextval('ticket_in_cart_id_seq'::regclass)");
+
+                entity.Property(e => e.Quantity).HasColumnName("quantity");
+
+                entity.Property(e => e.TicketId).HasColumnName("ticketId");
+
+                entity.Property(e => e.TotalPrice).HasColumnName("totalPrice");
+
+                entity.HasOne(d => d.Ticket)
+                    .WithMany(p => p.TicketsInCarts)
+                    .HasForeignKey(d => d.TicketId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("ticket_in_cart___fk_ticket");
             });
 
             OnModelCreatingPartial(modelBuilder);

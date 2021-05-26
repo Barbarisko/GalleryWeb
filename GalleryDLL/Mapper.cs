@@ -49,6 +49,11 @@ namespace GalleryBLL
                 .ReverseMap();
             CreateMap<TicketModel, Ticket>()
                 .ReverseMap();
+            CreateMap<NewsModel, News>()
+                .ReverseMap();
+            CreateMap<TicketInCartModel, TicketsInCart>()
+                .ReverseMap();
+
         }
     }
 }

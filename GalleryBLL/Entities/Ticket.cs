@@ -7,11 +7,15 @@ namespace GalleryDAL.Entities
 {
     public partial class Ticket : BaseEntity
     {
-        public int IdCurrExh { get; set; }
-        public DateTime BuyDate { get; set; }
+        public Ticket()
+        {
+            TicketsInCarts = new HashSet<TicketsInCart>();
+        }
 
-        public CurrentExhibition CurrentExhibition { get; set; }
-        public string CartId { get ; set; }
-        public int Quantity { get; set; }
+        public DateTime BuyDate { get; set; }
+        public int? CurExhId { get; set; }
+
+        public virtual CurrentExhibition CurExh { get; set; }
+        public virtual ICollection<TicketsInCart> TicketsInCarts { get; set; }
     }
 }

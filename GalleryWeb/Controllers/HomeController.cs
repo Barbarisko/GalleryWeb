@@ -16,13 +16,16 @@ namespace GalleryWeb.Controllers
         private readonly ILogger<HomeController> _logger;
         IArtistService artistsService;
         IExhibitionService exhibitionService;
+        ICurrentExhibitionService currentExhibitionService;
         IPictureService pictureService;
-        public HomeController(ILogger<HomeController> logger, IArtistService artistsService, IExhibitionService exhibitionService, IPictureService pictureService)
+        public HomeController(ILogger<HomeController> logger, IArtistService artistsService, 
+            IExhibitionService exhibitionService, IPictureService pictureService, ICurrentExhibitionService currentExhibitionService)
         {
             _logger = logger;
             this.artistsService = artistsService;
             this.exhibitionService = exhibitionService;
             this.pictureService = pictureService;
+            this.currentExhibitionService = currentExhibitionService;
         }
 
         public IActionResult Index()
@@ -42,7 +45,7 @@ namespace GalleryWeb.Controllers
         }
         public IActionResult Collections()
         {
-            ExhPicModel model = new ExhPicModel(exhibitionService.GetAllPicsFromExhibition(2).ToList());
+            ExhPicModel model = new ExhPicModel(currentExhibitionService.GetAllPicsFromExhibition(2).ToList());
             return View(model);
         }
         public IActionResult Cart()

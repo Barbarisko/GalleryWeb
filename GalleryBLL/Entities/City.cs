@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace GalleryDAL.Entities
 {
-    public partial class City : BaseEntity
+    public partial class City:BaseEntity
     {
         public City()
         {

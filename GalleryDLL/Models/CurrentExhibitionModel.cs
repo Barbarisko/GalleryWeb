@@ -16,10 +16,14 @@ namespace GalleryBLL.Models
         private int idEmployee;
         private int idExh;
         private int idExhPlace;
+        private DateTime? dateBegin;
+        private DateTime? dateEnd;
 
         public int IdEmployee { get => idEmployee; set => idEmployee = value; }
         public int IdExh { get => idExh; set => idExh = value; }
         public int IdExhPlace { get => idExhPlace; set => idExhPlace = value; }
+        public DateTime? DateBegin { get => dateBegin; set => dateBegin = value; }
+        public DateTime? DateEnd { get => dateEnd; set => dateEnd = value; }
 
         //public Employee IdEmployeeNavigation { get; set; }
         //public Exhibition IdExhNavigation { get; set; }

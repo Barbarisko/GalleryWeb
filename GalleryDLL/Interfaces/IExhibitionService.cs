@@ -8,19 +8,9 @@ namespace GalleryBLL.Interfaces
     public interface IExhibitionService
     {
         IEnumerable<ExhibitionModel> GetAllExhibitions();
-        ExhibitionModel GetExhById(int Id);
- 
-        void AddNewExhibition(int exhId);
-        void AddPictureToExhibition(PictureModel picture, int exhId, int roomNum);
-        void UpdateExhibition(string oldId, string newId);
-        List<ExhibitedPictureModel> GetAllPicsFromExhibition(int exhId);
-        decimal CountEstimatePrice(string currexhId);
+        ExhibitionModel GetExhById(int Id); 
+        void AddNewExhibition(string name, int? price, string description);
+        void UpdateEXHById(int Id, string name, int price, string desc);
         void DeleteExhibition(int exhId);
-        void DeletePicFromExhibition(int picId, int currexhId);
-        
-        // void AddItemToCart(Stock stock, int quantity, string cartId);
-
-        //when i will need a cart for tickets
-        //void UpdateCartId(string oldId, string newId);
     }
 }

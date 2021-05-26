@@ -27,63 +27,66 @@ namespace GalleryBLL.Services
             IEnumerable<Exhibition> exhEntities = _unitOfWork.ExhibitionRepository.GetAll();
             return _mapper.Map<IEnumerable<ExhibitionModel>>(exhEntities);
         }
+
         public ExhibitionModel GetExhById(int id)
         {
             return _mapper.Map<ExhibitionModel>(_unitOfWork.ExhibitionRepository.Get(id));       
         }
-        public void AddNewExhibition(int exhId)
-        {
-            throw new NotImplementedException();
-        }
-        public void AddPictureToExhibition(PictureModel picture, int currexhId, int roomNum)
-        {
-            ExhibitedPicture picEntity = _unitOfWork.ExhibitedPictureRepository.GetAll().ToList().Find(
-                p => p.IdCurrExh == currexhId && p.IdPicture == picture.Id);
 
-            if(picEntity!= null)
+
+        public void AddNewExhibition(string name, int? price, string description)
+        {
+            Exhibition itemEntity = _unitOfWork.ExhibitionRepository.GetAll().ToList().Find(
+                        i => i.Name == name);
+
+            if (itemEntity != null)
             {
-                throw new InvalidOperationException("this picture is already added");
+                throw new ArgumentException("This exhibition already exists! Find and edit it");
             }
             else
             {
-                ExhibitedPictureModel newPic = new ExhibitedPictureModel()
+                ExhibitionModel newItem = new ExhibitionModel()
                 {
-                    IdPicture = picture.Id,
-                    IdCurrExh = currexhId,
-                    Room = roomNum
+                    Name = name,
+                    Price = price,
+                    Description = description
                 };
-                ExhibitedPicture newPicEntity = _mapper.Map<ExhibitedPicture>(newPic);
-                _unitOfWork.ExhibitedPictureRepository.Add(newPicEntity);
+
+                Exhibition newItemEntity = _mapper.Map<Exhibition>(newItem);
+                _unitOfWork.ExhibitionRepository.Add(newItemEntity);
             }
-
-        }
-
-        public decimal CountEstimatePrice(string currexhId)
-        {
-            throw new NotImplementedException();
+            _unitOfWork.Save();
         }
 
         public void DeleteExhibition(int exhId)
         {
-            throw new NotImplementedException();
+            Exhibition exh =  _unitOfWork.ExhibitionRepository.Get(exhId);
+            if (exh == null)
+            {
+                throw new KeyNotFoundException();
+            }
+             _unitOfWork.ExhibitionRepository.Delete(exhId);
+            _unitOfWork.Save();
         }
 
-        public void DeletePicFromExhibition(int picId, int currexhId)
+        public void UpdateEXHById(int Id, string name, int price, string desc)
         {
-            throw new NotImplementedException();
+            List<Exhibition> sortedItemEntities = _unitOfWork.ExhibitionRepository.GetAll()
+                .ToList().FindAll(i => i.Id == Id);
+            if (sortedItemEntities.Any())
+            {
+                foreach (Exhibition i in sortedItemEntities)
+                {
+                    i.Name = name;
+                    i.Price = price;
+                    i.Description = desc;
+
+                    _unitOfWork.ExhibitionRepository.Update(i);
+                    _unitOfWork.Save();
+                }
+            }
         }
 
-        public List<ExhibitedPictureModel> GetAllPicsFromExhibition(int cexhId)
-        {
-            List<ExhibitedPicture> exhPicEntities = _unitOfWork.ExhibitedPictureRepository.GetAll().ToList();
-                //.FindAll(e=>e.IdCurrExh == cexhId);
-
-            return _mapper.Map<List<ExhibitedPictureModel>>(exhPicEntities);
-        }
-
-        public void UpdateExhibition(string oldId, string newId)
-        {
-            throw new NotImplementedException();
-        }
+      
     }
 }

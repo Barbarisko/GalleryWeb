@@ -15,6 +15,7 @@ namespace GalleryDAL.Entities
         public string Name { get; set; }
         public int? Telephone { get; set; }
         public int IdCity { get; set; }
+        public string Description { get; set; }
 
         public virtual City IdCityNavigation { get; set; }
         public virtual ICollection<CurrentExhibition> CurrentExhibitions { get; set; }

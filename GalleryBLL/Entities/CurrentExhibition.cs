@@ -16,6 +16,8 @@ namespace GalleryDAL.Entities
         public int IdEmployee { get; set; }
         public int IdExh { get; set; }
         public int IdExhPlace { get; set; }
+        public DateTime? DateBegin { get; set; }
+        public DateTime? DateEnd { get; set; }
 
         public virtual Employee IdEmployeeNavigation { get; set; }
         public virtual Exhibition IdExhNavigation { get; set; }

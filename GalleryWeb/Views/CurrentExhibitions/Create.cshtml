@@ -1,0 +1,40 @@
+﻿@model GalleryDAL.Entities.CurrentExhibition
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>CurrentExhibition</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IdEmployee" class="control-label"></label>
+                <select asp-for="IdEmployee" class ="form-control" asp-items="ViewBag.IdEmployee"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdExh" class="control-label"></label>
+                <select asp-for="IdExh" class ="form-control" asp-items="ViewBag.IdExh"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdExhPlace" class="control-label"></label>
+                <select asp-for="IdExhPlace" class ="form-control" asp-items="ViewBag.IdExhPlace"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

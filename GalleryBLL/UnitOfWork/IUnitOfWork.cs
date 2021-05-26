@@ -21,6 +21,8 @@ namespace GalleryDAL.UnitOfWork
         IRepository<Picture> PictureRepository { get; }
         IRepository<Technique> TechniqueRepository { get; }
         IRepository<Ticket> TicketRepository { get; }
+        IRepository<TicketsInCart> TicketsInCartRepository { get; }
+        IRepository<News> NewsRepository { get; }
 
         void Save();
 

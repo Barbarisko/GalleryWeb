@@ -32,7 +32,7 @@ namespace GalleryBLL.Services
            return  _mapper.Map<PictureModel>(Entity);            
         }
 
-		public void AddPicture(string name, int? price, DateTime createdate, string genre, string addInfo, string url,
+		public void AddPicture(string name, int price, DateTime createdate, string genre, string addInfo, string url,
 									int idArtist, int idTechnique)
 		{
 			Picture itemEntity = _unitOfWork.PictureRepository.GetAll().ToList().Find(
@@ -44,7 +44,7 @@ namespace GalleryBLL.Services
 			}
 			else
 			{
-				Picture newItem = new Picture()
+				PictureModel newItem = new PictureModel()
 				{
 					Name = name,
 					Price = price,
@@ -62,7 +62,7 @@ namespace GalleryBLL.Services
 			_unitOfWork.Save();
 		}
 
-		public void UpdatePicById(int Id, string name, int? price, DateTime createdate, string genre, string addInfo, string url,
+		public void UpdatePicById(int Id, string name, int price, DateTime createdate, string genre, string addInfo, string url,
                                     int idArtist, int idTechnique)
 		{
 			List<Picture> sortedItemEntities = _unitOfWork.PictureRepository.GetAll()

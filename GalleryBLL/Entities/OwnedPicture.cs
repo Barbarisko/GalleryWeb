@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace GalleryDAL.Entities
 {
-    public partial class OwnedPicture : BaseEntity
+    public partial class OwnedPicture:BaseEntity
     {
         public int? IdOwner { get; set; }
         public int IdPicture { get; set; }
