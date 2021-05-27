@@ -98,20 +98,20 @@ namespace GalleryBLL.Services
         //    return _mapper.Map<List<CartOrderItem>>(sortedItemEntities);
         //}
 
-        //public void UpdateCartId(string oldId, string newId)
-        //{
-        //    List<CartOrderItemEntity> sortedItemEntities = _unitOfWork.CartOrderItemRepository.GetAll()
-        //        .ToList().FindAll(i => i.CartId == oldId);
-        //    if (sortedItemEntities.Any())
-        //    {
-        //        foreach (CartOrderItemEntity i in sortedItemEntities)
-        //        {
-        //            i.CartId = newId;
-        //            _unitOfWork.CartOrderItemRepository.Update(i);
-        //            _unitOfWork.Save();
-        //        }
-        //    }
-        //}
+        public void UpdateCartId(string oldId, string newId)
+        {
+            List<TicketsInCart> sortedItemEntities = _unitOfWork.TicketsInCartRepository.GetAll()
+                .ToList().FindAll(i => i.CartId == oldId);
+            if (sortedItemEntities.Any())
+            {
+                foreach (TicketsInCart i in sortedItemEntities)
+                {
+                    i.CartId = newId;
+                    _unitOfWork.TicketsInCartRepository.Update(i);
+                    _unitOfWork.Save();
+                }
+            }
+        }
 
         //public void SetOrderId(string cartId, int orderId)
         //{

@@ -22,7 +22,7 @@ namespace GalleryWeb.Controllers
         // GET: CurrentExhibitions
         public async Task<IActionResult> Index()
         {
-            var galleryDbContext = _context.CurrentExhibitions.Include(c => c.IdEmployeeNavigation).Include(c => c.IdExhNavigation).Include(c => c.IdExhPlaceNavigation);
+            var galleryDbContext = _context.CurrentExhibitions.Include(c => c.Employee).Include(c => c.Exh).Include(c => c.ExhPlace);
             return View(await galleryDbContext.ToListAsync());
         }
 
@@ -35,9 +35,9 @@ namespace GalleryWeb.Controllers
             }
 
             var currentExhibition = await _context.CurrentExhibitions
-                .Include(c => c.IdEmployeeNavigation)
-                .Include(c => c.IdExhNavigation)
-                .Include(c => c.IdExhPlaceNavigation)
+                .Include(c => c.Employee)
+                .Include(c => c.Exh)
+                .Include(c => c.ExhPlace)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (currentExhibition == null)
             {
@@ -141,9 +141,9 @@ namespace GalleryWeb.Controllers
             }
 
             var currentExhibition = await _context.CurrentExhibitions
-                .Include(c => c.IdEmployeeNavigation)
-                .Include(c => c.IdExhNavigation)
-                .Include(c => c.IdExhPlaceNavigation)
+                .Include(c => c.Employee)
+                .Include(c => c.Exh)
+                .Include(c => c.ExhPlace)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (currentExhibition == null)
             {

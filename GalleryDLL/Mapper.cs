@@ -43,6 +43,7 @@ namespace GalleryBLL
                 .ForMember(d => d.OwnedPictures, opt => opt.MapFrom(src => src.OwnedPictures))
                 .ReverseMap();
             CreateMap<PictureModel, Picture>()
+                .ForMember(d => d.OwnedPicture, opt => opt.MapFrom(src => src.OwnedPicture))
                 .ReverseMap();
             CreateMap<TechniqueModel, Technique>()
                 .ForMember(d => d.Pictures, opt => opt.MapFrom(src => src.Pictures))

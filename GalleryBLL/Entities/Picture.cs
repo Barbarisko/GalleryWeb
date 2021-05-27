@@ -21,9 +21,9 @@ namespace GalleryDAL.Entities
         public int IdTechnique { get; set; }
         public string Url { get; set; }
 
-        public virtual Artist IdArtistNavigation { get; set; }
-        public virtual Technique IdTechniqueNavigation { get; set; }
-        public virtual OwnedPicture OwnedPicture { get; set; }
+        public virtual Artist Artist { get; set; }
+        public virtual Technique Technique { get; set; }
+        public virtual ICollection<OwnedPicture> OwnedPicture { get; set; }
         public virtual ICollection<ExhibitedPicture> ExhibitedPictures { get; set; }
     }
 }

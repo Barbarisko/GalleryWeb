@@ -22,7 +22,7 @@ namespace GalleryWeb.Controllers
         // GET: PicturesAdmin
         public async Task<IActionResult> Index()
         {
-            var galleryDbContext = _context.Pictures.Include(p => p.IdArtistNavigation).Include(p => p.IdTechniqueNavigation);
+            var galleryDbContext = _context.Pictures.Include(p => p.Artist).Include(p => p.Technique);
             return View(await galleryDbContext.ToListAsync());
         }
 
@@ -35,8 +35,8 @@ namespace GalleryWeb.Controllers
             }
 
             var picture = await _context.Pictures
-                .Include(p => p.IdArtistNavigation)
-                .Include(p => p.IdTechniqueNavigation)
+                .Include(p => p.Artist)
+                .Include(p => p.Technique)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (picture == null)
             {
@@ -136,8 +136,8 @@ namespace GalleryWeb.Controllers
             }
 
             var picture = await _context.Pictures
-                .Include(p => p.IdArtistNavigation)
-                .Include(p => p.IdTechniqueNavigation)
+                .Include(p => p.Artist)
+                .Include(p => p.Technique)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (picture == null)
             {

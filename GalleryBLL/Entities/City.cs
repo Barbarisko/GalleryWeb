@@ -17,7 +17,7 @@ namespace GalleryDAL.Entities
         public string Name { get; set; }
         public int IdCountry { get; set; }
 
-        public virtual Country IdCountryNavigation { get; set; }
+        public virtual Country Country { get; set; }
         public virtual ICollection<Artist> Artists { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }
         public virtual ICollection<ExhibitPlace> ExhibitPlaces { get; set; }

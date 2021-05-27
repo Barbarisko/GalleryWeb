@@ -1,4 +1,5 @@
-﻿using GalleryDAL.Entities;
+﻿using GalleryBLL.Interfaces;
+using GalleryDAL.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +13,7 @@ namespace GalleryWeb.Controllers
 	public class CartController : Controller
 	{
 		//IStockService _stockService;
-		//ICartService _cartService;
+		ITicketService _cartService;
 		private readonly UserManager<UserEntity> _userManager;
 		public const string CartSessionKey = "CartId";
 

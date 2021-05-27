@@ -15,7 +15,7 @@ namespace GalleryBLL.Models
         private string url;
         private ArtistModel artist;
         private TechniqueModel technique;
-        private OwnedPictureModel ownedPicture;
+        private List<OwnedPictureModel> ownedPicture;
         private List<ExhibitedPictureModel> exhibitedPictures;
         private int idArtist;
         private int idTechnique;
@@ -31,7 +31,7 @@ namespace GalleryBLL.Models
         
         public ArtistModel Artist { get => artist; set => artist = value; }
         public TechniqueModel Technique { get => technique; set => technique = value; }
-        public OwnedPictureModel OwnedPicture { get => ownedPicture; set => ownedPicture = value; }
+        public List<OwnedPictureModel> OwnedPicture { get => ownedPicture; set => ownedPicture = value; }
         public List<ExhibitedPictureModel> ExhibitedPictures { get => exhibitedPictures; set => exhibitedPictures = value; }
     }
 }

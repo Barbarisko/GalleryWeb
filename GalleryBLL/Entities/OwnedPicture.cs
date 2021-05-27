@@ -11,7 +11,7 @@ namespace GalleryDAL.Entities
         public int IdPicture { get; set; }
         public DateTime BuyDate { get; set; }
 
-        public virtual Owner IdOwnerNavigation { get; set; }
-        public virtual Picture IdPictureNavigation { get; set; }
+        public virtual Owner Owner { get; set; }
+        public virtual Picture Picture { get; set; }
     }
 }

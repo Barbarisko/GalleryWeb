@@ -1,4 +1,5 @@
-﻿using GalleryDAL.Entities;
+﻿using GalleryBLL.Interfaces;
+using GalleryDAL.Entities;
 using GalleryWeb.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -17,27 +18,27 @@ namespace GalleryWeb.Controllers
         private readonly UserManager<UserEntity> _userManager;
         private readonly SignInManager<UserEntity> _signInManager;
         private readonly IConfiguration _configuration;
-        //ICartService _cartService;
+        ITicketService _cartService;
 
         public AccountController(UserManager<UserEntity> userManager,
             SignInManager<UserEntity> signInManager,       IConfiguration configuration
-            //, ICartService cartService
+            , ITicketService cartService
             )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _configuration = configuration;
-            //_cartService = cartService;
+            _cartService = cartService;
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Logout()
-        //{
-        //    await _signInManager.SignOutAsync();
-        //    HttpContext.Session.SetString(CartController.CartSessionKey, "");
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            HttpContext.Session.SetString(CartController.CartSessionKey, "");
 
-        //    return RedirectToAction("Index", "Home");
-        //}
+            return RedirectToAction("Index", "Home");
+        }
 
         [HttpGet]
         public IActionResult Register()
@@ -113,31 +114,31 @@ namespace GalleryWeb.Controllers
         }
 
         [HttpPost]
-        //public async Task<IActionResult> Login(LoginModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, isPersistent: true, false);
+        public async Task<IActionResult> Login(LoginModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, isPersistent: true, false);
 
-        //        if (result.Succeeded)
-        //        {
-        //            _cartService.UpdateCartId(HttpContext.Session.GetString(CartController.CartSessionKey), model.Email);
+                if (result.Succeeded)
+                {
+                    _cartService.UpdateCartId(HttpContext.Session.GetString(CartController.CartSessionKey), model.Email);
 
-        //            return RedirectToAction("Index", "Home");
-        //        }
+                    return RedirectToAction("Index", "Home");
+                }
 
-        //        ModelState.AddModelError("", "Invalid Login Attempt");
-        //    }
+                ModelState.AddModelError("", "Invalid Login Attempt");
+            }
 
-        //    return View(model);
-        //}
+            return View(model);
+        }
 
 
         public void SendEmailCustom(string body, string email, string subject)
         {
             MailMessage mail = new MailMessage();
             mail.To.Add(email);
-            mail.From = new MailAddress("testweblab6@gmail.com");
+            mail.From = new MailAddress("Gallery.noreply@gmail.com");
             mail.Subject = subject;
             mail.Body = body;
             mail.IsBodyHtml = true;
@@ -145,7 +146,7 @@ namespace GalleryWeb.Controllers
             smtp.Host = "smtp.gmail.com";
             smtp.Port = 587;
             smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new System.Net.NetworkCredential("testweblab6@gmail.com", "Test123!");
+            smtp.Credentials = new System.Net.NetworkCredential("Gallery.noreply@gmail.com", "Test123!");
             smtp.EnableSsl = true;
             smtp.Send(mail);
         }

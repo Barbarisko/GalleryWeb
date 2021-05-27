@@ -11,7 +11,7 @@ namespace GalleryDAL.Entities
         public int IdPicture { get; set; }
         public int Room { get; set; }
 
-        public virtual CurrentExhibition IdCurrExhNavigation { get; set; }
-        public virtual Picture IdPictureNavigation { get; set; }
+        public virtual CurrentExhibition CurrExh { get; set; }
+        public virtual Picture Picture { get; set; }
     }
 }
