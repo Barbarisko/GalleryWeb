@@ -10,11 +10,11 @@ using GalleryDAL.Entities;
 
 namespace GalleryWeb.Controllers
 {
-    public class CurrentExhibitionsController : Controller
+    public class CurrentExhibitionsAdminController : Controller
     {
         private readonly GalleryDbContext _context;
 
-        public CurrentExhibitionsController(GalleryDbContext context)
+        public CurrentExhibitionsAdminController(GalleryDbContext context)
         {
             _context = context;
         }

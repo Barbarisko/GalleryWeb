@@ -38,11 +38,7 @@ namespace GalleryWeb.Controllers
         {
             return View();
         }
-        public IActionResult Artists()
-        {
-            Artists model = new Artists(artistsService.GetAllArtists().ToList());
-            return View(model);
-        }
+
         public IActionResult Collections()
         {
             ExhPicModel model = new ExhPicModel(currentExhibitionService.GetAllPicsFromExhibition(2).ToList());

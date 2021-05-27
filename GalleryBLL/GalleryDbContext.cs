@@ -1,13 +1,14 @@
 ﻿using System;
 using GalleryDAL.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
 namespace GalleryDAL
 {
-    public partial class GalleryDbContext : DbContext
+    public partial class GalleryDbContext : IdentityDbContext<UserEntity>
     {
         public GalleryDbContext()
         {

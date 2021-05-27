@@ -5,9 +5,11 @@ using GalleryDAL;
 using GalleryDAL.Entities;
 using GalleryDAL.Repository;
 using GalleryDAL.UnitOfWork;
+using GalleryWeb.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -63,6 +65,20 @@ namespace GalleryWeb
             services.AddTransient<IOwnershipService, OwnershipService>();
             services.AddTransient<ITicketService, TicketService>();
 
+
+            services.AddIdentity<UserEntity, IdentityRole>(options => options.SignIn.RequireConfirmedEmail = true)
+                    .AddEntityFrameworkStores<GalleryDbContext>()
+                    .AddDefaultTokenProviders();
+
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
             services.AddControllersWithViews();
         }
 
@@ -84,7 +100,9 @@ namespace GalleryWeb
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
