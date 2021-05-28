@@ -14,8 +14,7 @@ namespace GalleryBLL.Models
 
 
         // public int IdCurrExh { get; set; }
-        public DateTime BuyDate { get => buyDate; set => buyDate = value; }
-        public CurrentExhibitionModel CurrentExhibition { get => currentExhibition; set => currentExhibition = value; }
+       // public CurrentExhibitionModel CurrentExhibition { get => currentExhibition; set => currentExhibition = value; }
         public string CartId { get => _cartId; set => _cartId = value; }
         public int Quantity { get => quantity; set => quantity = value; }
     }

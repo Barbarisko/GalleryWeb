@@ -2,11 +2,12 @@
     ViewData["Title"] = "Home Page";
 }
 @using GalleryBLL.Models
-@model GalleryWeb.Models.Exhibitions
+@model GalleryWeb.Models.HomePageModel
     <link href="css/site.css" rel="stylesheet" />
 
     <div class="carousel slide" id="carouselExampleIndicators" data-bs-ride="carousel">
         <div class="carousel-indicators">
+
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
         </div>
@@ -42,25 +43,37 @@
             <h1 class="mb-4">Welcome to GalleryWeb</h1>
             <!-- Marketing Icons Section-->
             <div class="row">
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <div class="card h-100">
-                        <h4 class="card-header">Card Title</h4>
-                        <div class="card-body"><p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p></div>
-                        <div class="card-footer"><a class="btn btn-primary" href="#!">Learn More</a></div>
-                    </div>
+                @*@foreach (NewsModel news in Model.NewsItems)
+        {
+            <div class="col-lg-4 mb-4 mb-lg-0">
+                <div class="card h-100">
+                    <h4 class="card-header">@news.Name</h4>
+                    <div class="card-body"><p class="card-text">@news.Description</p></div>
+                    <div class="card-footer"><a class="btn btn-primary" href="#!">Learn More</a></div>
                 </div>
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <div class="card h-100">
-                        <h4 class="card-header">Card Title</h4>
-                        <div class="card-body"><p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.</p></div>
-                        <div class="card-footer"><a class="btn btn-primary" href="#!">Learn More</a></div>
+            </div>
+        }*@
+                <div class="row">
+                    <div class="col-lg-4 mb-4 mb-lg-0">
+                        <div class="card h-100">
+                            <h4 class="card-header">Card Title</h4>
+                            <div class="card-body"><p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p></div>
+                            <div class="card-footer"><a class="btn btn-primary" href="#!">Learn More</a></div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="card h-100">
-                        <h4 class="card-header">Card Title</h4>
-                        <div class="card-body"><p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p></div>
-                        <div class="card-footer"><a class="btn btn-primary" href="#!">Learn More</a></div>
+                    <div class="col-lg-4 mb-4 mb-lg-0">
+                        <div class="card h-100">
+                            <h4 class="card-header">Card Title</h4>
+                            <div class="card-body"><p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.</p></div>
+                            <div class="card-footer"><a class="btn btn-primary" href="#!">Learn More</a></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card h-100">
+                            <h4 class="card-header">Card Title</h4>
+                            <div class="card-body"><p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p></div>
+                            <div class="card-footer"><a class="btn btn-primary" href="#!">Learn More</a></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -74,18 +87,24 @@
             <div class="row">
                 @foreach (ExhibitionModel e in Model.Items)
                 {
+                    foreach(CurrentExhibitionModel c in e.CurrentExhibitions)
+                    {
+                    if(c.DateBegin > DateTime.Now)
+                    {
                     <div class="col-lg-4 col-sm-6 mb-4">
                         <div class="card h-100">
                             <a href="#!"><img class="card-img-top" src="https://via.placeholder.com/700x400" alt="..." /></a>
                             <div class="card-body">
                                 <h4 class="card-title">
-                                    <a asp-controller="Home" asp-action="ShowCExhibition" asp-route-exhId="@e.Id">@e.Name</a>
+                                    <a asp-controller="Explore" asp-action="ShowCExhibition" asp-route-eId="@e.Id" asp-route-ceId="@c.Id">@e.Name</a>
                                 </h4>
                                 <p class="card-text">Ticket price: @e.Price</p>
                             </div>
                         </div>
                     </div>
-                }
+                    }
+                    }                    
+                 }
             </div>
         </div>
     </section>

@@ -26,6 +26,18 @@ namespace GalleryWeb.Controllers
             return View(await galleryDbContext.ToListAsync());
         }
 
+        //public async Task<IActionResult> Index()
+        //{
+        //    List<CurrentExhibition> galleryDbContext = _context.CurrentExhibitions.Include(c => c.Employee)
+        //                                                .Include(c => c.Exh).Include(c => c.ExhPlace).ToList();
+        //    CEViewModel model = new CEViewModel(galleryDbContext);
+
+        //    for (int i = 0; i < galleryDbContext.Count; i++)
+        //    {
+        //        model.Total[i] = currentExhibitionService.CountEstimatePrice(i);
+        //    }
+        //    return View(model);
+        //}
         // GET: CurrentExhibitions/Details/5
         public async Task<IActionResult> Details(int? id)
         {

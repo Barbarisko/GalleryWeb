@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <!--<PackageReference Include="EntityFramework6.Npgsql" Version="6.4.3" />-->
@@ -25,10 +26,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GalleryDLL\GalleryBLL.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Explore\" />
   </ItemGroup>
 
 </Project>

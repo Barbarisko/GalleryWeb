@@ -19,13 +19,16 @@
                 @Html.DisplayNameFor(model => model.DateEnd)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdEmployeeNavigation)
+                @Html.DisplayNameFor(model => model.Employee)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdExhNavigation)
+                @Html.DisplayNameFor(model => model.Exh)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdExhPlaceNavigation)
+                @Html.DisplayNameFor(model => model.ExhPlace)
+            </th>
+            <th>
+                Estimate price
             </th>
             <th></th>
         </tr>
@@ -40,13 +43,16 @@
                 @Html.DisplayFor(modelItem => item.DateEnd)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdEmployeeNavigation.LastName)
+                @Html.DisplayFor(modelItem => item.Employee.LastName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdExhNavigation.Name)
+                @Html.DisplayFor(modelItem => item.Exh.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdExhPlaceNavigation.Id)
+                @Html.DisplayFor(modelItem => item.ExhPlace.Id)
+            </td>
+            <td>
+                Price
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

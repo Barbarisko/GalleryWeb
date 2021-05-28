@@ -35,7 +35,7 @@ namespace GalleryWeb.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            HttpContext.Session.SetString(CartController.CartSessionKey, "");
+           // HttpContext.Session.SetString(CartController.CartSessionKey, "");
 
             return RedirectToAction("Index", "Home");
         }
@@ -122,7 +122,7 @@ namespace GalleryWeb.Controllers
 
                 if (result.Succeeded)
                 {
-                    _cartService.UpdateCartId(HttpContext.Session.GetString(CartController.CartSessionKey), model.Email);
+                //    _cartService.UpdateCartId(HttpContext.Session.GetString(CartController.CartSessionKey), model.Email);
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -142,6 +142,7 @@ namespace GalleryWeb.Controllers
             mail.Subject = subject;
             mail.Body = body;
             mail.IsBodyHtml = true;
+
             SmtpClient smtp = new SmtpClient();
             smtp.Host = "smtp.gmail.com";
             smtp.Port = 587;

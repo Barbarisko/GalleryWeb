@@ -48,8 +48,8 @@ namespace GalleryBLL
             CreateMap<TechniqueModel, Technique>()
                 .ForMember(d => d.Pictures, opt => opt.MapFrom(src => src.Pictures))
                 .ReverseMap();
-            CreateMap<TicketModel, Ticket>()
-                .ReverseMap();
+            //CreateMap<TicketModel, Ticket>()
+            //    .ReverseMap();
             CreateMap<NewsModel, News>()
                 .ReverseMap();
             CreateMap<TicketInCartModel, TicketsInCart>()

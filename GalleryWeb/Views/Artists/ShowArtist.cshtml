@@ -10,17 +10,19 @@
                 <h1>Learn more about...</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    @* href for artist name *@
                     <li class="breadcrumb-item active">@Model.artist.Name</li>
                 </ol>
                 <!-- Intro Content-->
                 <div class="row">
-                    <div class="col-lg-6"><img class="img-fluid rounded mb-4" src="https://drive.google.com/file/d/1yj8zu7RGPm0ENPeYXdGXeqxjspmf-F5_/view?usp=sharing" alt="..." /></div>
+                    <div class="col-lg-6">
+                    <img class="img-fluid rounded mb-4" 
+                         src="@Model.artist.Url" 
+                         alt="@Model.artist.Name" /></div>
                     <div class="col-lg-6">
                         <h2>@Model.artist.Name</h2>
                         <p>
                             Date of birth: @Model.artist.Bday
-                            @*Native city: @Model.artist.City.Name*@
+                            @*Native city: @Model.artist.City.Name* передать в модель города*@ 
 
                         </p>
                         <p>Some interesting facts about</p>
@@ -43,7 +45,7 @@
                                 <img class="card-img-top" src="@p.Url" alt="..." />
                                 <div class="card-body">
                                     <h4 class="card-title">
-                                        <a asp-controller="Home" asp-action="ShowPicture" asp-route-picId="@p.Id">
+                                        <a asp-controller="Explore" asp-action="ShowPicture" asp-route-picId="@p.Id">
                                             @p.Name
                                         </a>
                                     </h4>

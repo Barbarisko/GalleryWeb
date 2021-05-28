@@ -9,9 +9,10 @@
     <div class="container">
         <!-- Page Heading/Breadcrumbs-->
         <h1>
-            Exhibition Name
+            @Model.CurrentExhibition.Exhibition.Name
             <small>status(current, archive, future)</small>
-            <a class="btn btn-primary float-end" role="button" asp-controller="Home" asp-action="Cart">Get a ticket</a>
+            <a class="btn btn-primary float-end" role="button" asp-controller="Cart" asp-action="BuyTicket" 
+                                               asp-route-curExId="@Model.CurrentExhibition.Id" asp-route-quantity="1">Get a ticket</a>
         </h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item"><a href="index.html">Home</a></li>

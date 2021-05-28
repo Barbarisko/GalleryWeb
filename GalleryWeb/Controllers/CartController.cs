@@ -1,4 +1,5 @@
 ﻿using GalleryBLL.Interfaces;
+using GalleryBLL.Models;
 using GalleryDAL.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -12,64 +13,61 @@ namespace GalleryWeb.Controllers
 {
 	public class CartController : Controller
 	{
-		//IStockService _stockService;
-		ITicketService _cartService;
+		ITicketService _ticketService;
+        ICurrentExhibitionService _currExhService;
 		private readonly UserManager<UserEntity> _userManager;
 		public const string CartSessionKey = "CartId";
 
-		public CartController(
-			//ICartService cartService,
-			//IStockService stockService,
-			UserManager<UserEntity> userManager)
-		{
-			//_cartService = cartService;
-			//_stockService = stockService;
-			_userManager = userManager;
-		}
+        public CartController(UserManager<UserEntity> userManager, ITicketService ticketService, ICurrentExhibitionService currExhService)
+        {
+            _userManager = userManager;
+            _ticketService = ticketService;
+            _currExhService = currExhService;
+        }
 
-		//public IActionResult AddItemToCartFromProductPage(int stockId, int quantity)
-		//{
-		//	Stock stock = _stockService.GetStockById(stockId);
+        public IActionResult BuyTicket(int curExId, int quantity)
+        {
+            CurrentExhibitionModel visitedExh = _currExhService.GetCurExhById(curExId);
 
-		//	if (quantity <= stock.Quantity)
-		//	{
-		//		_cartService.AddItemToCart(stock, quantity, GetCartId().Result);
-		//	}
+            if (quantity <= visitedExh.MaxTicketQuantity)
+            {
+                _ticketService.AddTicketToCart(visitedExh, quantity, GetCartId().Result);
+            }
 
-		//	return RedirectToAction("ShowProduct", "Product", new { stockId });
-		//}
+            return RedirectToAction("Cart", "Home", new { visitedExh.IdExh, curExId });
+        }
 
-		//public IActionResult AddItemToCartByPlus(int stockId)
-		//{
-		//	Stock stock = _stockService.GetStockById(stockId);
+        //public IActionResult AddItemToCartByPlus(int stockId)
+        //{
+        //    Stock stock = _stockService.GetStockById(stockId);
 
-		//	if (stock.Quantity >= 1)
-		//	{
-		//		_cartService.AddItemToCart(stock, 1, GetCartId().Result);
-		//	}
+        //    if (stock.Quantity >= 1)
+        //    {
+        //        _cartService.AddItemToCart(stock, 1, GetCartId().Result);
+        //    }
 
-		//	return RedirectToAction("Cart", "Cart");
-		//}
+        //    return RedirectToAction("Cart", "Cart");
+        //}
 
-		//public IActionResult RemoveItemFromCartByMinus(int itemId, int stockId)
-		//{
-		//	_cartService.RemoveItemFromCart(itemId, stockId);
-		//	return RedirectToAction("Cart", "Cart");
-		//}
+        //public IActionResult RemoveItemFromCartByMinus(int itemId, int stockId)
+        //{
+        //	_cartService.RemoveItemFromCart(itemId, stockId);
+        //	return RedirectToAction("Cart", "Cart");
+        //}
 
-		//public IActionResult RemoveItemFromCartByX(int itemId, int stockId)
-		//{
-		//	_cartService.DeleteItem(itemId, stockId);
-		//	return RedirectToAction("Cart", "Cart");
-		//}
+        //public IActionResult RemoveItemFromCartByX(int itemId, int stockId)
+        //{
+        //	_cartService.DeleteItem(itemId, stockId);
+        //	return RedirectToAction("Cart", "Cart");
+        //}
 
-		//public IActionResult Cart()
-		//{
-		//	CartModel model = new CartModel(_cartService.GetAllItemsFromCart(GetCartId().Result));
-		//	return View(model);
-		//}
+        //public IActionResult Cart()
+        //{
+        //	CartModel model = new CartModel(_cartService.GetAllItemsFromCart(GetCartId().Result));
+        //	return View(model);
+        //}
 
-		public async Task<string> GetCartId()
+        public async Task<string> GetCartId()
 		{
 			if (HttpContext.User.Identity.IsAuthenticated)
 			{

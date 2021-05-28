@@ -12,5 +12,10 @@ namespace GalleryBLL.Interfaces
         void AddNewExhibition(string name, int? price, string description);
         void UpdateEXHById(int Id, string name, int price, string desc);
         void DeleteExhibition(int exhId);
+
+        IEnumerable<NewsModel> GetAllNews();
+        NewsModel GetNewsById(int id);
+
+
     }
 }

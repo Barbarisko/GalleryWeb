@@ -10,22 +10,22 @@ using GalleryDAL.Entities;
 
 namespace GalleryWeb.Controllers
 {
-    public class ExhibitionsController : Controller
+    public class NewsAdminController : Controller
     {
         private readonly GalleryDbContext _context;
 
-        public ExhibitionsController(GalleryDbContext context)
+        public NewsAdminController(GalleryDbContext context)
         {
             _context = context;
         }
 
-        // GET: Exhibitions
+        // GET: NewsAdmin
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Exhibitions.ToListAsync());
+            return View(await _context.News.ToListAsync());
         }
 
-        // GET: Exhibitions/Details/5
+        // GET: NewsAdmin/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace GalleryWeb.Controllers
                 return NotFound();
             }
 
-            var exhibition = await _context.Exhibitions
+            var news = await _context.News
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (exhibition == null)
+            if (news == null)
             {
                 return NotFound();
             }
 
-            return View(exhibition);
+            return View(news);
         }
 
-        // GET: Exhibitions/Create
+        // GET: NewsAdmin/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Exhibitions/Create
+        // POST: NewsAdmin/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Price,Description,Id")] Exhibition exhibition)
+        public async Task<IActionResult> Create([Bind("Name,Description,PicUrl,Id")] News news)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(exhibition);
+                _context.Add(news);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(exhibition);
+            return View(news);
         }
 
-        // GET: Exhibitions/Edit/5
+        // GET: NewsAdmin/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace GalleryWeb.Controllers
                 return NotFound();
             }
 
-            var exhibition = await _context.Exhibitions.FindAsync(id);
-            if (exhibition == null)
+            var news = await _context.News.FindAsync(id);
+            if (news == null)
             {
                 return NotFound();
             }
-            return View(exhibition);
+            return View(news);
         }
 
-        // POST: Exhibitions/Edit/5
+        // POST: NewsAdmin/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Name,Price,Description,Id")] Exhibition exhibition)
+        public async Task<IActionResult> Edit(int id, [Bind("Name,Description,picUrl,Id")] News news)
         {
-            if (id != exhibition.Id)
+            if (id != news.Id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace GalleryWeb.Controllers
             {
                 try
                 {
-                    _context.Update(exhibition);
+                    _context.Update(news);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ExhibitionExists(exhibition.Id))
+                    if (!NewsExists(news.Id))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace GalleryWeb.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(exhibition);
+            return View(news);
         }
 
-        // GET: Exhibitions/Delete/5
+        // GET: NewsAdmin/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace GalleryWeb.Controllers
                 return NotFound();
             }
 
-            var exhibition = await _context.Exhibitions
+            var news = await _context.News
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (exhibition == null)
+            if (news == null)
             {
                 return NotFound();
             }
 
-            return View(exhibition);
+            return View(news);
         }
 
-        // POST: Exhibitions/Delete/5
+        // POST: NewsAdmin/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var exhibition = await _context.Exhibitions.FindAsync(id);
-            _context.Exhibitions.Remove(exhibition);
+            var news = await _context.News.FindAsync(id);
+            _context.News.Remove(news);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ExhibitionExists(int id)
+        private bool NewsExists(int id)
         {
-            return _context.Exhibitions.Any(e => e.Id == id);
+            return _context.News.Any(e => e.Id == id);
         }
     }
 }

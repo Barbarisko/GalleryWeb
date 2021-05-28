@@ -9,9 +9,9 @@ namespace GalleryWeb.Models
     public class CartModel
     {
 
-			public List<TicketModel> Items;
+			public List<TicketInCartModel> Items;
 
-			public CartModel(List<TicketModel> items)
+			public CartModel(List<TicketInCartModel> items)
 			{
 				Items = items;
 			}

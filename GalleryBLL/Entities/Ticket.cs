@@ -9,13 +9,13 @@ namespace GalleryDAL.Entities
     {
         public Ticket()
         {
-            TicketsInCarts = new HashSet<TicketsInCart>();
+            //TicketsInCarts = new HashSet<TicketsInCart>();
         }
 
         public DateTime BuyDate { get; set; }
         public int? CurExhId { get; set; }
 
         public virtual CurrentExhibition CurExh { get; set; }
-        public virtual ICollection<TicketsInCart> TicketsInCarts { get; set; }
+        //public virtual ICollection<TicketsInCart> TicketsInCarts { get; set; }
     }
 }

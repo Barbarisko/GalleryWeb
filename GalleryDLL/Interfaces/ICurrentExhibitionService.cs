@@ -8,6 +8,8 @@ namespace GalleryBLL.Interfaces
     public interface ICurrentExhibitionService
     {
         CurrentExhibitionModel GetCurExhById(int id);
+        IEnumerable<CurrentExhibitionModel> GetAllCurrentExhibitions();
+
         void AddCurrentExhibition(int idExh, int idEmp, int idPlace, DateTime begin, DateTime end);
         void DeleteCurrentExhibition(int exhId);
 

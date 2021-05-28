@@ -27,7 +27,7 @@ namespace GalleryBLL.Services
             List<ExhibitedPicture> picturesFromExh = _unitOfWork.CurrentExhibitionRepository.Get(currexhId).ExhibitedPictures.ToList();
             foreach (var pic in picturesFromExh)
             {
-                totalprice += pic.IdPictureNavigation.Price;
+                totalprice += pic.Picture.Price;
             }
             return totalprice;
         }

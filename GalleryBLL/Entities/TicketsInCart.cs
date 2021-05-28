@@ -7,11 +7,11 @@ namespace GalleryDAL.Entities
 {
     public partial class TicketsInCart : BaseEntity
     {
-        public int? TicketId { get; set; }
         public int? TotalPrice { get; set; }
-        public int? Quantity { get; set; }
-        public string? CartId { get; set ; }
-
-        public virtual Ticket Ticket { get; set; }
+        public int? Quantity { get ; set; }
+        public string? CartId { get; set  ; }
+        public CurrentExhibition CurrentExhibition { get; set ; }
+        public int? CurExhId { get; set; }
+        public DateTime BuyDate { get; set ; }
     }
 }

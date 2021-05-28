@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace GalleryWeb.Models
 {
-    public class Exhibitions
+    public class NewsViewModel
     {
-        public List<ExhibitionModel> Items;
+        public List<NewsModel> Items;
 
-        public Exhibitions(List<ExhibitionModel> items)
+        public NewsViewModel(List<NewsModel> items)
         {
             Items = items;
         }

@@ -14,23 +14,21 @@ namespace GalleryWeb.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        IArtistService artistsService;
         IExhibitionService exhibitionService;
         ICurrentExhibitionService currentExhibitionService;
-        IPictureService pictureService;
-        public HomeController(ILogger<HomeController> logger, IArtistService artistsService, 
-            IExhibitionService exhibitionService, IPictureService pictureService, ICurrentExhibitionService currentExhibitionService)
+        public HomeController(ILogger<HomeController> logger, IExhibitionService exhibitionService, 
+            ICurrentExhibitionService currentExhibitionService)
         {
             _logger = logger;
-            this.artistsService = artistsService;
             this.exhibitionService = exhibitionService;
-            this.pictureService = pictureService;
             this.currentExhibitionService = currentExhibitionService;
         }
 
         public IActionResult Index()
         {
-            Exhibitions model = new Exhibitions(exhibitionService.GetAllExhibitions().ToList());
+            HomePageModel model = new HomePageModel(exhibitionService.GetAllExhibitions().ToList(),
+                                                    currentExhibitionService.GetAllCurrentExhibitions().ToList()); 
+                                                    //exhibitionService.GetAllNews().ToList());
             return View(model);
         }
 
@@ -39,11 +37,6 @@ namespace GalleryWeb.Controllers
             return View();
         }
 
-        public IActionResult Collections()
-        {
-            ExhPicModel model = new ExhPicModel(currentExhibitionService.GetAllPicsFromExhibition(2).ToList());
-            return View(model);
-        }
         public IActionResult Cart()
         {
             return View();
@@ -51,22 +44,6 @@ namespace GalleryWeb.Controllers
         public IActionResult Contacts()
         {
             return View();
-        }
-        public IActionResult ShowPicture(int picId)
-        {
-
-            return View();
-        }
-        public IActionResult ShowCExhibition(int eId)
-        {
-            SingleExh model = new SingleExh(exhibitionService.GetExhById(eId));
-            return View(model);
-        }
-        public IActionResult ShowArtist(int artistId)
-        {
-            SingleArtist model = new SingleArtist(artistsService.GetArtistById(artistId),
-                pictureService.GetAllPicsFromArtist(artistId));
-            return View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

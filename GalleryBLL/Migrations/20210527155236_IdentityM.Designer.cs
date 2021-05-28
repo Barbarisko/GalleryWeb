@@ -10,14 +10,13 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GalleryDAL.Migrations
 {
     [DbContext(typeof(GalleryDbContext))]
-    [Migration("20210527133436_IdentityM")]
+    [Migration("20210527155236_IdentityM")]
     partial class IdentityM
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:Collation", "C.UTF-8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
@@ -27,63 +26,46 @@ namespace GalleryDAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("id")
-                        .HasDefaultValueSql("nextval('artists_id_artist_seq'::regclass)");
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("AddInfo")
-                        .HasColumnType("character varying")
-                        .HasColumnName("add_info");
+                        .HasColumnType("text");
 
                     b.Property<string>("ArtDirection")
-                        .HasMaxLength(15)
-                        .HasColumnType("character varying(15)")
-                        .HasColumnName("art_direction");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("Bday")
-                        .HasColumnType("date")
-                        .HasColumnName("bday");
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int?>("CityId")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime?>("Death")
-                        .HasColumnType("date")
-                        .HasColumnName("death");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int?>("IdCity")
-                        .HasColumnType("integer")
-                        .HasColumnName("id_city");
+                        .HasColumnType("integer");
 
                     b.Property<string>("LastName")
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)")
-                        .HasColumnName("last_name");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)")
-                        .HasColumnName("name");
+                        .HasColumnType("text");
 
                     b.Property<string>("Surname")
-                        .HasColumnType("character varying")
-                        .HasColumnName("surname");
+                        .HasColumnType("text");
 
                     b.Property<string>("Telephone")
-                        .HasMaxLength(10)
-                        .HasColumnType("character varying(10)")
-                        .HasColumnName("telephone");
+                        .HasColumnType("text");
 
                     b.Property<string>("Url")
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)")
-                        .HasColumnName("url");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdCity");
+                    b.HasIndex("CityId");
 
-                    b.HasIndex(new[] { "Telephone" }, "artists_telephone_key")
-                        .IsUnique();
-
-                    b.ToTable("artists");
+                    b.ToTable("Artists");
                 });
 
             modelBuilder.Entity("GalleryDAL.Entities.City", b =>
@@ -91,23 +73,22 @@ namespace GalleryDAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("id")
-                        .HasDefaultValueSql("nextval('cities_id_city_seq'::regclass)");
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int?>("CountryId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("IdCountry")
-                        .HasColumnType("integer")
-                        .HasColumnName("id_country");
+                        .HasColumnType("integer");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)")
-                        .HasColumnName("name");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdCountry");
+                    b.HasIndex("CountryId");
 
-                    b.ToTable("cities");
+                    b.ToTable("Cities");
                 });
 
             modelBuilder.Entity("GalleryDAL.Entities.Country", b =>
@@ -115,20 +96,14 @@ namespace GalleryDAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("id")
-                        .HasDefaultValueSql("nextval('countries_id_country_seq'::regclass)");
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Name")
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)")
-                        .HasColumnName("name");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "Name" }, "countries_name_key")
-                        .IsUnique();
-
-                    b.ToTable("countries");
+                    b.ToTable("Countries");
                 });
 
             modelBuilder.Entity("GalleryDAL.Entities.CurrentExhibition", b =>
@@ -136,42 +111,41 @@ namespace GalleryDAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("id")
-                        .HasDefaultValueSql("nextval('current_exhibitions_id_curr_exh_seq'::regclass)");
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<DateTime?>("DateBegin")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("date")
-                        .HasColumnName("date_begin")
-                        .HasDefaultValueSql("now()");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime?>("DateEnd")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("date")
-                        .HasColumnName("date_end")
-                        .HasDefaultValueSql("now()");
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int?>("EmployeeId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("ExhId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("ExhPlaceId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("IdEmployee")
-                        .HasColumnType("integer")
-                        .HasColumnName("id_employee");
+                        .HasColumnType("integer");
 
                     b.Property<int>("IdExh")
-                        .HasColumnType("integer")
-                        .HasColumnName("id_exh");
+                        .HasColumnType("integer");
 
                     b.Property<int>("IdExhPlace")
-                        .HasColumnType("integer")
-                        .HasColumnName("id_exh_place");
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdEmployee");
+                    b.HasIndex("EmployeeId");
 
-                    b.HasIndex("IdExh");
+                    b.HasIndex("ExhId");
 
-                    b.HasIndex("IdExhPlace");
+                    b.HasIndex("ExhPlaceId");
 
-                    b.ToTable("current_exhibitions");
+                    b.ToTable("CurrentExhibitions");
                 });
 
             modelBuilder.Entity("GalleryDAL.Entities.Employee", b =>
@@ -179,57 +153,40 @@ namespace GalleryDAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("id")
-                        .HasDefaultValueSql("nextval('employees_id_employee_seq'::regclass)");
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("AddInfo")
-                        .HasColumnType("text")
-                        .HasColumnName("add_info");
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("Bday")
-                        .HasColumnType("date")
-                        .HasColumnName("bday");
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int?>("CityId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("IdCity")
-                        .HasColumnType("integer")
-                        .HasColumnName("id_city");
+                        .HasColumnType("integer");
 
                     b.Property<string>("Job")
-                        .HasMaxLength(10)
-                        .HasColumnType("character varying(10)")
-                        .HasColumnName("job");
+                        .HasColumnType("text");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)")
-                        .HasColumnName("last_name");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)")
-                        .HasColumnName("name");
+                        .HasColumnType("text");
 
                     b.Property<string>("Surname")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)")
-                        .HasColumnName("surname");
+                        .HasColumnType("text");
 
                     b.Property<string>("Telephone")
-                        .HasMaxLength(10)
-                        .HasColumnType("character varying(10)")
-                        .HasColumnName("telephone");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdCity");
+                    b.HasIndex("CityId");
 
-                    b.HasIndex(new[] { "Telephone" }, "employees_telephone_key")
-                        .IsUnique();
-
-                    b.ToTable("employees");
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("GalleryDAL.Entities.ExhibitPlace", b =>
@@ -237,31 +194,28 @@ namespace GalleryDAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("id")
-                        .HasDefaultValueSql("nextval('exhibit_places_id_exh_place_seq'::regclass)");
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int?>("CityId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Description")
-                        .HasColumnType("character varying")
-                        .HasColumnName("description");
+                        .HasColumnType("text");
 
                     b.Property<int>("IdCity")
-                        .HasColumnType("integer")
-                        .HasColumnName("id_city");
+                        .HasColumnType("integer");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)")
-                        .HasColumnName("name");
+                        .HasColumnType("text");
 
                     b.Property<int?>("Telephone")
-                        .HasColumnType("integer")
-                        .HasColumnName("telephone");
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdCity");
+                    b.HasIndex("CityId");
 
-                    b.ToTable("exhibit_places");
+                    b.ToTable("ExhibitPlaces");
                 });
 
             modelBuilder.Entity("GalleryDAL.Entities.ExhibitedPicture", b =>
@@ -269,28 +223,30 @@ namespace GalleryDAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("id")
-                        .HasDefaultValueSql("nextval('exhibited_pictures_id_exh_pic_seq'::regclass)");
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int?>("CurrExhId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("IdCurrExh")
-                        .HasColumnType("integer")
-                        .HasColumnName("id_curr_exh");
+                        .HasColumnType("integer");
 
                     b.Property<int>("IdPicture")
-                        .HasColumnType("integer")
-                        .HasColumnName("id_picture");
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("PictureId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("Room")
-                        .HasColumnType("integer")
-                        .HasColumnName("room");
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdCurrExh");
+                    b.HasIndex("CurrExhId");
 
-                    b.HasIndex("IdPicture");
+                    b.HasIndex("PictureId");
 
-                    b.ToTable("exhibited_pictures");
+                    b.ToTable("ExhibitedPictures");
                 });
 
             modelBuilder.Entity("GalleryDAL.Entities.Exhibition", b =>
@@ -298,27 +254,20 @@ namespace GalleryDAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("id")
-                        .HasDefaultValueSql("nextval('exhibitions_id_exh_seq'::regclass)");
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Description")
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)")
-                        .HasColumnName("description");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("character varying(30)")
-                        .HasColumnName("name");
+                        .HasColumnType("text");
 
                     b.Property<int?>("Price")
-                        .HasColumnType("integer")
-                        .HasColumnName("price");
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.ToTable("exhibitions");
+                    b.ToTable("Exhibitions");
                 });
 
             modelBuilder.Entity("GalleryDAL.Entities.News", b =>
@@ -326,23 +275,17 @@ namespace GalleryDAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("id")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Description")
-                        .HasColumnType("character varying")
-                        .HasColumnName("description");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
-                        .HasColumnType("character varying")
-                        .HasColumnName("name");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "Id" }, "news_id_uindex")
-                        .IsUnique();
-
-                    b.ToTable("news");
+                    b.ToTable("News");
                 });
 
             modelBuilder.Entity("GalleryDAL.Entities.OwnedPicture", b =>
@@ -350,29 +293,30 @@ namespace GalleryDAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("id")
-                        .HasDefaultValueSql("nextval('owned_pictures_id_owned_picture_seq'::regclass)");
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<DateTime>("BuyDate")
-                        .HasColumnType("date")
-                        .HasColumnName("buy_date");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int?>("IdOwner")
-                        .HasColumnType("integer")
-                        .HasColumnName("id_owner");
+                        .HasColumnType("integer");
 
                     b.Property<int>("IdPicture")
-                        .HasColumnType("integer")
-                        .HasColumnName("id_picture");
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("OwnerId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("PictureId")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdOwner");
+                    b.HasIndex("OwnerId");
 
-                    b.HasIndex(new[] { "IdPicture" }, "owned_pictures_id_picture_key")
-                        .IsUnique();
+                    b.HasIndex("PictureId");
 
-                    b.ToTable("owned_pictures");
+                    b.ToTable("OwnedPictures");
                 });
 
             modelBuilder.Entity("GalleryDAL.Entities.Owner", b =>
@@ -380,46 +324,26 @@ namespace GalleryDAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("id")
-                        .HasDefaultValueSql("nextval('owners_id_owner_seq'::regclass)");
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("BankAcc")
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("bank_acc");
+                        .HasColumnType("text");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("last_name");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("name");
+                        .HasColumnType("text");
 
                     b.Property<string>("Surname")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("surname");
+                        .HasColumnType("text");
 
                     b.Property<string>("Telephone")
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("telephone");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "BankAcc" }, "owners_bank_acc_key")
-                        .IsUnique();
-
-                    b.HasIndex(new[] { "Telephone" }, "owners_telephone_key")
-                        .IsUnique();
-
-                    b.ToTable("owners");
+                    b.ToTable("Owners");
                 });
 
             modelBuilder.Entity("GalleryDAL.Entities.Picture", b =>
@@ -427,52 +351,45 @@ namespace GalleryDAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("id")
-                        .HasDefaultValueSql("nextval('pictures_id_picture_seq'::regclass)");
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("AddInfo")
-                        .HasColumnType("text")
-                        .HasColumnName("add_info");
+                        .HasColumnType("text");
+
+                    b.Property<int?>("ArtistId")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime>("CreateDate")
-                        .HasColumnType("date")
-                        .HasColumnName("create_date");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Genre")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)")
-                        .HasColumnName("genre");
+                        .HasColumnType("text");
 
                     b.Property<int>("IdArtist")
-                        .HasColumnType("integer")
-                        .HasColumnName("id_artist");
+                        .HasColumnType("integer");
 
                     b.Property<int>("IdTechnique")
-                        .HasColumnType("integer")
-                        .HasColumnName("id_technique");
+                        .HasColumnType("integer");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(30)
-                        .HasColumnType("character varying(30)")
-                        .HasColumnName("name");
+                        .HasColumnType("text");
 
                     b.Property<int>("Price")
-                        .HasColumnType("integer")
-                        .HasColumnName("price");
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("TechniqueId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Url")
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)")
-                        .HasColumnName("url");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdArtist");
+                    b.HasIndex("ArtistId");
 
-                    b.HasIndex("IdTechnique");
+                    b.HasIndex("TechniqueId");
 
-                    b.ToTable("pictures");
+                    b.ToTable("Pictures");
                 });
 
             modelBuilder.Entity("GalleryDAL.Entities.Technique", b =>
@@ -480,37 +397,23 @@ namespace GalleryDAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("id")
-                        .HasDefaultValueSql("nextval('techniques_id_technique_seq'::regclass)");
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Base")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("character varying(10)")
-                        .HasColumnName("base");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("character varying(10)")
-                        .HasColumnName("name");
+                        .HasColumnType("text");
 
                     b.Property<string>("Paint")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("character varying(10)")
-                        .HasColumnName("paint");
+                        .HasColumnType("text");
 
                     b.Property<string>("PicUrl")
-                        .HasColumnType("character varying")
-                        .HasColumnName("picUrl");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "Name" }, "techniques_name_key")
-                        .IsUnique();
-
-                    b.ToTable("techniques");
+                    b.ToTable("Techniques");
                 });
 
             modelBuilder.Entity("GalleryDAL.Entities.Ticket", b =>
@@ -518,22 +421,19 @@ namespace GalleryDAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("id")
-                        .HasDefaultValueSql("nextval('tickets_id_ticket_seq'::regclass)");
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<DateTime>("BuyDate")
-                        .HasColumnType("date")
-                        .HasColumnName("buy_date");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int?>("CurExhId")
-                        .HasColumnType("integer")
-                        .HasColumnName("curExhId");
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CurExhId");
 
-                    b.ToTable("tickets");
+                    b.ToTable("Tickets");
                 });
 
             modelBuilder.Entity("GalleryDAL.Entities.TicketsInCart", b =>
@@ -541,32 +441,25 @@ namespace GalleryDAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("id")
-                        .HasDefaultValueSql("nextval('ticket_in_cart_id_seq'::regclass)");
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("CartId")
                         .HasColumnType("text");
 
                     b.Property<int?>("Quantity")
-                        .HasColumnType("integer")
-                        .HasColumnName("quantity");
+                        .HasColumnType("integer");
 
                     b.Property<int?>("TicketId")
-                        .HasColumnType("integer")
-                        .HasColumnName("ticketId");
+                        .HasColumnType("integer");
 
                     b.Property<int?>("TotalPrice")
-                        .HasColumnType("integer")
-                        .HasColumnName("totalPrice");
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
                     b.HasIndex("TicketId");
 
-                    b.HasIndex(new[] { "Id" }, "ticket_in_cart_id_uindex")
-                        .IsUnique();
-
-                    b.ToTable("tickets_in_cart");
+                    b.ToTable("TicketsInCarts");
                 });
 
             modelBuilder.Entity("GalleryDAL.Entities.UserEntity", b =>
@@ -771,135 +664,109 @@ namespace GalleryDAL.Migrations
                 {
                     b.HasOne("GalleryDAL.Entities.City", "City")
                         .WithMany("Artists")
-                        .HasForeignKey("IdCity")
-                        .HasConstraintName("artists_id_city_fkey");
+                        .HasForeignKey("CityId");
 
                     b.Navigation("City");
                 });
 
             modelBuilder.Entity("GalleryDAL.Entities.City", b =>
                 {
-                    b.HasOne("GalleryDAL.Entities.Country", "IdCountryNavigation")
+                    b.HasOne("GalleryDAL.Entities.Country", "Country")
                         .WithMany("Cities")
-                        .HasForeignKey("IdCountry")
-                        .HasConstraintName("cities_id_country_fkey")
-                        .IsRequired();
+                        .HasForeignKey("CountryId");
 
-                    b.Navigation("IdCountryNavigation");
+                    b.Navigation("Country");
                 });
 
             modelBuilder.Entity("GalleryDAL.Entities.CurrentExhibition", b =>
                 {
-                    b.HasOne("GalleryDAL.Entities.Employee", "IdEmployeeNavigation")
+                    b.HasOne("GalleryDAL.Entities.Employee", "Employee")
                         .WithMany("CurrentExhibitions")
-                        .HasForeignKey("IdEmployee")
-                        .HasConstraintName("current_exhibitions_id_employee_fkey")
-                        .IsRequired();
+                        .HasForeignKey("EmployeeId");
 
-                    b.HasOne("GalleryDAL.Entities.Exhibition", "IdExhNavigation")
+                    b.HasOne("GalleryDAL.Entities.Exhibition", "Exh")
                         .WithMany("CurrentExhibitions")
-                        .HasForeignKey("IdExh")
-                        .HasConstraintName("current_exhibitions_id_exh_fkey")
-                        .IsRequired();
+                        .HasForeignKey("ExhId");
 
-                    b.HasOne("GalleryDAL.Entities.ExhibitPlace", "IdExhPlaceNavigation")
+                    b.HasOne("GalleryDAL.Entities.ExhibitPlace", "ExhPlace")
                         .WithMany("CurrentExhibitions")
-                        .HasForeignKey("IdExhPlace")
-                        .HasConstraintName("current_exhibitions_id_exh_place_fkey")
-                        .IsRequired();
+                        .HasForeignKey("ExhPlaceId");
 
-                    b.Navigation("IdEmployeeNavigation");
+                    b.Navigation("Employee");
 
-                    b.Navigation("IdExhNavigation");
+                    b.Navigation("Exh");
 
-                    b.Navigation("IdExhPlaceNavigation");
+                    b.Navigation("ExhPlace");
                 });
 
             modelBuilder.Entity("GalleryDAL.Entities.Employee", b =>
                 {
-                    b.HasOne("GalleryDAL.Entities.City", "IdCityNavigation")
+                    b.HasOne("GalleryDAL.Entities.City", "City")
                         .WithMany("Employees")
-                        .HasForeignKey("IdCity")
-                        .HasConstraintName("employees_id_city_fkey")
-                        .IsRequired();
+                        .HasForeignKey("CityId");
 
-                    b.Navigation("IdCityNavigation");
+                    b.Navigation("City");
                 });
 
             modelBuilder.Entity("GalleryDAL.Entities.ExhibitPlace", b =>
                 {
-                    b.HasOne("GalleryDAL.Entities.City", "IdCityNavigation")
+                    b.HasOne("GalleryDAL.Entities.City", "City")
                         .WithMany("ExhibitPlaces")
-                        .HasForeignKey("IdCity")
-                        .HasConstraintName("exhibit_places_id_city_fkey")
-                        .IsRequired();
+                        .HasForeignKey("CityId");
 
-                    b.Navigation("IdCityNavigation");
+                    b.Navigation("City");
                 });
 
             modelBuilder.Entity("GalleryDAL.Entities.ExhibitedPicture", b =>
                 {
-                    b.HasOne("GalleryDAL.Entities.CurrentExhibition", "IdCurrExhNavigation")
+                    b.HasOne("GalleryDAL.Entities.CurrentExhibition", "CurrExh")
                         .WithMany("ExhibitedPictures")
-                        .HasForeignKey("IdCurrExh")
-                        .HasConstraintName("exhibited_pictures_id_curr_exh_fkey")
-                        .IsRequired();
+                        .HasForeignKey("CurrExhId");
 
-                    b.HasOne("GalleryDAL.Entities.Picture", "IdPictureNavigation")
+                    b.HasOne("GalleryDAL.Entities.Picture", "Picture")
                         .WithMany("ExhibitedPictures")
-                        .HasForeignKey("IdPicture")
-                        .HasConstraintName("exhibited_pictures_id_picture_fkey")
-                        .IsRequired();
+                        .HasForeignKey("PictureId");
 
-                    b.Navigation("IdCurrExhNavigation");
+                    b.Navigation("CurrExh");
 
-                    b.Navigation("IdPictureNavigation");
+                    b.Navigation("Picture");
                 });
 
             modelBuilder.Entity("GalleryDAL.Entities.OwnedPicture", b =>
                 {
-                    b.HasOne("GalleryDAL.Entities.Owner", "IdOwnerNavigation")
+                    b.HasOne("GalleryDAL.Entities.Owner", "Owner")
                         .WithMany("OwnedPictures")
-                        .HasForeignKey("IdOwner")
-                        .HasConstraintName("owned_pictures_id_owner_fkey");
+                        .HasForeignKey("OwnerId");
 
-                    b.HasOne("GalleryDAL.Entities.Picture", "IdPictureNavigation")
-                        .WithOne("OwnedPicture")
-                        .HasForeignKey("GalleryDAL.Entities.OwnedPicture", "IdPicture")
-                        .HasConstraintName("owned_pictures_id_picture_fkey")
-                        .IsRequired();
+                    b.HasOne("GalleryDAL.Entities.Picture", "Picture")
+                        .WithMany("OwnedPicture")
+                        .HasForeignKey("PictureId");
 
-                    b.Navigation("IdOwnerNavigation");
+                    b.Navigation("Owner");
 
-                    b.Navigation("IdPictureNavigation");
+                    b.Navigation("Picture");
                 });
 
             modelBuilder.Entity("GalleryDAL.Entities.Picture", b =>
                 {
-                    b.HasOne("GalleryDAL.Entities.Artist", "IdArtistNavigation")
+                    b.HasOne("GalleryDAL.Entities.Artist", "Artist")
                         .WithMany("Pictures")
-                        .HasForeignKey("IdArtist")
-                        .HasConstraintName("pictures_id_artist_fkey")
-                        .IsRequired();
+                        .HasForeignKey("ArtistId");
 
-                    b.HasOne("GalleryDAL.Entities.Technique", "IdTechniqueNavigation")
+                    b.HasOne("GalleryDAL.Entities.Technique", "Technique")
                         .WithMany("Pictures")
-                        .HasForeignKey("IdTechnique")
-                        .HasConstraintName("pictures_id_technique_fkey")
-                        .IsRequired();
+                        .HasForeignKey("TechniqueId");
 
-                    b.Navigation("IdArtistNavigation");
+                    b.Navigation("Artist");
 
-                    b.Navigation("IdTechniqueNavigation");
+                    b.Navigation("Technique");
                 });
 
             modelBuilder.Entity("GalleryDAL.Entities.Ticket", b =>
                 {
                     b.HasOne("GalleryDAL.Entities.CurrentExhibition", "CurExh")
                         .WithMany("Tickets")
-                        .HasForeignKey("CurExhId")
-                        .HasConstraintName("tickets_current_exhibitions_id_fk")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CurExhId");
 
                     b.Navigation("CurExh");
                 });
@@ -908,9 +775,7 @@ namespace GalleryDAL.Migrations
                 {
                     b.HasOne("GalleryDAL.Entities.Ticket", "Ticket")
                         .WithMany("TicketsInCarts")
-                        .HasForeignKey("TicketId")
-                        .HasConstraintName("ticket_in_cart___fk_ticket")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("TicketId");
 
                     b.Navigation("Ticket");
                 });
