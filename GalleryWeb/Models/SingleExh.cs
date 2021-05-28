@@ -15,9 +15,10 @@ namespace GalleryWeb.Models
             List<ExhibitedPictureModel> pictures)
         {
             this.CurrentExhibition = CurrentExhibition;
-            //Exhibition = exhibition;
-            CurrentExhibition.Exhibition = exhibition;
-            CurrentExhibition.ExhibitedPictures = pictures;
+            Exhibition = exhibition;
+            Pictures = pictures;
+            //CurrentExhibition.Exhibition = exhibition;
+            //CurrentExhibition.ExhibitedPictures = pictures;
         }
     }
 }

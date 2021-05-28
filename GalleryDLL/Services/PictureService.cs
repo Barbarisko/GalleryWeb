@@ -25,6 +25,11 @@ namespace GalleryBLL.Services
 				.ToList().FindAll(i => i.IdArtist == artId);
 			return _mapper.Map<List<PictureModel>>(picEntities);
 		}
+		public List<PictureModel> GetAllPics()
+		{
+			List<Picture> picEntities = _unitOfWork.PictureRepository.GetAll().ToList();
+			return _mapper.Map<List<PictureModel>>(picEntities);
+		}
 
         public PictureModel GetPicById(int id)
         {

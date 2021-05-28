@@ -1,4 +1,5 @@
 ﻿using GalleryBLL.Interfaces;
+using GalleryBLL.Models;
 using GalleryWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -14,12 +15,14 @@ namespace GalleryWeb.Controllers
         private readonly ILogger<ExploreController> _logger;
         ICurrentExhibitionService currentExhibitionService;
         IExhibitionService exhibitionService;
+        IPictureService pictureService;
         public ExploreController(ILogger<ExploreController> logger,
-            ICurrentExhibitionService currentExhibitionService, IExhibitionService exhibitionService)
+            ICurrentExhibitionService currentExhibitionService, IExhibitionService exhibitionService, IPictureService pictureService)
         {
             _logger = logger;
             this.currentExhibitionService = currentExhibitionService;
             this.exhibitionService = exhibitionService;
+            this.pictureService = pictureService;
         }
         public IActionResult ShowCExhibition(int eId, int ceId)
         {
@@ -34,7 +37,7 @@ namespace GalleryWeb.Controllers
         }
         public IActionResult Collections()
         {
-            ExhPicModel model = new ExhPicModel(currentExhibitionService.GetAllPicsFromExhibition(2).ToList());
+            Pictures model = new Pictures(pictureService.GetAllPics().ToList());
             return View(model);
         }
 

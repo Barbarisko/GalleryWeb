@@ -37,10 +37,6 @@ namespace GalleryWeb.Controllers
             return View();
         }
 
-        public IActionResult Cart()
-        {
-            return View();
-        }
         public IActionResult Contacts()
         {
             return View();

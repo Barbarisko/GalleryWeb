@@ -1,5 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 @using GalleryBLL.Models
 @model GalleryWeb.Models.HomePageModel
@@ -93,12 +95,12 @@
                     {
                     <div class="col-lg-4 col-sm-6 mb-4">
                         <div class="card h-100">
-                            <a href="#!"><img class="card-img-top" src="https://via.placeholder.com/700x400" alt="..." /></a>
+                            <img class="card-img-top" src="@e.Thumbnail" alt="..." />
                             <div class="card-body">
                                 <h4 class="card-title">
                                     <a asp-controller="Explore" asp-action="ShowCExhibition" asp-route-eId="@e.Id" asp-route-ceId="@c.Id">@e.Name</a>
                                 </h4>
-                                <p class="card-text">Ticket price: @e.Price</p>
+                                <p class="card-text">Ticket price: @e.Price UAH</p>
                             </div>
                         </div>
                     </div>

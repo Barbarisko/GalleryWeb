@@ -1,6 +1,7 @@
 ﻿using GalleryBLL.Interfaces;
 using GalleryBLL.Models;
 using GalleryDAL.Entities;
+using GalleryWeb.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -15,14 +16,20 @@ namespace GalleryWeb.Controllers
 	{
 		ITicketService _ticketService;
         ICurrentExhibitionService _currExhService;
-		private readonly UserManager<UserEntity> _userManager;
-		public const string CartSessionKey = "CartId";
+        IExhibitionService _exhService;
+        IArtistService artistsService;
 
-        public CartController(UserManager<UserEntity> userManager, ITicketService ticketService, ICurrentExhibitionService currExhService)
+        private readonly UserManager<UserEntity> _userManager;
+		public const string CartSessionKey = "сartId";
+
+        public CartController(UserManager<UserEntity> userManager, ITicketService ticketService, 
+            ICurrentExhibitionService currExhService, IArtistService artistsService, IExhibitionService exhService)
         {
             _userManager = userManager;
             _ticketService = ticketService;
             _currExhService = currExhService;
+            this.artistsService = artistsService;
+            _exhService = exhService;
         }
 
         public IActionResult BuyTicket(int curExId, int quantity)
@@ -34,38 +41,45 @@ namespace GalleryWeb.Controllers
                 _ticketService.AddTicketToCart(visitedExh, quantity, GetCartId().Result);
             }
 
-            return RedirectToAction("Cart", "Home", new { visitedExh.IdExh, curExId });
+            return RedirectToAction("Cart", "Cart", new { visitedExh.IdExh, curExId });
         }
 
-        //public IActionResult AddItemToCartByPlus(int stockId)
-        //{
-        //    Stock stock = _stockService.GetStockById(stockId);
+        public IActionResult AddTicketToCartByPlus(int curExhId)
+        {
+            CurrentExhibitionModel ce = _currExhService.GetCurExhById(curExhId);
 
-        //    if (stock.Quantity >= 1)
-        //    {
-        //        _cartService.AddItemToCart(stock, 1, GetCartId().Result);
-        //    }
+            if (ce.MaxTicketQuantity >= 1)
+            {
+                _ticketService.AddTicketToCart(ce, 1, GetCartId().Result);
+            }
 
-        //    return RedirectToAction("Cart", "Cart");
-        //}
+            return RedirectToAction("Cart", "Cart");
+        }
 
-        //public IActionResult RemoveItemFromCartByMinus(int itemId, int stockId)
-        //{
-        //	_cartService.RemoveItemFromCart(itemId, stockId);
-        //	return RedirectToAction("Cart", "Cart");
-        //}
+        public IActionResult RemoveItemFromCartByMinus(int ticketid, int curExhId)
+        {
+            _ticketService.RemoveTicketFromCart(ticketid, curExhId);
+            return RedirectToAction("Cart", "Cart");
+        }
 
-        //public IActionResult RemoveItemFromCartByX(int itemId, int stockId)
-        //{
-        //	_cartService.DeleteItem(itemId, stockId);
-        //	return RedirectToAction("Cart", "Cart");
-        //}
+        public IActionResult RemoveItemFromCartByX(int ticketid, int curExhId)
+        {
+            _ticketService.DeleteItem(ticketid, curExhId);
+            return RedirectToAction("Cart", "Cart");
+        }
 
-        //public IActionResult Cart()
-        //{
-        //	CartModel model = new CartModel(_cartService.GetAllItemsFromCart(GetCartId().Result));
-        //	return View(model);
-        //}
+        public IActionResult Cart()
+        {
+            var ticketsFromCE = _ticketService.GetAllTicketsFromCart(GetCartId().Result);
+            foreach(TicketInCartModel t in ticketsFromCE)
+            {
+                t.CurrentExhibition = _currExhService.GetCurExhById((int)t.CurExhId);
+                t.CurrentExhibition.Exhibition = _exhService.GetExhById(t.CurrentExhibition.IdExh);
+            }
+            //Artists model = new Artists(artistsService.GetAllArtists().ToList());
+            CartModel model = new CartModel(ticketsFromCE);
+            return View(model);
+        }
 
         public async Task<string> GetCartId()
 		{

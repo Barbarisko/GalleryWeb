@@ -23,22 +23,23 @@ namespace GalleryBLL.Services
 		}
 
 
-        public void AddTicketToCart(CurrentExhibitionModel Exhibition/*, TicketInCartModel ticket,*/ ,int quantity, string cartId)
+        public void AddTicketToCart(CurrentExhibitionModel Exhibition,int quantity, string cartId)
         {
             TicketsInCart ticketincartEntity = _unitOfWork.TicketsInCartRepository.GetAll().ToList().Find(
-                        i => i.CartId == cartId && i.CurrentExhibition.Id == Exhibition.Id);
+                        i => i.CartId == cartId && i.CurExhId== Exhibition.Id);
+           
+            var exh = _unitOfWork.ExhibitionRepository.Get(Exhibition.IdExh);
 
             if (ticketincartEntity != null)
             {
                 ticketincartEntity.Quantity += quantity;
-                ticketincartEntity.TotalPrice = ticketincartEntity.CurrentExhibition.Exh.Price * ticketincartEntity.Quantity;
+                ticketincartEntity.TotalPrice = exh.Price * ticketincartEntity.Quantity;
                 _unitOfWork.TicketsInCartRepository.Update(ticketincartEntity);
             }
             else
             {
                 if (Exhibition.MaxTicketQuantity > 0)
                 {
-                    var exh = _unitOfWork.ExhibitionRepository.Get(Exhibition.IdExh);
                     TicketInCartModel newItem = new TicketInCartModel()
                     {
                         CurExhId = Exhibition.Id,
@@ -51,7 +52,6 @@ namespace GalleryBLL.Services
                     TicketsInCart newItemEntity = _mapper.Map<TicketsInCart>(newItem);
                     _unitOfWork.TicketsInCartRepository.Add(newItemEntity);
                     _unitOfWork.Save();
-
                 }
             }
 
@@ -65,11 +65,12 @@ namespace GalleryBLL.Services
         public void RemoveTicketFromCart(int itemId, int curExhId)
         {
             TicketsInCart itemEntity = _unitOfWork.TicketsInCartRepository.Get(itemId);
+            CurrentExhibition exhibitionEntity = _unitOfWork.CurrentExhibitionRepository.Get(curExhId);
 
             if (itemEntity.Quantity > 1)
             {
                 itemEntity.Quantity--;
-                itemEntity.TotalPrice = itemEntity.CurrentExhibition.Exh.Price * itemEntity.Quantity;
+                itemEntity.TotalPrice = _unitOfWork.ExhibitionRepository.Get(exhibitionEntity.IdExh).Price * itemEntity.Quantity;
                 _unitOfWork.TicketsInCartRepository.Update(itemEntity);
             }
             else if (itemEntity.Quantity == 1)
@@ -93,6 +94,8 @@ namespace GalleryBLL.Services
             CurrentExhibition ceEntity = _unitOfWork.CurrentExhibitionRepository.Get(curExId);
             ceEntity.maxTicketQuantity += quantity;
             _unitOfWork.CurrentExhibitionRepository.Update(ceEntity);
+
+            _unitOfWork.TicketsInCartRepository.Delete(itemId);
 
             _unitOfWork.Save();
         }

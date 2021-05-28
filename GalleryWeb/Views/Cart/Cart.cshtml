@@ -1,0 +1,52 @@
+﻿
+@using GalleryBLL.Models
+
+@model GalleryWeb.Models.CartModel
+
+@{ ViewData["Title"] = "Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/css/site.css" rel="stylesheet" />
+<link href="~/css/buttons.css" rel="stylesheet" />
+
+<!-- Page Content-->
+
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Exhibition</th>
+            <th scope="col">Date</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Total</th>
+            <th scope="col">Remove</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (TicketInCartModel t in Model.Items)
+        {
+            <tr>
+                <td class="align-middle">
+                    <a asp-controller="Name" asp-action="ShowExhibition" asp-route-curExhId="@t.CurrentExhibition.Exhibition.Name">
+                        @t.CurrentExhibition.Exhibition.Name
+                    </a>
+                </td>
+                <td class="align-middle">@t.BuyDate</td>
+                <td class="align-middle">
+                    <a style="text-decoration: none;" asp-controller="Cart" asp-action="RemoveItemFromCartByMinus"
+                       asp-route-ticketId="@t.Id" asp-route-curExhId="@t.CurrentExhibition.Id">-</a>
+                    @t.Quantity
+                    <a style="text-decoration: none;" asp-controller="Cart" asp-action="AddItemToCartByPlus" asp-route-curExhId="@t.CurrentExhibition.Id">+</a>
+                </td>
+                <td class="align-middle">@t.TotalPrice</td>
+                <td class="align-middle">
+                    <a style="text-decoration: none;" asp-controller="Cart" asp-action="RemoveItemFromCartByX"
+                       asp-route-ticketId="@t.Id" asp-route-curExhId="@t.CurrentExhibition.Id">x</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="btn-1" role="button" >
+    <a asp-controller="Home" asp-action="Privacy"><span>Go to create order</span></a>
+</div>

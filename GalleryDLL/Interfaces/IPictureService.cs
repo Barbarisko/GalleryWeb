@@ -8,6 +8,14 @@ namespace GalleryBLL.Interfaces
     public interface IPictureService
     {
         List<PictureModel> GetAllPicsFromArtist(int artId);
+        List<PictureModel> GetAllPics();
+        PictureModel GetPicById(int id);
+        void AddPicture(string name, int price, DateTime createdate, string genre, string addInfo, string url,
+                            int idArtist, int idTechnique);
+        void UpdatePicById(int Id, string name, int price, DateTime createdate, string genre, string addInfo, string url,
+                            int idArtist, int idTechnique);
+
+        void DeletePic(int itemId);
 
     }
 }

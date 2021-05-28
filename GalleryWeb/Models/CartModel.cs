@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 
 namespace GalleryWeb.Models
 {
-    public class CartModel
-    {
+	public class CartModel
+	{
 
-			public List<TicketInCartModel> Items;
+		public List<TicketInCartModel> Items;
 
-			public CartModel(List<TicketInCartModel> items)
-			{
-				Items = items;
-			}
-		
+
+		public CartModel(List<TicketInCartModel> items)
+		{
+			Items = items;
+		}
+
 	}
 }

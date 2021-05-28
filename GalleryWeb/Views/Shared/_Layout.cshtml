@@ -29,27 +29,23 @@
                     <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Artists" asp-action="Artists">Artists</a></li>
                     <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Explore" asp-action="Collections">Collections</a></li>
                     <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contacts">Contacts</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Cart">Cart</a></li>
-                </ul>
+                    <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Cart" asp-action="Cart">Cart</a></li>
+                 </ul>
                 <ul class="nav navbar-nav pull-right">
                     @if (signInManager.IsSignedIn(User))
                     {
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gallery Admin Page</a>
+                            <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Manage...</a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
                                 <a class="dropdown-item" asp-area="" asp-controller="CurrentExhibitionsAdmin" asp-action="Index" class="navbar-brand">Current Exhibitions</a>
                                 <a class="dropdown-item" asp-area="" asp-controller="ExhibitionsAdmin" asp-action="Index" class="navbar-brand">Exhibitions pool</a>
                                 <a class="dropdown-item" asp-area="" asp-controller="ArtistsAdmin" asp-action="Index" class="navbar-brand">Artists</a>
                                 <a class="dropdown-item" asp-area="" asp-controller="PicturesAdmin" asp-action="Index" class="navbar-brand">All Pictures</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="NewsAdmin" asp-action="Index" class="navbar-brand">News Portal</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="EmployeesAdmin" asp-action="Index" class="navbar-brand">Staff</a>
                             </div>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">HR Page</a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-                                <a class="dropdown-item" asp-area="" asp-controller="EmployeesAdmin" asp-action="Index" class="navbar-brand">Staff Managing</a>
-                            </div>
-                        </li>
+                        
                         <li class="nav-item">
                             <form method="post" asp-controller="Account" asp-action="Logout">
                                 <button type="submit" class="navbar-brand btn btn-link" style="width:auto">

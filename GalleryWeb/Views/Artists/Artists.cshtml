@@ -1,7 +1,8 @@
 ﻿@using GalleryBLL.Models
 @model GalleryWeb.Models.Artists
 @{
-    ViewData["Title"] = "Artists";
+    ViewData["Title"] = "[ Artists ]";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
@@ -11,19 +12,19 @@
     <div class="container">
         <!-- Page Heading/Breadcrumbs-->
         <h1 class="mt-4 mb-3">
-            Portfolio 3
-            <small>Subheading</small>
+            Represented Artists
+            <small>...get to know them better!</small>
         </h1>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-            <li class="breadcrumb-item active">Portfolio 3</li>
+            <li class="breadcrumb-item active">Represented Artists</li>
         </ol>
         <div class="row">
             @foreach (ArtistModel a in Model.Items)
             {
                 <div class="col-lg-4 col-sm-6 mb-4">
                     <div class="card h-100">
-                        <a href="#!"><img class="card-img-top" src="https://via.placeholder.com/700x400" alt="..." /></a>
+                        <a href="#!"><img class="card-img-top" src="@a.Url" alt="@a.Name" /></a>
                         <div class="card-body">
                             <h4 class="card-title"><a asp-controller="Artists" asp-action="ShowArtist" asp-route-artistId="@a.Id">@a.Name @a.LastName </a></h4>
                             <p class="card-text">@a.ArtDirection</p>

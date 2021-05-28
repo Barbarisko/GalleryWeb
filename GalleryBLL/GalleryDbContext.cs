@@ -307,6 +307,8 @@ namespace GalleryDAL
                     .HasColumnName("name");
 
                 entity.Property(e => e.Price).HasColumnName("price");
+                entity.Property(e => e.Thumbnail)
+                .HasColumnName("thumbnailUrl");
             });
 
             modelBuilder.Entity<News>(entity =>
@@ -515,6 +517,8 @@ namespace GalleryDAL
                 entity.Property(e => e.CartId)
                 .HasColumnType("character varying")
                 .HasColumnName("cartId");
+
+                entity.Property(e => e.CurExhId).HasColumnName("curExhId");
 
                 entity.HasOne(d => d.CurrentExhibition)
                     .WithMany(p => p.Tickets)

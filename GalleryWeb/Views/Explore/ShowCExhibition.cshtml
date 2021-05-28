@@ -9,7 +9,7 @@
     <div class="container">
         <!-- Page Heading/Breadcrumbs-->
         <h1>
-            @Model.CurrentExhibition.Exhibition.Name
+            @Model.Exhibition.Name
             <small>status(current, archive, future)</small>
             <a class="btn btn-primary float-end" role="button" asp-controller="Cart" asp-action="BuyTicket" 
                                                asp-route-curExId="@Model.CurrentExhibition.Id" asp-route-quantity="1">Get a ticket</a>
@@ -27,7 +27,7 @@
                 <div class="card h-100">
                     <h4 class="card-header">Picture Title 1</h4>
                     <div class="card-body"><p class="card-text">Picture description</p></div>
-                    <div class="card-footer"><a asp-controller="Home" asp-action="ShowPicture">Learn More</a></div>
+                    <div class="card-footer"><a asp-controller="Explore" asp-action="ShowPicture">Learn More</a></div>
                 </div>
         </div>
     </div>

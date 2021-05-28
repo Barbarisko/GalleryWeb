@@ -122,7 +122,7 @@ namespace GalleryWeb.Controllers
 
                 if (result.Succeeded)
                 {
-                //    _cartService.UpdateCartId(HttpContext.Session.GetString(CartController.CartSessionKey), model.Email);
+                   _cartService.UpdateCartId(HttpContext.Session.GetString(CartController.CartSessionKey), model.Email);
 
                     return RedirectToAction("Index", "Home");
                 }
