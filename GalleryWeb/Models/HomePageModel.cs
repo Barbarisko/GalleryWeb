@@ -8,13 +8,13 @@ namespace GalleryWeb.Models
 {
     public class HomePageModel
     {
-        public List<ExhibitionModel> Items;
+        public List<ExhibitionModel> Exhibitions;
         //public List<CurrentExhibitionModel> CEItems;
         public List<NewsModel> NewsItems;
 
         public HomePageModel(List<ExhibitionModel> items/*, List<NewsModel> newsItems*/, List<CurrentExhibitionModel> cEItems)
         {
-            Items = items;
+            Exhibitions = items;
             foreach(var i in items)
             {
                 foreach(var c in cEItems)

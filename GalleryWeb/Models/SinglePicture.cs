@@ -10,9 +10,12 @@ namespace GalleryWeb.Models
     {
         public PictureModel Picture;
 
-        public SinglePicture(PictureModel picture)
+        public SinglePicture(PictureModel picture/*, ArtistModel artist, TechniqueModel technique*/)
         {
             Picture = picture;
+            //Picture.Artist = artist;
+            //Picture.Technique = technique;
+
         }
     }
 }

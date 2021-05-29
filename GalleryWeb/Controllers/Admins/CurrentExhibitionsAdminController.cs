@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using GalleryDAL;
 using GalleryDAL.Entities;
 
-namespace GalleryWeb.Controllers
+namespace GalleryWeb.Controllers.Admins
 {
     public class CurrentExhibitionsAdminController : Controller
     {
@@ -26,18 +26,6 @@ namespace GalleryWeb.Controllers
             return View(await galleryDbContext.ToListAsync());
         }
 
-        //public async Task<IActionResult> Index()
-        //{
-        //    List<CurrentExhibition> galleryDbContext = _context.CurrentExhibitions.Include(c => c.Employee)
-        //                                                .Include(c => c.Exh).Include(c => c.ExhPlace).ToList();
-        //    CEViewModel model = new CEViewModel(galleryDbContext);
-
-        //    for (int i = 0; i < galleryDbContext.Count; i++)
-        //    {
-        //        model.Total[i] = currentExhibitionService.CountEstimatePrice(i);
-        //    }
-        //    return View(model);
-        //}
         // GET: CurrentExhibitions/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -73,7 +61,7 @@ namespace GalleryWeb.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdEmployee,IdExh,IdExhPlace,DateBegin,DateEnd,Id")] CurrentExhibition currentExhibition)
+        public async Task<IActionResult> Create([Bind("IdEmployee,IdExh,IdExhPlace,DateBegin,DateEnd,maxTicketQuantity,EstimatedPrice,Tag,Id")] CurrentExhibition currentExhibition)
         {
             if (ModelState.IsValid)
             {
@@ -111,7 +99,7 @@ namespace GalleryWeb.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdEmployee,IdExh,IdExhPlace,DateBegin,DateEnd,Id")] CurrentExhibition currentExhibition)
+        public async Task<IActionResult> Edit(int id, [Bind("IdEmployee,IdExh,IdExhPlace,DateBegin,DateEnd,maxTicketQuantity,EstimatedPrice,Tag,Id")] CurrentExhibition currentExhibition)
         {
             if (id != currentExhibition.Id)
             {

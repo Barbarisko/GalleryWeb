@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GalleryDAL;
 using GalleryDAL.Entities;
+using GalleryBLL.Interfaces;
+using GalleryBLL.Models;
 
 namespace GalleryWeb.Controllers
 {
     public class EmployeesAdminController : Controller
     {
         private readonly GalleryDbContext _context;
-
-        public EmployeesAdminController(GalleryDbContext context)
+        IHRService hRService;
+        public EmployeesAdminController(GalleryDbContext context, IHRService hRService)
         {
             _context = context;
+            this.hRService = hRService;
         }
 
         // GET: Employees
@@ -57,12 +60,13 @@ namespace GalleryWeb.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Surname,Name,LastName,Bday,Job,Telephone,IdCity,AddInfo,Id")] Employee employee)
+        public async Task<IActionResult> Create([Bind("Surname,Name,LastName,Bday,Job,Telephone,IdCity,AddInfo,Id")] EmployeeModel employee)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(employee);
-                await _context.SaveChangesAsync();
+                //_context.Add(employee);
+                //await _context.SaveChangesAsync();
+                 hRService.AddEmployee(employee);
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdCity"] = new SelectList(_context.Cities, "Id", "Id", employee.IdCity);

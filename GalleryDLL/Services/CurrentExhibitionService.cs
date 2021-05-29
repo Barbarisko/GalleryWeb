@@ -29,6 +29,8 @@ namespace GalleryBLL.Services
             {
                 totalprice += pic.Picture.Price;
             }
+            CurrentExhibition ce = _unitOfWork.CurrentExhibitionRepository.Get(currexhId);
+            
             return totalprice;
         }
 
@@ -53,7 +55,14 @@ namespace GalleryBLL.Services
         {
             List<ExhibitedPicture> exhPicEntities = _unitOfWork.ExhibitedPictureRepository.GetAll().ToList()
                                                      .FindAll(e => e.IdCurrExh == cexhId);
-
+            List<Picture> pictures = _unitOfWork.PictureRepository.GetAll().ToList();
+            for(int i=0; i<exhPicEntities.Count; i++)
+            {
+                if(pictures[i].Id == exhPicEntities[i].IdPicture)
+                {
+                    exhPicEntities[i].Picture = pictures[i];
+                }
+            }
             return _mapper.Map<List<ExhibitedPictureModel>>(exhPicEntities);
         }
         public IEnumerable<CurrentExhibitionModel> GetAllCurrentExhibitions()
@@ -83,6 +92,7 @@ namespace GalleryBLL.Services
                     IdEmployee = idEmp,
                     IdExh = idExh,
                     IdExhPlace = idPlace,
+                    Exhibition = _mapper.Map<ExhibitionModel>(_unitOfWork.ExhibitionRepository.Get(idExh)),
                     DateBegin = begin,
                     DateEnd = end
                 };

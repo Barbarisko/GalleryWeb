@@ -109,5 +109,33 @@ namespace GalleryBLL.Services
 
 			_unitOfWork.Save();
 		}
+		public TechniqueModel GetTechById(int id)
+		{
+			Technique Entity = _unitOfWork.TechniqueRepository.Get(id);
+			return _mapper.Map<TechniqueModel>(Entity);
+		}
+		public List<PictureModel> SortPicturesAZ(List<PictureModel> itemsToSort)
+        {
+			return itemsToSort.OrderBy(o => o.Name).ToList();
+		}
+
+        public List<PictureModel> SortPicturesZA(List<PictureModel> itemsToSort)
+        {
+			return itemsToSort.OrderByDescending(o => o.Name).ToList();
+		}
+		public List<PictureModel> FilterByGenre(List<PictureModel> itemsToSort, string genreName)
+        {
+			List<PictureModel> filtered = new List<PictureModel>();
+			for(int i=0; i<itemsToSort.Count; i++)
+			{
+				if(itemsToSort[i].Genre==genreName)
+                {
+					filtered[i] = itemsToSort[i];
+                }
+			}
+			filtered.Sort();
+			return filtered;
+        }
+
 	}
 }

@@ -32,7 +32,6 @@ namespace GalleryDAL
         public virtual DbSet<Owner> Owners { get; set; }
         public virtual DbSet<Picture> Pictures { get; set; }
         public virtual DbSet<Technique> Techniques { get; set; }
-        public virtual DbSet<Ticket> Tickets { get; set; }
         public virtual DbSet<TicketsInCart> TicketsInCarts { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -162,6 +161,9 @@ namespace GalleryDAL
                     .HasDefaultValueSql("now()");
 
                 entity.Property(e => e.IdEmployee).HasColumnName("id_employee");
+                entity.Property(e => e.maxTicketQuantity).HasColumnName("maxTicketQuantity");
+                entity.Property(e => e.EstimatedPrice).HasColumnName("estimatedPrice");
+                entity.Property(e => e.Tag).HasColumnName("tag");
 
                 entity.Property(e => e.IdExh).HasColumnName("id_exh");
 
@@ -477,23 +479,6 @@ namespace GalleryDAL
                 entity.Property(e => e.PicUrl)
                     .HasColumnType("character varying")
                     .HasColumnName("picUrl");
-            });
-
-            modelBuilder.Entity<Ticket>(entity =>
-            {
-                entity.ToTable("tickets");
-
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .HasDefaultValueSql("nextval('tickets_id_ticket_seq'::regclass)");
-
-                entity.Property(e => e.BuyDate)
-                    .HasColumnType("date")
-                    .HasColumnName("buy_date");
-
-                entity.Property(e => e.CurExhId).HasColumnName("curExhId");
-
-
             });
 
             modelBuilder.Entity<TicketsInCart>(entity =>

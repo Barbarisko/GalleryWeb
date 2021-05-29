@@ -68,7 +68,7 @@ namespace GalleryWeb.Controllers
 
                     SendEmailCustom(confirmationLink, model.Email, "Email confirmation link");
 
-                    return View("RegistrationConfirmation");
+                    return View("RegisterConfirmation");
                 }
 
                 foreach (var error in result.Errors)
@@ -138,7 +138,7 @@ namespace GalleryWeb.Controllers
         {
             MailMessage mail = new MailMessage();
             mail.To.Add(email);
-            mail.From = new MailAddress("Gallery.noreply@gmail.com");
+            mail.From = new MailAddress("galleryweb.noreply@gmail.com");
             mail.Subject = subject;
             mail.Body = body;
             mail.IsBodyHtml = true;
@@ -147,7 +147,7 @@ namespace GalleryWeb.Controllers
             smtp.Host = "smtp.gmail.com";
             smtp.Port = 587;
             smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new System.Net.NetworkCredential("Gallery.noreply@gmail.com", "Test123!");
+            smtp.Credentials = new System.Net.NetworkCredential("galleryweb.noreply@gmail.com", "ZXCasdqwe123");
             smtp.EnableSsl = true;
             smtp.Send(mail);
         }

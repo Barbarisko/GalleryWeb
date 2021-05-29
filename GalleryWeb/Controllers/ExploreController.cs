@@ -16,13 +16,16 @@ namespace GalleryWeb.Controllers
         ICurrentExhibitionService currentExhibitionService;
         IExhibitionService exhibitionService;
         IPictureService pictureService;
+        IArtistService artistService;
         public ExploreController(ILogger<ExploreController> logger,
-            ICurrentExhibitionService currentExhibitionService, IExhibitionService exhibitionService, IPictureService pictureService)
+            ICurrentExhibitionService currentExhibitionService, IExhibitionService exhibitionService, 
+            IPictureService pictureService, IArtistService artistService)
         {
             _logger = logger;
             this.currentExhibitionService = currentExhibitionService;
             this.exhibitionService = exhibitionService;
             this.pictureService = pictureService;
+            this.artistService = artistService;
         }
         public IActionResult ShowCExhibition(int eId, int ceId)
         {
@@ -33,12 +36,32 @@ namespace GalleryWeb.Controllers
         
         public IActionResult ShowPicture(int picId)
         {
-            return View();
+            var pic = pictureService.GetPicById(picId);
+            SinglePicture model = new SinglePicture(pic);
+
+            model.Picture.Artist = artistService.GetArtistById(pic.IdArtist);
+            model.Picture.Technique = pictureService.GetTechById(pic.IdTechnique);
+            //var art = artistService.GetArtistById(pic.IdArtist);
+            //var tech = pictureService.GetTechById(pic.IdTechnique);
+            //SinglePicture model = new SinglePicture(pic, art, tech);
+            return View(model);
         }
         public IActionResult Collections()
         {
             Pictures model = new Pictures(pictureService.GetAllPics().ToList());
             return View(model);
+        }
+        public IActionResult SortAZ()
+        {
+            Pictures model = new Pictures(pictureService.GetAllPics());            
+            model.pics = pictureService.SortPicturesAZ(model.pics); 
+            return View("Collections", model);
+        }
+        public IActionResult SortZA()
+        {
+            Pictures model = new Pictures(pictureService.GetAllPics());            
+            model.pics = pictureService.SortPicturesZA(model.pics); 
+            return View("Collections", model);
         }
 
     }

@@ -10,25 +10,36 @@
         <!-- Page Heading/Breadcrumbs-->
         <h1>
             @Model.Exhibition.Name
-            <small>status(current, archive, future)</small>
-            <a class="btn btn-primary float-end" role="button" asp-controller="Cart" asp-action="BuyTicket" 
-                                               asp-route-curExId="@Model.CurrentExhibition.Id" asp-route-quantity="1">Get a ticket</a>
+            <small>@Model.CurrentExhibition.Tag</small>
+            <a class="btn btn-primary float-end" role="button" asp-controller="Cart" asp-action="BuyTicket"
+               asp-route-curExId="@Model.CurrentExhibition.Id" asp-route-quantity="1">Get a ticket</a>
         </h1>
         <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
             <li class="breadcrumb-item active">Name</li>
         </ol>
         <!-- Image Header-->
-        <img class="img-fluid rounded mb-4" src="https://via.placeholder.com/1200x300" alt="..." />
+        <div class="row">
+            <div class="container">
+                <img class="img-fluid rounded mb-4" src="@Model.Exhibition.Thumbnail" alt="@Model.Exhibition.Name" />
+            </div>
+            <div class="container">
+                <p>
+                     @Model.Message
+                </p>
+            </div>
+        </div>
         <!-- Marketing Icons Section-->
         <div class="row">
-
-            <div class="col-lg-4 mb-4 mb-lg-0">
-                <div class="card h-100">
-                    <h4 class="card-header">Picture Title 1</h4>
-                    <div class="card-body"><p class="card-text">Picture description</p></div>
-                    <div class="card-footer"><a asp-controller="Explore" asp-action="ShowPicture">Learn More</a></div>
+            @foreach (ExhibitedPictureModel p in Model.Pictures)
+            {
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card h-100" class="container">
+                        <a asp-controller="Explore" asp-action="ShowPicture" asp-route-picId="@p.Picture.Id">
+                            <img class="card-img-top" src="@p.Picture.Url" alt="@p.Picture.Name" />
+                        </a>
+                    </div>
                 </div>
+            }
         </div>
-    </div>
 </section>

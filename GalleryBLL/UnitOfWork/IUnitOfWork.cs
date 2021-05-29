@@ -20,7 +20,6 @@ namespace GalleryDAL.UnitOfWork
         IRepository<Owner> OwnerRepository { get; }
         IRepository<Picture> PictureRepository { get; }
         IRepository<Technique> TechniqueRepository { get; }
-        IRepository<Ticket> TicketRepository { get; }
         IRepository<TicketsInCart> TicketsInCartRepository { get; }
         IRepository<News> NewsRepository { get; }
 

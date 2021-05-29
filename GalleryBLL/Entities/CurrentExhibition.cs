@@ -5,6 +5,12 @@ using System.Collections.Generic;
 
 namespace GalleryDAL.Entities
 {
+    public enum Status
+    {
+        current,
+        future,
+        archive
+    }
     public partial class CurrentExhibition : BaseEntity
     {
         public CurrentExhibition()
@@ -19,6 +25,8 @@ namespace GalleryDAL.Entities
         public DateTime? DateBegin { get; set; }
         public DateTime? DateEnd { get; set; }
         public int maxTicketQuantity { get; set; }
+        public int EstimatedPrice { get; set; }
+        public Status Tag { get ; set; }
 
         public virtual Employee Employee { get; set; }
         public virtual Exhibition Exh { get; set; }

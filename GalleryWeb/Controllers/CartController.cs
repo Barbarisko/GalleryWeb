@@ -76,7 +76,6 @@ namespace GalleryWeb.Controllers
                 t.CurrentExhibition = _currExhService.GetCurExhById((int)t.CurExhId);
                 t.CurrentExhibition.Exhibition = _exhService.GetExhById(t.CurrentExhibition.IdExh);
             }
-            //Artists model = new Artists(artistsService.GetAllArtists().ToList());
             CartModel model = new CartModel(ticketsFromCE);
             return View(model);
         }

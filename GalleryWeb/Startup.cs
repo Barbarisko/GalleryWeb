@@ -49,7 +49,6 @@ namespace GalleryWeb
             services.AddScoped<IRepository<Owner>, Repository<Owner>>();
             services.AddScoped<IRepository<Picture>, Repository<Picture>>();
             services.AddScoped<IRepository<Technique>, Repository<Technique>>();
-            services.AddScoped<IRepository<Ticket>, Repository<Ticket>>();
             services.AddScoped<IRepository<News>, Repository<News>>();
             services.AddScoped<IRepository<TicketsInCart>, Repository<TicketsInCart>>();
 

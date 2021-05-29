@@ -30,12 +30,12 @@ namespace GalleryBLL.Services
         {
             Artist entity = _unitOfWork.ArtistRepository.Get(id);
 
-			if (entity != null)
+			if (entity == null)
 			{
-				return _mapper.Map<ArtistModel>(entity);
+                throw new KeyNotFoundException("No such artist");
 			}
-			return null;
-		}
+            return _mapper.Map<ArtistModel>(entity);
+        }
 
         public void AddArtist(ArtistModel artist)
         {

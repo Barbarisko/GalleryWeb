@@ -28,33 +28,90 @@
             <div class="row">
                 <!-- Sidebar Column-->
                 <div class="col-lg-3 mb-4">
-                    <div class="list-group">
-                        <a class="list-group-item" href="index.html">Name(A->Z)</a>
-                        <a class="list-group-item" href="index.html">Name(Z->A)</a>
-                        <a class="list-group-item" href="index.html">Price</a>
-                        <a class="list-group-item" href="index.html">Price</a>
+                    <h5>Sort by:</h5>
 
+                    <div class="list-group">
+                        <a class="list-group-item" asp-controller="Explore" asp-action="SortAZ">Name(A->Z)</a>
+                        <a class="list-group-item" asp-controller="Explore" asp-action="SortZA">Name(Z->A)</a>
+                        <a class="list-group-item" href="index.html">Price</a>
+                        <a class="list-group-item" href="index.html">Price</a>
+                    </div>
+                    <h5>Filter by:</h5>
+
+                    <div class="list-group">
+                        <a class="list-group-item" asp-controller="Explore" asp-action="SortAZ">Artists</a>
+                        <a class="list-group-item" asp-controller="Explore" asp-action="SortZA">Genres</a>
+                        <a class="list-group-item" href="index.html">Techniques</a>
+                        <a class="list-group-item" href="index.html">Exhibitions</a>
                     </div>
                 </div>
                 <!-- Content Column-->
                 <div class="col-lg-9 mb-4">
                     <h2>Pieces of art filtered by: </h2>
+
+
+
+
+
                     <section class="py-5">
                         <div class="container">
+                
+                            @{ 
+                                int rows = Model.pics.Count() / 4;
+                                int num;
+                            } 
+                            
                             <div class="row">
-                                @foreach (PictureModel p in Model.pics)
-                                {
-                                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                                        <div class="card h-100">
-                                            <a asp-controller="Explore" asp-action="ShowPicture">
-                                                <img class="card-img-top" src="@p.Url" alt="@p.Name" />
-                                            </a>
-                                        </div>
-                                    </div>
-                                }
+                                <div class="column">
+                                    @for (int i = 0; i < rows; i++)
+                                    {
+                                        num = (4 * i);
+                                        <img src="@Model.pics[num].Url" alt="@Model.pics[num].Name" style="width:100%">
+                                    }
 
+                                    @if ((Model.pics.Count() - (rows * 4)) > 0)
+                                    {
+                                        num = (rows * 4);
+                                        <img src="@Model.pics[num].Url" alt="@Model.pics[num].Name" style="width:100%">
+                                    }
+                                </div>
+                                <div class="column">
+                                    @for (int i = 0; i < rows; i++)
+                                    {
+                                        num = (4 * i) + 1;
+                                        <img src="@Model.pics[num].Url" alt="@Model.pics[num].Name" style="width:100%">
+                                    }
 
+                                    @if ((Model.pics.Count() - (rows * 4 + 1)) > 0)
+                                    {
+                                        num = (rows * 4) + 1;
+                                        <img src="@Model.pics[num].Url" alt="@Model.pics[num].Name" style="width:100%">
+                                    }
+                                </div>
+                                <div class="column">
+                                    @for (int i = 0; i < rows; i++)
+                                    {
+                                        num = (4 * i) + 2;
+                                        <img src="@Model.pics[num].Url" alt="@Model.pics[num].Name" style="width:100%">
+                                    }
+
+                                    @if ((Model.pics.Count() - (rows * 4 + 2)) > 0)
+                                    {
+                                        num = (rows * 4) + 2;
+                                        <img src="@Model.pics[num].Url" alt="@Model.pics[num].Name" style="width:100%">
+                                    }
+                                </div>
+                                <div class="column">
+                                    @for (int i = 0; i < rows; i++)
+                                    {
+                                        num = (4 * i) + 3;
+                                        <img src="@Model.pics[num].Url" alt="@Model.pics[num].Name" style="width:100%">
+                                    }
+                                </div>
                             </div>
+
+
+
                             <!-- Pagination-->
                             <ul class="pagination justify-content-center">
                                 <li class="page-item">

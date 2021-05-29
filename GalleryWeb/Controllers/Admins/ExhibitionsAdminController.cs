@@ -8,12 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using GalleryDAL;
 using GalleryDAL.Entities;
 
-namespace GalleryWeb.Controllers
+namespace GalleryWeb.Controllers.Admins
 {
     public class ExhibitionsAdminController : Controller
     {
         private readonly GalleryDbContext _context;
-
+         
         public ExhibitionsAdminController(GalleryDbContext context)
         {
             _context = context;
@@ -54,7 +54,7 @@ namespace GalleryWeb.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Price,Description,Id")] Exhibition exhibition)
+        public async Task<IActionResult> Create([Bind("Name,Price,Description,Thumbnail,Id")] Exhibition exhibition)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace GalleryWeb.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Name,Price,Description,Id")] Exhibition exhibition)
+        public async Task<IActionResult> Edit(int id, [Bind("Name,Price,Description,Thumbnail,Id")] Exhibition exhibition)
         {
             if (id != exhibition.Id)
             {
