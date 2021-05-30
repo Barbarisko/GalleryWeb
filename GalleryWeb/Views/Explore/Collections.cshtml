@@ -43,9 +43,7 @@
                         </a>
 
                     </ul>
-                    <hr class="my-0" />
-                    <hr class="my-0" />
-
+                    
                     <h5 class="d-flex align-items-center mb-3">Filter by genres:</h5>
 
                     <ul class="list-group mb3">
@@ -84,7 +82,45 @@
                         }
 
                         <div class="row">
+                            @for (int j = 0; j < 4; j++)
+                            {
                             <div class="column">
+
+
+
+                                @for (int i = 0; i < rows; i++)
+                                {
+                                    num = (4 * i) + j;
+                                    <div class="card border-danger text-dark bg-light mb-3" style="max-width: 18rem;">
+
+                                        <img src="@Model.pics[num].Url" alt="@Model.pics[num].Name" style="width:100%">
+                                        <div class="card-body align-content-center">
+                                            <h7 class="card-title">
+                                                <a asp-controller="Explore" asp-action="ShowPicture"
+                                                   asp-route-picId="@Model.pics[num].Id">@Model.pics[num].Name</a>
+                                            </h7>
+                                        </div>
+                                    </div>
+
+                                }
+
+                                @if ((Model.pics.Count() - (rows * 4 + j)) > 0)
+                                {
+                                    num = (rows * 4) + j;
+                                    <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+
+                                        <img src="@Model.pics[num].Url" alt="@Model.pics[num].Name" style="width:100%">
+                                        <div class="card-body align-content-center">
+                                            <h7 class="card-title">
+                                                <a asp-controller="Explore" asp-action="ShowPicture"
+                                                   asp-route-picId="@Model.pics[num].Id">@Model.pics[num].Name</a>
+                                            </h7>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            }
+                            @*<div class="column">
                                 @for (int i = 0; i < rows; i++)
                                 {
                                     num = (4 * i);
@@ -133,7 +169,7 @@
                                     num = (4 * i) + 3;
                                     <img src="@Model.pics[num].Url" alt="@Model.pics[num].Name" style="width:100%">
                                 }
-                            </div>
+                            </div>*@
                         </div>
                     <!-- Pagination-->
                     <!--<ul class="pagination justify-content-center">
