@@ -2,44 +2,131 @@
 @model GalleryWeb.Models.SingleExh
 @{
     ViewData["Title"] = "[ Exhibition ]";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link rel="stylesheet" href="~/css/portfolio.css" />
+<link rel="stylesheet" href="~/css/buttons.css" />
 
 <section class="py-5">
     <div class="container">
         <!-- Page Heading/Breadcrumbs-->
-        <h1>
-            @Model.Exhibition.Name
-            <small>@Model.CurrentExhibition.Tag</small>
-            <a class="btn btn-primary float-end" role="button" asp-controller="Cart" asp-action="BuyTicket"
-               asp-route-curExId="@Model.CurrentExhibition.Id" asp-route-quantity="1">Get a ticket</a>
-        </h1>
+        <div class="row">
+            <div class="col-lg-8 mb-4">
+                <h1>
+                    @Model.Exhibition.Name
+                    <small>@Model.CurrentExhibition.Tag</small>
+                </h1>
+            </div>
+            <div class="col-lg-4 mb-4">
+
+                <div class="btn-2 float-end" role="button">
+                    <a asp-controller="Cart" asp-action="BuyTicket"
+                       asp-route-curExId="@Model.CurrentExhibition.Id" asp-route-quantity="1"><span>Get a ticket</span></a>
+                </div>
+            </div>
+        </div>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
             <li class="breadcrumb-item active">Name</li>
+
         </ol>
         <!-- Image Header-->
         <div class="row">
-            <div class="container">
+            <div class="col-lg-8 mb-4">
                 <img class="img-fluid rounded mb-4" src="@Model.Exhibition.Thumbnail" alt="@Model.Exhibition.Name" />
             </div>
-            <div class="container">
+            <div class="col-lg-4 mb-4">
                 <p>
-                     @Model.Message
+                    @Model.Message
                 </p>
             </div>
         </div>
+        <hr class="my-0" />
+
         <!-- Marketing Icons Section-->
-        <div class="row">
-            @foreach (ExhibitedPictureModel p in Model.Pictures)
-            {
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                    <div class="card h-100" class="container">
-                        <a asp-controller="Explore" asp-action="ShowPicture" asp-route-picId="@p.Picture.Id">
-                            <img class="card-img-top" src="@p.Picture.Url" alt="@p.Picture.Name" />
-                        </a>
+
+        @*<div class="py-5 bg-light">
+            <div class="row">
+                @foreach (ExhibitedPictureModel p in Model.Pictures)
+                {
+                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                        <div class="card h-100" class="container">
+                            <a asp-controller="Explore" asp-action="ShowPicture" asp-route-picId="@p.Picture.Id">
+                                <img class="card-img-top" src="@p.Picture.Url" alt="@p.Picture.Name" />
+                            </a>
+                        </div>
+                        <div class="card-footer"><a href="#!"></a></div>
                     </div>
+                }
+            </div>
+        </div>*@
+
+
+        <section class="py-5">
+            <div class="container">
+
+                @{
+                    int rows = Model.Pictures.Count() / 4;
+                    int num;
+                }
+
+                <div class="row">
+                    <div class="column">
+                        @for (int i = 0; i < rows; i++)
+                        {
+                            num = (4 * i);
+                            <a asp-controller="Explore" asp-action="ShowPicture" asp-route-picId="@Model.Pictures[num].Picture.Id">
+                                <img src="@Model.Pictures[num].Picture.Url" alt="@Model.Pictures[num].Picture.Name" style="width:100%">
+                            </a>
+                        }
+
+                        @if ((Model.Pictures.Count() - (rows * 4)) > 0)
+                        {
+                            num = (rows * 4);
+                            <a asp-controller="Explore" asp-action="ShowPicture" asp-route-picId="@Model.Pictures[num].Picture.Id">
+                                <img src="@Model.Pictures[num].Picture.Url" alt="@Model.Pictures[num].Picture.Name" style="width:100%">
+                            </a>
+                        }
+                        </div>
+                    <div class="column">
+                        @for (int i = 0; i < rows; i++)
+                        {
+                            num = (4 * i) + 1;
+                            <a asp-controller="Explore" asp-action="ShowPicture" asp-route-picId="@Model.Pictures[num].Picture.Id">
+
+                                <img src="@Model.Pictures[num].Picture.Url" alt="@Model.Pictures[num].Picture.Name" style="width:100%">
+                            </a>
+                        }
+                        @if ((Model.Pictures.Count() - (rows * 4 + 1)) > 0)
+                        {
+                            num = (rows * 4) + 1;
+                            <a asp-controller="Explore" asp-action="ShowPicture" asp-route-picId="@Model.Pictures[num].Picture.Id">
+                            <img src="@Model.Pictures[num].Picture.Url" alt="@Model.Pictures[num].Picture.Name" style="width:100%"> 
+                            </a>
+                        }
+                        </div>
+                    <div class="column">
+                        @for (int i = 0; i < rows; i++)
+                        {
+                            num = (4 * i) + 2;
+                            <a asp-controller="Explore" asp-action="ShowPicture" asp-route-picId="@Model.Pictures[num].Picture.Id"> 
+                            <img src="@Model.Pictures[num].Picture.Url" alt="@Model.Pictures[num].Picture.Name" style="width:100%">
+                            </a>
+                        }
+                        @if ((Model.Pictures.Count() - (rows * 4 + 2)) > 0)
+                        {
+                            num = (rows * 4) + 2;
+                            <img src="@Model.Pictures[num].Picture.Url" alt="@Model.Pictures[num].Picture.Name" style="width:100%">
+                        }
+                        </div>
+                    <div class="column">
+                        @for (int i = 0; i < rows; i++)
+                        {
+                            num = (4 * i) + 3;
+                            <a asp-controller="Explore" asp-action="ShowPicture" asp-route-picId="@Model.Pictures[num].Picture.Id">
+                                <img src="@Model.Pictures[num].Picture.Url" alt="@Model.Pictures[num].Picture.Name" style="width:100%">
+                            </a>
+                         }
+                        </div>
                 </div>
-            }
-        </div>
-</section>
+        </section>

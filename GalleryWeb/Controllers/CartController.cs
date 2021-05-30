@@ -79,7 +79,7 @@ namespace GalleryWeb.Controllers
             CartModel model = new CartModel(ticketsFromCE);
             return View(model);
         }
-
+        
         public async Task<string> GetCartId()
 		{
 			if (HttpContext.User.Identity.IsAuthenticated)

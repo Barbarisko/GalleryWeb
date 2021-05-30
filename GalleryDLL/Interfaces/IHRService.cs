@@ -8,16 +8,16 @@ namespace GalleryBLL.Interfaces
     public interface  IHRService
     {
         IEnumerable<CityModel> GetAllCities();
-        public CityModel GetCityById(int id);
+        CityModel GetCityById(int id);
 
         IEnumerable<CountryModel> GetAllCountries();
         public CountryModel GetCountryById(int id);
 
         EmployeeModel GetEmployeeById(int id);
         void AddEmployee(EmployeeModel employee);
-        public void DeleteEmployee(int id);
+        void DeleteEmployee(int id);
 
-        public IEnumerable<ExhibitPlaceModel> GetAllPlaces();
-        public ExhibitPlaceModel GetPlaceById(int id);
+        IEnumerable<ExhibitPlaceModel> GetAllPlaces();
+        ExhibitPlaceModel GetPlaceById(int id);
     }
 }

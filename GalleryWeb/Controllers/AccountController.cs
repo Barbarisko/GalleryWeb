@@ -66,7 +66,7 @@ namespace GalleryWeb.Controllers
                     var confirmationLink = Url.Action("ConfirmEmail", "Account",
                         new { userId = user.Id, token }, Request.Scheme);
 
-                    SendEmailCustom(confirmationLink, model.Email, "Email confirmation link");
+                    SendEmailCustom(confirmationLink, model.Email, "Congrats! You have successfully confirmed your email! Please follow the confirmation link : ");
 
                     return View("RegisterConfirmation");
                 }
@@ -150,6 +150,25 @@ namespace GalleryWeb.Controllers
             smtp.Credentials = new System.Net.NetworkCredential("galleryweb.noreply@gmail.com", "ZXCasdqwe123");
             smtp.EnableSsl = true;
             smtp.Send(mail);
+        }
+        public IActionResult SendEmailCustomReverse(string body, string email, string subject)
+        {
+            MailMessage mail = new MailMessage();
+            mail.To.Add("galleryweb.noreply@gmail.com");
+            mail.From = new MailAddress(email);
+            mail.Subject = subject;
+            mail.Body = body;
+            mail.IsBodyHtml = true;
+
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = "smtp.gmail.com";
+            smtp.Port = 587;
+            smtp.UseDefaultCredentials = true;
+            smtp.Credentials = new System.Net.NetworkCredential("galleryweb.noreply@gmail.com", "ZXCasdqwe123");
+            smtp.EnableSsl = true;
+            smtp.Send(mail);
+
+            return RedirectToAction("Contacts", "Home");
         }
 
 

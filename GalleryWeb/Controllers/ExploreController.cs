@@ -63,6 +63,12 @@ namespace GalleryWeb.Controllers
             model.pics = pictureService.SortPicturesZA(model.pics); 
             return View("Collections", model);
         }
+        public IActionResult FilterByGenre(string genreName)
+        {
+            Pictures jopa = new Pictures(pictureService.FilterByGenre(pictureService.GetAllPics(), genreName));
+            //model.pics = pictureService.FilterByGenre(model.pics, genreName); 
+            return View("Collections", jopa);
+        }
 
     }
 }

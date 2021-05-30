@@ -1,18 +1,28 @@
-﻿.btn-1{
-    width: 300px;
-    height: 200px;
+﻿
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+
+.btn-1,
+.btn-2 {
+/*    width: 300px;
+    height: 200px;*/
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
-
+    /* Created by http://grohit.com/  */
     footer a,
-    .btn-1 a
-    {
+    .btn-1 a,
+    .btn-2 a {
         text-decoration: none;
         border: 2px solid #010100;
-        padding: 15px;
+        padding: 8px;
         color: #000;
         text-transform: uppercase;
         letter-spacing: 2px;
@@ -41,7 +51,8 @@ span {
     transform: scaleY(1);
 }
 
-.btn-1 a:hover::before {
+.btn-1 a:hover::before,
+.btn-2 a:hover::before {
     transform: scaleY(0);
 }
 
@@ -57,8 +68,10 @@ span {
     transition: all 0.5s ease-in-out;
     transform: scaleX(1);
 }
+/* Created by http://grohit.com/  */
 
-.btn-1 a:hover::after {
+.btn-1 a:hover::after,
+.btn-2 a:hover::after {
     transform: scaleX(0);
 }
 
@@ -97,3 +110,8 @@ span {
         transition: all 0.5s ease-in-out;
         transform: scaleX(1);
     }
+
+
+
+
+

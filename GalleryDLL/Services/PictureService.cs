@@ -130,11 +130,10 @@ namespace GalleryBLL.Services
 			{
 				if(itemsToSort[i].Genre==genreName)
                 {
-					filtered[i] = itemsToSort[i];
+					filtered.Add(itemsToSort[i]);
                 }
 			}
-			filtered.Sort();
-			return filtered;
+			return filtered.OrderBy(o => o.Name).ToList();
         }
 
 	}

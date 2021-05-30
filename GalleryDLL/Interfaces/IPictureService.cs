@@ -20,7 +20,7 @@ namespace GalleryBLL.Interfaces
         TechniqueModel GetTechById(int id);
         List<PictureModel> SortPicturesAZ(List<PictureModel> itemsToSort);
         List<PictureModel> SortPicturesZA(List<PictureModel> itemsToSort);
-        List<PictureModel> FilterByGenre(List<PictureModel> itemsToSort);
+        List<PictureModel> FilterByGenre(List<PictureModel> itemsToSort, string genreName);
 
 
     }

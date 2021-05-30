@@ -14,5 +14,13 @@ namespace GalleryWeb.Models
         {
             this.pics = pics;
         }
+        public Pictures(Pictures p)
+        {
+            this.pics = p.pics;
+        }
+        public Pictures()
+        {
+            this.pics = new List<PictureModel>();
+        }
     }
 }

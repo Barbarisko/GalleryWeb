@@ -15,7 +15,5 @@ namespace GalleryBLL.Interfaces
 
         IEnumerable<NewsModel> GetAllNews();
         NewsModel GetNewsById(int id);
-
-
     }
 }

@@ -6,22 +6,61 @@
 @using GalleryBLL.Models
 @model GalleryWeb.Models.HomePageModel
     <link href="css/site.css" rel="stylesheet" />
-
-    <div class="carousel slide" id="carouselExampleIndicators" data-bs-ride="carousel">
+<div class="container">
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
+            @for (int i = 0; i < Model.Exhibitions.Count; i++)
+            { 
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="@i" class="@(i == 0 ? "active":"")" aria-current="true" aria-label="Slide @i"></button>
+            }
+        </div>
+        <div class="carousel-inner">
+            @for (int i = 0; i < Model.Exhibitions.Count; i++)
+            {
+                for (int j = 0; j < Model.Exhibitions[i].CurrentExhibitions.Count; j++)
+                {
+                    <div class="carousel-item @(i == 0 ? "active" : "")">
+                        <a asp-controller="Explore" asp-action="ShowCExhibition" asp-route-eId="@Model.Exhibitions[i].Id"
+                           asp-route-ceId="@Model.Exhibitions[i].CurrentExhibitions[j].Id"
+                           style="padding: 0px 0px 0px 0px;">
+                            <img class="d-block w-100" src="@Model.Exhibitions[i].Thumbnail" alt="..." />
+                        </a>
+                        <div class="carousel-caption d-none d-md-block">
+                            <h3>@Model.Exhibitions[i].Name</h3>
+                            <p>Held from @Model.Exhibitions[i].CurrentExhibitions[j].DateBegin.Value.Day  to @Model.Exhibitions[i].CurrentExhibitions[j].DateEnd.Value.Date</p>
+                        </div>
+                    </div>
+                }
 
+            }
+
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+
+    @*<div class="carousel slide" id="carouselExampleIndicators" data-bs-ride="carousel">
+        <ol class="carousel-indicators">
             @for (int i = 0; i < Model.Exhibitions.Count; i++)
             {
                 if (i == 0)
                 {
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@i" class="active" aria-current="true" aria-label="Slide @(i + 1)"></button>
+                    <li class="active" data-target="#carouselExampleIndicators" data-slide-to="@i"></li>
                 }
                 else
                 {
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@i" aria-current="true" aria-label="Slide @(i + 1)"></button>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="@i" class=""></li>
                 }
             }
-        </div>
+        </ol>
+            
         <div class="carousel-inner">
             @for (int i = 0; i < Model.Exhibitions.Count; i++)
             {
@@ -35,7 +74,7 @@
                         </a>
                         <div class="carousel-caption d-none d-md-block">
                             <h3>@Model.Exhibitions[i].Name</h3>
-                            <p>Held from @Model.Exhibitions[i].CurrentExhibitions[j].DateBegin.Value.Date to @Model.Exhibitions[i].CurrentExhibitions[j].DateEnd.Value.Date</p>
+                            <p>Held from @Model.Exhibitions[i].CurrentExhibitions[j].DateBegin.Value.Day  to @Model.Exhibitions[i].CurrentExhibitions[j].DateEnd.Value.Date</p>
                         </div>
                     </div>
                 }
@@ -50,7 +89,7 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
-        </div>
+        </div>*@
 
         <!-- Page Content-->
         <section class="py-5">

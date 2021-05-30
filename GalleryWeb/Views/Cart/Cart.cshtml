@@ -1,17 +1,16 @@
-﻿
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<GalleryDAL.Entities.UserEntity> signInManager;
 @using GalleryBLL.Models
-
 @model GalleryWeb.Models.CartModel
 
 @{ ViewData["Title"] = "Cart";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link href="~/css/site.css" rel="stylesheet" />
 <link href="~/css/buttons.css" rel="stylesheet" />
 
 <!-- Page Content-->
 
-<table class="table">
+<table class="table table-striped" style="width:100%">
     <thead class="thead-light">
         <tr>
             <th scope="col">Exhibition</th>
@@ -35,7 +34,7 @@
                     <a style="text-decoration: none;" asp-controller="Cart" asp-action="RemoveItemFromCartByMinus"
                        asp-route-ticketId="@t.Id" asp-route-curExhId="@t.CurrentExhibition.Id">-</a>
                     @t.Quantity
-                    <a style="text-decoration: none;" asp-controller="Cart" asp-action="AddItemToCartByPlus" asp-route-curExhId="@t.CurrentExhibition.Id">+</a>
+                    <a style="text-decoration: none;" asp-controller="Cart" asp-action="AddTicketToCartByPlus" asp-route-curExhId="@t.CurrentExhibition.Id">+</a>
                 </td>
                 <td class="align-middle">@t.TotalPrice</td>
                 <td class="align-middle">
@@ -43,10 +42,26 @@
                        asp-route-ticketId="@t.Id" asp-route-curExhId="@t.CurrentExhibition.Id">x</a>
                 </td>
             </tr>
+
+            Model.message += $"{t.CurrentExhibition.Exhibition.Name}" + ", ";
+            Model.price += (decimal)t.CurrentExhibition.Exhibition.Price;
         }
     </tbody>
 </table>
 
-<div class="btn-1" role="button" >
-    <a asp-controller="Home" asp-action="Privacy"><span>Go to create order</span></a>
-</div>
+@if (signInManager.IsSignedIn(User))
+{
+    <div class="btn-1" role="button">
+        <a asp-controller="Account" asp-action="SendEmailCustom"
+           asp-route-body="Hi! You have ordered tickets for : @Model.message .
+               Total price is : @Model.price" asp-route-email="@User.Identity.Name"
+           asp-route-subject="Gallery Web Tickets"><span>Order!</span></a>
+    </div>
+}
+else
+{
+    <div class="btn-2" role="button">
+        <a asp-controller="Account" asp-action="Login"><span>Order!</span></a>
+    </div>
+}
+

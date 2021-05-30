@@ -12,7 +12,8 @@
             @Model.Picture.Name
             <small>
                 by
-                <a asp-controller="Artists" asp-action="ShowArtist">@Model.Picture.Artist.Name</a>
+                <a asp-controller="Artists" asp-action="ShowArtist" asp-route-artistId="@Model.Picture.Artist.Id">
+                @Model.Picture.Artist.Name</a>
             </small>
         </h1>
         <ol class="breadcrumb">
@@ -28,7 +29,8 @@
                 <!-- Date/Time-->
                 <p>
                     Created on @Model.Picture.CreateDate by 
-                    <a asp-controller="Artists" asp-action="ShowArtist">@Model.Picture.Artist.Name</a>
+                    <a asp-controller="Artists" asp-action="ShowArtist" asp-route-artistId="@Model.Picture.Artist.Id">
+                    @Model.Picture.Artist.Name</a>
                 </p>
                 <hr />
                 <!-- Post Content-->
@@ -106,7 +108,7 @@
                             <div class="col-lg-6">
                                 <ul class="list-unstyled mb-0">
                                     <li><a href="#!">@Model.Picture.Technique.Name</a></li>
-                                    <li><a href="#!">@Model.Picture.Genre</a></li>
+                                    <li><a asp-controller="Explore" asp-action="FilterByGenre" asp-route-genreName="@Model.Picture.Genre">@Model.Picture.Genre</a></li>
                                     <li><a href="#!">@Model.Picture.Artist.ArtDirection</a></li>
                                 </ul>
                             </div>
@@ -118,7 +120,7 @@
                     <h5 class="card-header">Painted by</h5>
                     <div class="card-body">
                         <div class="card h-100" class="container">
-                            <a asp-controller="Artists" asp-action="ShowArtist">
+                            <a asp-controller="Artists" asp-action="ShowArtist" asp-route-artistId="@Model.Picture.Artist.Id">
                                 <img class="card-img-top" src="@Model.Picture.Artist.Url" alt="@Model.Picture.Artist.Name" />
                             </a>
                         </div>

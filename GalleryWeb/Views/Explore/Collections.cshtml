@@ -26,47 +26,80 @@
             </ol>
             <!-- Content Row-->
             <div class="row">
+
+
                 <!-- Sidebar Column-->
+               
+
                 <div class="col-lg-3 mb-4">
-                    <h5>Sort by:</h5>
+                    <h5 class="d-flex align-items-center mb-3">
+                    Sort by:
+                    </h5>
 
-                    <div class="list-group">
-                        <a class="list-group-item" asp-controller="Explore" asp-action="SortAZ">Name(A->Z)</a>
-                        <a class="list-group-item" asp-controller="Explore" asp-action="SortZA">Name(Z->A)</a>
-                        <a class="list-group-item" href="index.html">Price</a>
-                        <a class="list-group-item" href="index.html">Price</a>
-                    </div>
-                    <h5>Filter by:</h5>
+                    <ul class="list-group mb-3">
+                        <a asp-controller="Explore" asp-action="SortAZ" class="list-group-item list-group-item-dark list-group-item-action active" aria-current="true">
+                            Name(A->Z)
+                        </a>
+                        <a asp-controller="Explore" asp-action="SortAZ" class="list-group-item list-group-item-dark list-group-item-action">
+                            Name(A->Z)
+                        </a>
 
-                    <div class="list-group">
-                        <a class="list-group-item" asp-controller="Explore" asp-action="SortAZ">Artists</a>
-                        <a class="list-group-item" asp-controller="Explore" asp-action="SortZA">Genres</a>
-                        <a class="list-group-item" href="index.html">Techniques</a>
-                        <a class="list-group-item" href="index.html">Exhibitions</a>
-                    </div>
+                        <li class="list-group-item lh-sm">
+                            <a asp-controller="Explore" asp-action="SortZA">Name(Z->A)</a>
+                        </li>
+                    </ul>
+                    <hr class="my-0" />
+                    <hr class="my-0" />
+
+                    <h5  class="d-flex align-items-center mb-3">Filter by genres:</h5>
+
+                    <ul class="list-group mb3">
+                        <li class="list-group-item lh-sm">
+                            <a asp-controller="Explore" asp-action="Collections">
+                                <b>Clear filter</b>
+                            </a>
+                        </li>
+                        @{
+                            var tempList = new List<string>();
+                        }
+                        @foreach (PictureModel p in Model.pics)
+                        {
+                            if (!tempList.Contains(p.Genre))
+                            {
+                                tempList.Add(p.Genre);
+
+                                <li class="list-group-item lh-sm">
+                                    <a asp-controller="Explore" asp-action="FilterByGenre"
+                                       asp-route-genreName="@p.Genre">@p.Genre
+                                    </a>
+                                </li>
+                            }
+
+                        }
+                    </ul>
                 </div>
+
                 <!-- Content Column-->
                 <div class="col-lg-9 mb-4">
                     <h2>Pieces of art filtered by: </h2>
-
-
-
-
-
                     <section class="py-5">
                         <div class="container">
-                
-                            @{ 
+
+                            @{
                                 int rows = Model.pics.Count() / 4;
                                 int num;
-                            } 
-                            
+                            }
+
                             <div class="row">
                                 <div class="column">
                                     @for (int i = 0; i < rows; i++)
                                     {
                                         num = (4 * i);
                                         <img src="@Model.pics[num].Url" alt="@Model.pics[num].Name" style="width:100%">
+                                        <div class="card-footer">
+                                            <a asp-controller="Explore" asp-action="ShowPicture"
+                                               asp-route-picId="@Model.pics[num].Id">@Model.pics[num].Name</a>
+                                        </div>
                                     }
 
                                     @if ((Model.pics.Count() - (rows * 4)) > 0)

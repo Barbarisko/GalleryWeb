@@ -25,8 +25,8 @@
                             @*Native city: @Model.artist.City.Name* передать в модель города*@ 
 
                         </p>
-                        <p>Some interesting facts about</p>
-                        <p>smth he loved to eat for lunch</p>
+                        <p>Some interesting facts about: </p>
+                        <p>@Model.artist.AddInfo</p>
                     </div>
                 </div>
             </div>
@@ -52,7 +52,6 @@
                                     <h6 class="card-subtitle mb-2 text-muted">@p.Genre</h6>
                                     <p class="card-text">@p.AddInfo</p>
                                 </div>
-                                <div class="card-footer"><a href="#!"></a></div>
                             </div>
                         </div>
             }

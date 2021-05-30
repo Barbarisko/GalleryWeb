@@ -10,11 +10,14 @@ namespace GalleryWeb.Models
 	{
 
 		public List<TicketInCartModel> Items;
-
+		public string message;
+		public decimal price;
 
 		public CartModel(List<TicketInCartModel> items)
 		{
 			Items = items;
+			message = "";
+			price = 0;
 		}
 
 	}

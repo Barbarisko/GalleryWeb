@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<GalleryDAL.Entities.UserEntity> signInManager;
+@{
     ViewData["Title"] = "Contacts";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
@@ -80,7 +82,12 @@
                     </div>
                     <div id="success"></div>
                     <!-- For success/fail messages-->
-                    <button class="btn btn-primary" id="sendMessageButton" type="submit">Send Message</button>
+                    <a class="btn btn-primary" role="button" type="submit"
+                       asp-controller="Account" asp-action="SendEmailCustomReverse"
+                       asp-route-body="Костыльная обратная связь" asp-route-email="@User.Identity.Name" 
+                       asp-route-subject="@User.Identity.Name - discuss topic">
+                        Send Message
+                    </a>
                 </form>
             </div>
         </div>

@@ -2,15 +2,18 @@
 
 @{
     ViewData["Title"] = "Overview";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap5.min.css" rel="stylesheet" crossorigin="anonymous">
+
 <link href="~/css/buttons.css" rel="stylesheet" />
 
 <h1>Overview</h1>
 
 <div class="btn-1" role="button" style=" text-align: center">
-    <a asp-controller="Home" asp-action="Privacy"><span>Create new</span></a>
+    <a asp-controller="CurrentExhibitionsAdmin" asp-action="Create"><span>Create new</span></a>
 </div>
-<table class="table">
+<table id="table" class="table">
     <thead>
         <tr>
             <th>
@@ -77,3 +80,5 @@
         }
     </tbody>
 </table>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap5.min.js"></script>

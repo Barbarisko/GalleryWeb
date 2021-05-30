@@ -21,7 +21,7 @@ namespace GalleryBLL.Services
             _mapper = mapper;
         }
 
-        public int CountEstimatePrice(int currexhId)
+        public void CountEstimatePrice(int currexhId)
         {
             int totalprice = 0;
             List<ExhibitedPicture> picturesFromExh = _unitOfWork.CurrentExhibitionRepository.Get(currexhId).ExhibitedPictures.ToList();
@@ -30,8 +30,8 @@ namespace GalleryBLL.Services
                 totalprice += pic.Picture.Price;
             }
             CurrentExhibition ce = _unitOfWork.CurrentExhibitionRepository.Get(currexhId);
-            
-            return totalprice;
+            ce.EstimatedPrice = totalprice;
+            _unitOfWork.CurrentExhibitionRepository.Update(ce);
         }
 
         public void DeletePicFromExhibition(int picId, int currexhId)

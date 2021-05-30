@@ -7,22 +7,29 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GalleryDAL;
 using GalleryDAL.Entities;
+using GalleryBLL.Interfaces;
 
 namespace GalleryWeb.Controllers.Admins
 {
     public class CurrentExhibitionsAdminController : Controller
     {
         private readonly GalleryDbContext _context;
-
-        public CurrentExhibitionsAdminController(GalleryDbContext context)
+        ICurrentExhibitionService currentExhibitionService;
+        public CurrentExhibitionsAdminController(GalleryDbContext context, ICurrentExhibitionService currentExhibitionService)
         {
             _context = context;
+            this.currentExhibitionService = currentExhibitionService;
         }
 
         // GET: CurrentExhibitions
         public async Task<IActionResult> Index()
         {
             var galleryDbContext = _context.CurrentExhibitions.Include(c => c.Employee).Include(c => c.Exh).Include(c => c.ExhPlace);
+            //var list = currentExhibitionService.GetAllCurrentExhibitions().ToList();
+            //foreach (CurrentExhibitionModel c in list)
+            //{
+            //    currentExhibitionService.CountEstimatePrice(c.Id);
+            //}
             return View(await galleryDbContext.ToListAsync());
         }
 
