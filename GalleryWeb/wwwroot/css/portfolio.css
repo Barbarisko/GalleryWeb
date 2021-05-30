@@ -40,3 +40,77 @@
         max-width: 100%;
     }
 }
+
+
+
+.btn-group {
+    margin-bottom: 10px;
+}
+
+.btn.checked {
+    background-color: #403d37;
+}
+
+/* Isotope Grid Styles */
+/* --------------------------------------- */
+.grid {
+    background: #f5f1ec;
+    max-width: 1200px;
+}
+    /* clear fix */
+    .grid:after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+
+/* Isotope Item Styles */
+/* --------------------------------------- */
+.item {
+    width: 70px;
+    height: 70px;
+    margin: 5px;
+    float: left;
+    text-align: center;
+}
+
+    .item.round {
+        border-radius: 75px;
+    }
+
+    .item.yellow {
+        background: #DE910A;
+    }
+
+    .item.black {
+        background: #1B1B1E;
+    }
+
+    .item.red {
+        background: #AF2E1E;
+    }
+
+    .item.wide,
+    .item.big {
+        width: 150px;
+    }
+
+    .item.tall,
+    .item.big {
+        height: 150px;
+    }
+
+    .item .content {
+        position: absolute;
+        width: 100%;
+        top: 50%;
+        margin-top: -15px;
+        left: 0;
+        display: block;
+        color: #fff;
+        font-size: 20px;
+    }
+
+.filters {
+    margin-bottom: 20px;
+}

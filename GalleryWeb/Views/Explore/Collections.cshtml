@@ -29,36 +29,29 @@
 
 
                 <!-- Sidebar Column-->
-               
-
                 <div class="col-lg-3 mb-4">
                     <h5 class="d-flex align-items-center mb-3">
-                    Sort by:
+                        Sort by:
                     </h5>
 
                     <ul class="list-group mb-3">
-                        <a asp-controller="Explore" asp-action="SortAZ" class="list-group-item list-group-item-dark list-group-item-action active" aria-current="true">
-                            Name(A->Z)
-                        </a>
                         <a asp-controller="Explore" asp-action="SortAZ" class="list-group-item list-group-item-dark list-group-item-action">
                             Name(A->Z)
                         </a>
+                        <a asp-controller="Explore" asp-action="SortZA" class="list-group-item list-group-item-dark list-group-item-action">
+                            Name(Z->A)
+                        </a>
 
-                        <li class="list-group-item lh-sm">
-                            <a asp-controller="Explore" asp-action="SortZA">Name(Z->A)</a>
-                        </li>
                     </ul>
                     <hr class="my-0" />
                     <hr class="my-0" />
 
-                    <h5  class="d-flex align-items-center mb-3">Filter by genres:</h5>
+                    <h5 class="d-flex align-items-center mb-3">Filter by genres:</h5>
 
                     <ul class="list-group mb3">
-                        <li class="list-group-item lh-sm">
-                            <a asp-controller="Explore" asp-action="Collections">
-                                <b>Clear filter</b>
-                            </a>
-                        </li>
+                        <a asp-controller="Explore" asp-action="Collections" class="list-group-item list-group-item-dark list-group-item-action">
+                            <b>Clear filter</b>
+                        </a>
                         @{
                             var tempList = new List<string>();
                         }
@@ -68,11 +61,9 @@
                             {
                                 tempList.Add(p.Genre);
 
-                                <li class="list-group-item lh-sm">
-                                    <a asp-controller="Explore" asp-action="FilterByGenre"
-                                       asp-route-genreName="@p.Genre">@p.Genre
-                                    </a>
-                                </li>
+                                <a asp-controller="Explore" asp-action="FilterByGenre" asp-route-genreName="@p.Genre" class="list-group-item list-group-item-dark list-group-item-action">
+                                    @p.Genre
+                                </a>
                             }
 
                         }
@@ -82,71 +73,70 @@
                 <!-- Content Column-->
                 <div class="col-lg-9 mb-4">
                     <h2>Pieces of art filtered by: </h2>
+
+
                     <section class="py-5">
-                        <div class="container">
+                    <div class="container">
 
-                            @{
-                                int rows = Model.pics.Count() / 4;
-                                int num;
-                            }
+                        @{
+                            int rows = Model.pics.Count() / 4;
+                            int num;
+                        }
 
-                            <div class="row">
-                                <div class="column">
-                                    @for (int i = 0; i < rows; i++)
-                                    {
-                                        num = (4 * i);
-                                        <img src="@Model.pics[num].Url" alt="@Model.pics[num].Name" style="width:100%">
-                                        <div class="card-footer">
-                                            <a asp-controller="Explore" asp-action="ShowPicture"
-                                               asp-route-picId="@Model.pics[num].Id">@Model.pics[num].Name</a>
-                                        </div>
-                                    }
+                        <div class="row">
+                            <div class="column">
+                                @for (int i = 0; i < rows; i++)
+                                {
+                                    num = (4 * i);
+                                    <img src="@Model.pics[num].Url" alt="@Model.pics[num].Name" style="width:100%">
+                                    <div class="card-footer">
+                                        <a asp-controller="Explore" asp-action="ShowPicture"
+                                           asp-route-picId="@Model.pics[num].Id">@Model.pics[num].Name</a>
+                                    </div>
+                                }
 
-                                    @if ((Model.pics.Count() - (rows * 4)) > 0)
-                                    {
-                                        num = (rows * 4);
-                                        <img src="@Model.pics[num].Url" alt="@Model.pics[num].Name" style="width:100%">
-                                    }
-                                </div>
-                                <div class="column">
-                                    @for (int i = 0; i < rows; i++)
-                                    {
-                                        num = (4 * i) + 1;
-                                        <img src="@Model.pics[num].Url" alt="@Model.pics[num].Name" style="width:100%">
-                                    }
-
-                                    @if ((Model.pics.Count() - (rows * 4 + 1)) > 0)
-                                    {
-                                        num = (rows * 4) + 1;
-                                        <img src="@Model.pics[num].Url" alt="@Model.pics[num].Name" style="width:100%">
-                                    }
-                                </div>
-                                <div class="column">
-                                    @for (int i = 0; i < rows; i++)
-                                    {
-                                        num = (4 * i) + 2;
-                                        <img src="@Model.pics[num].Url" alt="@Model.pics[num].Name" style="width:100%">
-                                    }
-
-                                    @if ((Model.pics.Count() - (rows * 4 + 2)) > 0)
-                                    {
-                                        num = (rows * 4) + 2;
-                                        <img src="@Model.pics[num].Url" alt="@Model.pics[num].Name" style="width:100%">
-                                    }
-                                </div>
-                                <div class="column">
-                                    @for (int i = 0; i < rows; i++)
-                                    {
-                                        num = (4 * i) + 3;
-                                        <img src="@Model.pics[num].Url" alt="@Model.pics[num].Name" style="width:100%">
-                                    }
-                                </div>
+                                @if ((Model.pics.Count() - (rows * 4)) > 0)
+                                {
+                                    num = (rows * 4);
+                                    <img src="@Model.pics[num].Url" alt="@Model.pics[num].Name" style="width:100%">
+                                }
                             </div>
+                            <div class="column">
+                                @for (int i = 0; i < rows; i++)
+                                {
+                                    num = (4 * i) + 1;
+                                    <img src="@Model.pics[num].Url" alt="@Model.pics[num].Name" style="width:100%">
+                                }
 
+                                @if ((Model.pics.Count() - (rows * 4 + 1)) > 0)
+                                {
+                                    num = (rows * 4) + 1;
+                                    <img src="@Model.pics[num].Url" alt="@Model.pics[num].Name" style="width:100%">
+                                }
+                            </div>
+                            <div class="column">
+                                @for (int i = 0; i < rows; i++)
+                                {
+                                    num = (4 * i) + 2;
+                                    <img src="@Model.pics[num].Url" alt="@Model.pics[num].Name" style="width:100%">
+                                }
 
-
-                            <!-- Pagination-->
-                            <ul class="pagination justify-content-center">
+                                @if ((Model.pics.Count() - (rows * 4 + 2)) > 0)
+                                {
+                                    num = (rows * 4) + 2;
+                                    <img src="@Model.pics[num].Url" alt="@Model.pics[num].Name" style="width:100%">
+                                }
+                            </div>
+                            <div class="column">
+                                @for (int i = 0; i < rows; i++)
+                                {
+                                    num = (4 * i) + 3;
+                                    <img src="@Model.pics[num].Url" alt="@Model.pics[num].Name" style="width:100%">
+                                }
+                            </div>
+                        </div>
+                    <!-- Pagination-->
+                    <!--<ul class="pagination justify-content-center">
                                 <li class="page-item">
                                     <a class="page-link" href="#" aria-label="Previous">
                                         <span aria-hidden="true">«</span>
@@ -164,10 +154,15 @@
                                 </li>
                             </ul>
                         </div>
-                    </section>
+                    </section>-->
 
                 </div>
             </div>
         </div>
     </section>
+
+
+    @*<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>*@
+    <script src="~/js/portfolio.js" asp-append-version="true"></script>
+
 </body>
