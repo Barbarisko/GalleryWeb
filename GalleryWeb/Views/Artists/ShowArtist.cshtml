@@ -19,11 +19,12 @@
                          src="@Model.artist.Url" 
                          alt="@Model.artist.Name" /></div>
                     <div class="col-lg-6">
-                        <h2>@Model.artist.Name</h2>
+                        <h2>@Model.artist.Name, @Model.artist.Surname</h2>
                         <p>
                             Date of birth: @Model.artist.Bday
-                            @*Native city: @Model.artist.City.Name* передать в модель города*@ 
-
+                        </p>
+                        <p>
+                            Native city: @Model.artist.City.Name
                         </p>
                         <p>Some interesting facts about: </p>
                         <p>@Model.artist.AddInfo</p>

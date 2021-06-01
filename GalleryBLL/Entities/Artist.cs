@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -12,10 +13,12 @@ namespace GalleryDAL.Entities
             Pictures = new HashSet<Picture>();
         }
 
+        [Required]
         public string Name { get; set; }
         public string LastName { get; set; }
         public DateTime Bday { get; set; }
         public DateTime? Death { get; set; }
+        [Required]
         public string ArtDirection { get; set; }
         public string Telephone { get; set; }
         public int? IdCity { get; set; }

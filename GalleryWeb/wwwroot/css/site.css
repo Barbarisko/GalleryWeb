@@ -1,5 +1,5 @@
 ﻿body{
-    font-family: 'Arial', sans-serif
+    font-family: 'Roboto', sans-serif
 }
 
 .carousel-inner > .carousel-item {
@@ -24,5 +24,28 @@
         height: 250px;
     }
 }
+.btn-primary {
+    color: #fff;
+    background-color: #da6c22;
+    border-color: #842029;
+}
+.btn-primary:hover {
+    color: #fff;
+    background-color: #000;
+    border-color: #842029;
+}
+a {
+    color: #da6c22;
+    text-decoration: wavy;
+}
+a:hover {
+    color: #000;
+    text-decoration: wavy;
+}
 
-
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #da6c22;
+    border-color: #842029;
+}

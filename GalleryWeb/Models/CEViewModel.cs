@@ -1,4 +1,5 @@
-﻿using GalleryDAL.Entities;
+﻿using GalleryBLL.Models;
+using GalleryDAL.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Query;
 using System;
@@ -11,13 +12,12 @@ namespace GalleryWeb.Models
     public class CEViewModel 
     {
         public List<decimal> Total;
-        public List<CurrentExhibition> ceContext;
-
-        public CEViewModel(List<CurrentExhibition> ceContext)
+        public List<CurrentExhibitionModel> ceContext;
+        
+        public CEViewModel(List<CurrentExhibitionModel> ceContext)
         {
             this.ceContext = ceContext;
+           
         }
-
-
     }
 }

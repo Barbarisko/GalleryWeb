@@ -10,9 +10,9 @@ namespace GalleryWeb.Models
     {
         public List<ExhibitionModel> Exhibitions;
         //public List<CurrentExhibitionModel> CEItems;
-        public List<NewsModel> NewsItems;
+        public List<ExhibitPlaceModel> places;
 
-        public HomePageModel(List<ExhibitionModel> items/*, List<NewsModel> newsItems*/, List<CurrentExhibitionModel> cEItems)
+        public HomePageModel(List<ExhibitionModel> items, List<ExhibitPlaceModel> places, List<CurrentExhibitionModel> cEItems)
         {
             Exhibitions = items;
             foreach(var i in items)
@@ -23,9 +23,10 @@ namespace GalleryWeb.Models
                     {
                         i.CurrentExhibitions.Add(c);
                     }
+                    
                 }
             }
-            //NewsItems = newsItems;
+            this.places = places;
         }
     }
 }

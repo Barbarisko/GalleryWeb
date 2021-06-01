@@ -1,0 +1,55 @@
+﻿@model GalleryWeb.Models.ExhPicModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<link href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap5.min.css" rel="stylesheet" crossorigin="anonymous">
+
+<link href="~/css/buttons.css" rel="stylesheet" />
+<p></p>
+<h1>Overview</h1>
+
+<div class="btn-1" role="button" style=" text-align: center">
+    <a asp-action="Create"><span>Create new</span></a>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Room
+            </th>
+            <th>
+                Exhibition
+            </th>
+            <th>
+                Picture
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Room)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CurrentExhibition.Exhibition.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Picture.Name)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap5.min.js"></script>

@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GalleryBLL", "GalleryDLL\Ga
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GalleryWeb", "GalleryWeb\GalleryWeb.csproj", "{4AC90602-BEDC-4AD0-A42F-D2DBA24A4EAC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GalleryWebTests", "GalleryWebTests\GalleryWebTests.csproj", "{C8D50B2E-F4F0-4C79-8FC3-1806BD2850C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{4AC90602-BEDC-4AD0-A42F-D2DBA24A4EAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4AC90602-BEDC-4AD0-A42F-D2DBA24A4EAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4AC90602-BEDC-4AD0-A42F-D2DBA24A4EAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8D50B2E-F4F0-4C79-8FC3-1806BD2850C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8D50B2E-F4F0-4C79-8FC3-1806BD2850C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8D50B2E-F4F0-4C79-8FC3-1806BD2850C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8D50B2E-F4F0-4C79-8FC3-1806BD2850C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

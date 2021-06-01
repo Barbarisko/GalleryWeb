@@ -51,7 +51,7 @@ namespace GalleryWeb.Controllers
         // GET: Employees/Create
         public IActionResult Create()
         {
-            ViewData["IdCity"] = new SelectList(_context.Cities, "Id", "Id");
+            ViewData["IdCity"] = new SelectList(_context.Cities, "Id", "Name");
             return View();
         }
 
@@ -69,7 +69,7 @@ namespace GalleryWeb.Controllers
                  hRService.AddEmployee(employee);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdCity"] = new SelectList(_context.Cities, "Id", "Id", employee.IdCity);
+            ViewData["IdCity"] = new SelectList(_context.Cities, "Id", "Name", employee.IdCity);
             return View(employee);
         }
 
@@ -86,7 +86,7 @@ namespace GalleryWeb.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdCity"] = new SelectList(_context.Cities, "Id", "Id", employee.IdCity);
+            ViewData["IdCity"] = new SelectList(_context.Cities, "Id", "Name", employee.IdCity);
             return View(employee);
         }
 
@@ -122,7 +122,7 @@ namespace GalleryWeb.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdCity"] = new SelectList(_context.Cities, "Id", "Id", employee.IdCity);
+            ViewData["IdCity"] = new SelectList(_context.Cities, "Id", "Name", employee.IdCity);
             return View(employee);
         }
 

@@ -18,7 +18,6 @@
                 </h1>
             </div>
             <div class="col-lg-4 mb-4">
-
                 <div class="btn-2 float-end" role="button">
                     <a asp-controller="Cart" asp-action="BuyTicket"
                        asp-route-curExId="@Model.CurrentExhibition.Id" asp-route-quantity="1"><span>Get a ticket</span></a>
@@ -37,12 +36,24 @@
             </div>
             <div class="col-lg-4 mb-4">
                 <p>
+                    We have <b>@Model.CurrentExhibition.MaxTicketQuantity</b> tickets left!
+                </p>
+                <p>
+                    Starts on <b>@Model.CurrentExhibition.DateBegin.Value.Month @Model.CurrentExhibition.DateBegin.Value.Day, @Model.CurrentExhibition.DateBegin.Value.Year </b>
+                </p>
+                <p>
+                    Finishes by <b>@Model.CurrentExhibition.DateEnd.Value.Month @Model.CurrentExhibition.DateEnd.Value.Day, @Model.CurrentExhibition.DateEnd.Value.Year </b>
+                </p>
+                <p>
+                    Will be held at <b>@Model.CurrentExhibition.ExhibitPlace.Name, @Model.CurrentExhibition.ExhibitPlace.City.Name </b>
+                </p>
+                <p>
                     @Model.Message
                 </p>
+
             </div>
         </div>
         <hr class="my-0" />
-
         <!-- Marketing Icons Section-->
 
         @*<div class="py-5 bg-light">
@@ -62,9 +73,8 @@
         </div>*@
 
 
-        <section class="py-5">
+        <section class="py-5 bg-light">
             <div class="container">
-
                 @{
                     int rows = Model.Pictures.Count() / 4;
                     int num;
@@ -76,7 +86,7 @@
                         {
                             num = (4 * i);
                             <a asp-controller="Explore" asp-action="ShowPicture" asp-route-picId="@Model.Pictures[num].Picture.Id">
-                                <img src="@Model.Pictures[num].Picture.Url" alt="@Model.Pictures[num].Picture.Name" style="width:100%">
+                                <img src="@Model.Pictures[num].Picture.Url" alt="@Model.Pictures[num].Picture.Name" style="width:100%;">
                             </a>
                         }
 
@@ -128,5 +138,8 @@
                             </a>
                          }
                         </div>
+                    </div>
                 </div>
-        </section>
+            </section>
+      </div>  
+ </section>

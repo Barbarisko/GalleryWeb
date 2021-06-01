@@ -14,31 +14,34 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="IdEmployee" class="control-label"></label>
-                <select asp-for="IdEmployee" class ="form-control" asp-items="ViewBag.IdEmployee"></select>
+                <select asp-for="IdEmployee" class="form-control" asp-items="ViewBag.IdEmployee"></select>
             </div>
             <div class="form-group">
                 <label asp-for="IdExh" class="control-label"></label>
-                <select asp-for="IdExh" class ="form-control" asp-items="ViewBag.IdExh"></select>
+                <select asp-for="IdExh" class="form-control" asp-items="ViewBag.IdExh"></select>
             </div>
             <div class="form-group">
                 <label asp-for="IdExhPlace" class="control-label"></label>
-                <select asp-for="IdExhPlace" class ="form-control" asp-items="ViewBag.IdExhPlace"></select>
+                <select asp-for="IdExhPlace" class="form-control" asp-items="ViewBag.IdExhPlace"></select>
             </div>
             <div class="form-group">
                 <label asp-for="maxTicketQuantity" class="control-label"></label>
                 <input asp-for="maxTicketQuantity" class="form-control" />
                 <span asp-validation-for="maxTicketQuantity" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <input type="hidden" asp-for="EstimatedPrice" />
+
+            @*<div class="form-group">
                 <label asp-for="EstimatedPrice" class="control-label"></label>
                 <input asp-for="EstimatedPrice" class="form-control" />
                 <span asp-validation-for="EstimatedPrice" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
                 <label asp-for="Tag" class="control-label"></label>
-                <select asp-for="Tag" class="form-control"></select>
+                <input asp-for="Tag" class="form-control"></input>
                 <span asp-validation-for="Tag" class="text-danger"></span>
             </div>
+            <p></p>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

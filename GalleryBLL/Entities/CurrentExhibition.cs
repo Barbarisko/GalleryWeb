@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -24,8 +25,10 @@ namespace GalleryDAL.Entities
         public int IdExhPlace { get; set; }
         public DateTime? DateBegin { get; set; }
         public DateTime? DateEnd { get; set; }
+        [Required]
         public int maxTicketQuantity { get; set; }
         public int EstimatedPrice { get; set; }
+        [Required]
         public Status Tag { get ; set; }
 
         public virtual Employee Employee { get; set; }

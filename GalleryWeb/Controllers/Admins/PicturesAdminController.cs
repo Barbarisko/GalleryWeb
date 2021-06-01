@@ -50,7 +50,7 @@ namespace GalleryWeb.Controllers
         public IActionResult Create()
         {
             ViewData["IdArtist"] = new SelectList(_context.Artists, "Id", "Name");
-            ViewData["IdTechnique"] = new SelectList(_context.Techniques, "Id", "Base");
+            ViewData["IdTechnique"] = new SelectList(_context.Techniques, "Id", "Name");
             return View();
         }
 
@@ -68,7 +68,7 @@ namespace GalleryWeb.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdArtist"] = new SelectList(_context.Artists, "Id", "Name", picture.IdArtist);
-            ViewData["IdTechnique"] = new SelectList(_context.Techniques, "Id", "Base", picture.IdTechnique);
+            ViewData["IdTechnique"] = new SelectList(_context.Techniques, "Id", "Name", picture.IdTechnique);
             return View(picture);
         }
 
@@ -86,7 +86,7 @@ namespace GalleryWeb.Controllers
                 return NotFound();
             }
             ViewData["IdArtist"] = new SelectList(_context.Artists, "Id", "Name", picture.IdArtist);
-            ViewData["IdTechnique"] = new SelectList(_context.Techniques, "Id", "Base", picture.IdTechnique);
+            ViewData["IdTechnique"] = new SelectList(_context.Techniques, "Id", "Name", picture.IdTechnique);
             return View(picture);
         }
 
@@ -123,7 +123,7 @@ namespace GalleryWeb.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdArtist"] = new SelectList(_context.Artists, "Id", "Name", picture.IdArtist);
-            ViewData["IdTechnique"] = new SelectList(_context.Techniques, "Id", "Base", picture.IdTechnique);
+            ViewData["IdTechnique"] = new SelectList(_context.Techniques, "Id", "Name", picture.IdTechnique);
             return View(picture);
         }
 

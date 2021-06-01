@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace GalleryWeb.Controllers
@@ -17,18 +18,16 @@ namespace GalleryWeb.Controllers
 		ITicketService _ticketService;
         ICurrentExhibitionService _currExhService;
         IExhibitionService _exhService;
-        IArtistService artistsService;
 
         private readonly UserManager<UserEntity> _userManager;
 		public const string CartSessionKey = "сartId";
 
         public CartController(UserManager<UserEntity> userManager, ITicketService ticketService, 
-            ICurrentExhibitionService currExhService, IArtistService artistsService, IExhibitionService exhService)
+            ICurrentExhibitionService currExhService, IExhibitionService exhService)
         {
             _userManager = userManager;
             _ticketService = ticketService;
             _currExhService = currExhService;
-            this.artistsService = artistsService;
             _exhService = exhService;
         }
 
@@ -97,6 +96,25 @@ namespace GalleryWeb.Controllers
 
 			return HttpContext.Session.GetString(CartSessionKey);
 		}
-	}
+        public void SendTickets(string body, string email, string subject)
+        {
+
+            MailMessage mail = new MailMessage();
+            mail.To.Add(email);
+            mail.From = new MailAddress("galleryweb.noreply@gmail.com");
+            mail.Subject = subject;
+            mail.Body = body;
+            mail.IsBodyHtml = true;
+
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = "smtp.gmail.com";
+            smtp.Port = 587;
+            smtp.UseDefaultCredentials = false;
+            smtp.Credentials = new System.Net.NetworkCredential("galleryweb.noreply@gmail.com", "ZXCasdqwe123");
+            smtp.EnableSsl = true;
+            smtp.Send(mail);
+
+        }
+    }
 
 }

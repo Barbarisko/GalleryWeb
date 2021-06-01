@@ -48,7 +48,7 @@ namespace GalleryWeb.Controllers
         // GET: ArtistsAdmin/Create
         public IActionResult Create()
         {
-            ViewData["IdCity"] = new SelectList(_context.Cities, "Id", "Id");
+            ViewData["IdCity"] = new SelectList(_context.Cities, "Id", "Name");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace GalleryWeb.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdCity"] = new SelectList(_context.Cities, "Id", "Id", artist.IdCity);
+            ViewData["IdCity"] = new SelectList(_context.Cities, "Id", "Name", artist.IdCity);
             return View(artist);
         }
 
@@ -82,7 +82,7 @@ namespace GalleryWeb.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdCity"] = new SelectList(_context.Cities, "Id", "Id", artist.IdCity);
+            ViewData["IdCity"] = new SelectList(_context.Cities, "Id", "Name", artist.IdCity);
             return View(artist);
         }
 
@@ -118,7 +118,7 @@ namespace GalleryWeb.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdCity"] = new SelectList(_context.Cities, "Id", "Id", artist.IdCity);
+            ViewData["IdCity"] = new SelectList(_context.Cities, "Id", "Name", artist.IdCity);
             return View(artist);
         }
 

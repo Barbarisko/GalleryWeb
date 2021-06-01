@@ -12,7 +12,7 @@
 <div class="btn-1" role="button" style=" text-align: center">
     <a asp-controller="ArtistsAdmin" asp-action="Create"><span>Create new</span></a>
 </div>
-<table id="table" class="table">
+<table id="table" class="table table-striped">
     <thead>
         <tr>
             <th>
@@ -83,9 +83,25 @@
                     @Html.DisplayFor(modelItem => item.City.Id)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-secondary btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Edit">
+                        <span style="font-size: 14px;">
+                            <i class="fa fa-edit"></i>
+                        </span>
+                    </a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Details">
+                        <span style="        font-size: 14px;">
+                            <i class="fas fa-info-circle"></i>
+                        </span>
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Delete">
+                        <span style="        font-size: 14px;">
+                            <i class="fa fa-trash"></i>
+                        </span>
+                    </a>
+
+                    @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
                 </td>
             </tr>
         }

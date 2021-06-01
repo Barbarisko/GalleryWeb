@@ -19,6 +19,6 @@ namespace GalleryWeb.Models
 			message = "";
 			price = 0;
 		}
-
+		
 	}
 }

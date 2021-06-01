@@ -34,8 +34,7 @@ namespace GalleryWeb
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddEntityFrameworkNpgsql().AddDbContext<GalleryDbContext>(opt =>
-                                 opt.UseNpgsql("Host = 165.232.107.123; Username = postgres; Password = 1; Database = postgres;" +
-                                                " Persist Security Info = True"));
+                                 opt.UseNpgsql(Configuration.GetConnectionString("Gallerybd")));
 
             services.AddScoped<IRepository<Artist>, Repository<Artist>>();
             services.AddScoped<IRepository<City>, Repository<City>>();
@@ -49,7 +48,6 @@ namespace GalleryWeb
             services.AddScoped<IRepository<Owner>, Repository<Owner>>();
             services.AddScoped<IRepository<Picture>, Repository<Picture>>();
             services.AddScoped<IRepository<Technique>, Repository<Technique>>();
-            services.AddScoped<IRepository<News>, Repository<News>>();
             services.AddScoped<IRepository<TicketsInCart>, Repository<TicketsInCart>>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();

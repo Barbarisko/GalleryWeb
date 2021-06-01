@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>@ViewData["Title"] - [ Axler Gallery ]</title>
+    <title>@ViewData["Title"] - [ Gallery Web ]</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap5.min.css" rel="stylesheet" crossorigin="anonymous">
 
@@ -39,14 +39,17 @@
                     <ul class="nav navbar-nav pull-right">
                         @if (signInManager.IsSignedIn(User))
                         {
+                if (User.Identity.Name == "helen.fedchuk@gmail.com")
+                {
                         <div class="collapse navbar-collapse" id="navbarText">
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Dropdown
+                                        Manage...
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdownPortfolio">
                                         <li><a class="dropdown-item" asp-area="" asp-controller="CurrentExhibitionsAdmin" asp-action="Index">Current Exhibitions</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="ExhibitedPictures" asp-action="Index">Exhibited pictures</a></li>
                                         <li><a class="dropdown-item" asp-area="" asp-controller="ExhibitionsAdmin" asp-action="Index">Exhibitions pool</a></li>
                                         <li><a class="dropdown-item" asp-area="" asp-controller="ArtistsAdmin" asp-action="Index">Artists</a></li>
                                         <li><a class="dropdown-item" asp-area="" asp-controller="PicturesAdmin" asp-action="Index">All Pictures</a></li>
@@ -55,10 +58,12 @@
                                 </li>
                             </ul>
                         </div>
+                }
+                        
                          <li class="nav-item">
                                 <form method="post" asp-controller="Account" asp-action="Logout">
-                                    <button type="submit" class="navbar-brand btn btn-link" style="width:auto">
-                                        <h7>Logout @User.Identity.Name</h7>
+                                    <button type="submit" class="nav-item btn nav-link" style="width:auto">
+                                        <h8>Logout @User.Identity.Name</h8>
                                     </button>
                                 </form>
                          </li>

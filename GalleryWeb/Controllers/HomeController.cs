@@ -16,19 +16,21 @@ namespace GalleryWeb.Controllers
         private readonly ILogger<HomeController> _logger;
         IExhibitionService exhibitionService;
         ICurrentExhibitionService currentExhibitionService;
-        public HomeController(ILogger<HomeController> logger, IExhibitionService exhibitionService, 
-            ICurrentExhibitionService currentExhibitionService)
+        IHRService hRService;
+        public HomeController(ILogger<HomeController> logger, IExhibitionService exhibitionService,
+            ICurrentExhibitionService currentExhibitionService, IHRService hRService)
         {
             _logger = logger;
             this.exhibitionService = exhibitionService;
             this.currentExhibitionService = currentExhibitionService;
+            this.hRService = hRService;
         }
 
         public IActionResult Index()
         {
             HomePageModel model = new HomePageModel(exhibitionService.GetAllExhibitions().ToList(),
+                                                    hRService.GetAllPlaces().ToList(),
                                                     currentExhibitionService.GetAllCurrentExhibitions().ToList()); 
-                                                    //exhibitionService.GetAllNews().ToList());
             return View(model);
         }
 

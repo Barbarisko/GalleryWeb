@@ -33,19 +33,7 @@ namespace GalleryBLL.Services
             return _mapper.Map<ExhibitionModel>(_unitOfWork.ExhibitionRepository.Get(id));       
         }
         
-        public IEnumerable<NewsModel> GetAllNews()
-        {
-            IEnumerable<News> Entities = _unitOfWork.NewsRepository.GetAll();
-            return _mapper.Map<IEnumerable<NewsModel>>(Entities);
-        }
-
-        public NewsModel GetNewsById(int id)
-        {
-            return _mapper.Map<NewsModel>(_unitOfWork.NewsRepository.Get(id));       
-        }
-
-
-        public void AddNewExhibition(string name, int? price, string description)
+       public void AddNewExhibition(string name, int? price, string description)
         {
             Exhibition itemEntity = _unitOfWork.ExhibitionRepository.GetAll().ToList().Find(
                         i => i.Name == name);

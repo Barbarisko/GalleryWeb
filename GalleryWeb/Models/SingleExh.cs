@@ -12,14 +12,16 @@ namespace GalleryWeb.Models
         public ExhibitionModel Exhibition;
         public CurrentExhibitionModel CurrentExhibition;
         public List<ExhibitedPictureModel> Pictures;
+        public ExhibitPlaceModel place;
         public string Message;
         public SingleExh(ExhibitionModel exhibition, CurrentExhibitionModel CurrentExhibition,
-            List<ExhibitedPictureModel> pictures)
+            List<ExhibitedPictureModel> pictures , ExhibitPlaceModel place, CityModel city)
         {
             this.CurrentExhibition = CurrentExhibition;
             Exhibition = exhibition;
-            
-            if(CurrentExhibition.Tag == Status.future)
+            this.CurrentExhibition.ExhibitPlace = place;
+            this.CurrentExhibition.ExhibitPlace.City = city;
+            if (CurrentExhibition.Tag == Status.future)
             {
                 Message = $"looking forward to see you! \n Starting on {CurrentExhibition.DateBegin} " +
                     $"\n You can still book tickets!";

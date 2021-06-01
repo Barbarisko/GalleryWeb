@@ -114,6 +114,12 @@ namespace GalleryBLL.Services
 			Technique Entity = _unitOfWork.TechniqueRepository.Get(id);
 			return _mapper.Map<TechniqueModel>(Entity);
 		}
+
+		public List<TechniqueModel> GetAllTechniqes()
+		{
+			List<Technique> tecEntities = _unitOfWork.TechniqueRepository.GetAll().ToList();
+			return _mapper.Map<List<TechniqueModel>>(tecEntities);
+		}
 		public List<PictureModel> SortPicturesAZ(List<PictureModel> itemsToSort)
         {
 			return itemsToSort.OrderBy(o => o.Name).ToList();

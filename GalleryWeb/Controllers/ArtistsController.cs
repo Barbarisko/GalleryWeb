@@ -14,22 +14,24 @@ namespace GalleryWeb.Controllers
         private readonly ILogger<HomeController> _logger;
         IArtistService artistsService;
         IPictureService pictureService;
+        IHRService hRService;
         public ArtistsController(ILogger<HomeController> logger, IArtistService artistsService,
-            IExhibitionService exhibitionService, ICurrentExhibitionService currentExhibitionService, IPictureService pictureService)
+            IPictureService pictureService, IHRService hRService)
         {
             _logger = logger;
             this.artistsService = artistsService;
             this.pictureService = pictureService;
+            this.hRService = hRService;
         }
         public IActionResult Artists()
         {
-            Artists model = new Artists(artistsService.GetAllArtists().ToList());
+            Artists model = new Artists(artistsService.GetAllArtists().ToList(), hRService.GetAllCities().ToList(), hRService.GetAllCountries().ToList());
             return View(model);
         }
         public IActionResult ShowArtist(int artistId)
         {
             SingleArtist model = new SingleArtist(artistsService.GetArtistById(artistId),
-                pictureService.GetAllPicsFromArtist(artistId));
+                pictureService.GetAllPicsFromArtist(artistId), hRService.GetCityById((int)artistsService.GetArtistById(artistId).IdCity));
             return View(model);
         }
     }

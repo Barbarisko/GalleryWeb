@@ -84,8 +84,8 @@
                     <!-- For success/fail messages-->
                     <a class="btn btn-primary" role="button" type="submit"
                        asp-controller="Account" asp-action="SendEmailCustomReverse"
-                       asp-route-body="Костыльная обратная связь" asp-route-email="@User.Identity.Name" 
-                       asp-route-subject="@User.Identity.Name - discuss topic">
+                       asp-route-body="test" asp-route-email="@User.Identity.Name" 
+                       asp-route-subject="Feedback from @User.Identity.Name">
                         Send Message
                     </a>
                 </form>

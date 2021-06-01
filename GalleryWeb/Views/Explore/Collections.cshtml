@@ -63,7 +63,46 @@
                                     @p.Genre
                                 </a>
                             }
+                        }
+                    </ul>
+                    <p></p>
+                    <h5 class="d-flex align-items-center mb-3">Filter by tecniques:</h5>
 
+                    <ul class="list-group mb3">
+                        <a asp-controller="Explore" asp-action="Collections" class="list-group-item list-group-item-dark list-group-item-action">
+                            <b>Clear filter</b>
+                        </a>
+                        
+                        @foreach (PictureModel p in Model.pics)
+                        {
+                            if (!tempList.Contains(p.Technique.Name))
+                            {
+                                tempList.Add(p.Technique.Name);
+
+                                <a asp-controller="Explore" asp-action="FilterByTechnique" asp-route-techId="@p.Technique.Id" class="list-group-item list-group-item-dark list-group-item-action">
+                                    @p.Technique.Name
+                                </a>
+                            }
+                        }
+                    </ul>
+                    <p></p>
+                    <h5 class="d-flex align-items-center mb-3">Filter by authors:</h5>
+
+                    <ul class="list-group mb3">
+                        <a asp-controller="Explore" asp-action="Collections" class="list-group-item list-group-item-dark list-group-item-action">
+                            <b>Clear filter</b>
+                        </a>
+                       
+                        @foreach (PictureModel p in Model.pics)
+                        {
+                            if (!tempList.Contains(p.Artist.Name))
+                            {
+                                tempList.Add(p.Artist.Name);
+
+                                <a asp-controller="Explore" asp-action="FilterByArtist" asp-route-artistId="@p.Artist.Id" class="list-group-item list-group-item-dark list-group-item-action">
+                                    @p.Artist.Name
+                                </a>
+                            }
                         }
                     </ul>
                 </div>
@@ -91,14 +130,15 @@
                                 @for (int i = 0; i < rows; i++)
                                 {
                                     num = (4 * i) + j;
-                                    <div class="card border-danger text-dark bg-light mb-3" style="max-width: 18rem;">
-
-                                        <img src="@Model.pics[num].Url" alt="@Model.pics[num].Name" style="width:100%">
+                                    <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+                                        <a asp-controller="Explore" asp-action="ShowPicture"
+                                           asp-route-picId="@Model.pics[num].Id">
+                                            <img src="@Model.pics[num].Url" alt="@Model.pics[num].Name" style="width:100%">
+                                        </a>
                                         <div class="card-body align-content-center">
-                                            <h7 class="card-title">
-                                                <a asp-controller="Explore" asp-action="ShowPicture"
-                                                   asp-route-picId="@Model.pics[num].Id">@Model.pics[num].Name</a>
-                                            </h7>
+                                            <h8 class="card-text">
+                                                @Model.pics[num].Name
+                                            </h8>
                                         </div>
                                     </div>
 
@@ -107,16 +147,18 @@
                                 @if ((Model.pics.Count() - (rows * 4 + j)) > 0)
                                 {
                                     num = (rows * 4) + j;
-                                    <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+                            <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
 
-                                        <img src="@Model.pics[num].Url" alt="@Model.pics[num].Name" style="width:100%">
-                                        <div class="card-body align-content-center">
-                                            <h7 class="card-title">
-                                                <a asp-controller="Explore" asp-action="ShowPicture"
-                                                   asp-route-picId="@Model.pics[num].Id">@Model.pics[num].Name</a>
-                                            </h7>
-                                        </div>
-                                    </div>
+                                <a asp-controller="Explore" asp-action="ShowPicture"
+                                   asp-route-picId="@Model.pics[num].Id">
+                                    <img src="@Model.pics[num].Url" alt="@Model.pics[num].Name" style="width:100%">
+                                </a>
+                                <div class="card-body align-content-center">
+                                    <h8 class="card-text">
+                                        @Model.pics[num].Name
+                                    </h8>
+                                </div>
+                            </div>
                                 }
                             </div>
                             }

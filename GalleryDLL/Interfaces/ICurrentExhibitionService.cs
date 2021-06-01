@@ -15,6 +15,7 @@ namespace GalleryBLL.Interfaces
 
         void AddPictureToExhibition(PictureModel picture, int exhId, int roomNum);
         List<ExhibitedPictureModel> GetAllPicsFromExhibition(int exhId);
+         IEnumerable<ExhibitedPictureModel> GetAllExhPics();
         void CountEstimatePrice(int currexhId);
         void DeletePicFromExhibition(int picId, int currexhId);
     }

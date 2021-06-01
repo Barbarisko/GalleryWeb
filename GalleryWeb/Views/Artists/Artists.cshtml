@@ -16,18 +16,19 @@
             <small>...get to know them better!</small>
         </h1>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
             <li class="breadcrumb-item active">Represented Artists</li>
         </ol>
         <div class="row">
             @foreach (ArtistModel a in Model.Items)
             {
                 <div class="col-lg-4 col-sm-6 mb-4">
-                    <div class="card h-100">
-                        <a href="#!"><img class="card-img-top" src="@a.Url" alt="@a.Name" /></a>
+                    <div class="card h-100">                        
+                        <a asp-controller="Artists" asp-action="ShowArtist" asp-route-artistId="@a.Id"><img class="card-img-top" src="@a.Url" alt="@a.Name" /></a>
                         <div class="card-body">
-                            <h4 class="card-title"><a asp-controller="Artists" asp-action="ShowArtist" asp-route-artistId="@a.Id">@a.Name @a.LastName </a></h4>
+                            <h4 class="card-title"><a asp-controller="Artists" asp-action="ShowArtist" asp-route-artistId="@a.Id">@a.Name @a.Surname </a></h4>
                             <p class="card-text">@a.ArtDirection</p>
+                            <p class="card-text">@a.City.Country.Name, @a.City.Name</p>
                         </div>
                     </div>
                 </div>

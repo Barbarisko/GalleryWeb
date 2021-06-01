@@ -27,7 +27,6 @@ namespace GalleryDAL
         public virtual DbSet<ExhibitPlace> ExhibitPlaces { get; set; }
         public virtual DbSet<ExhibitedPicture> ExhibitedPictures { get; set; }
         public virtual DbSet<Exhibition> Exhibitions { get; set; }
-        public virtual DbSet<News> News { get; set; }
         public virtual DbSet<OwnedPicture> OwnedPictures { get; set; }
         public virtual DbSet<Owner> Owners { get; set; }
         public virtual DbSet<Picture> Pictures { get; set; }
@@ -311,28 +310,6 @@ namespace GalleryDAL
                 entity.Property(e => e.Price).HasColumnName("price");
                 entity.Property(e => e.Thumbnail)
                 .HasColumnName("thumbnailUrl");
-            });
-
-            modelBuilder.Entity<News>(entity =>
-            {
-                entity.ToTable("news");
-
-                entity.HasIndex(e => e.Id, "news_id_uindex")
-                    .IsUnique();
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Description)
-                    .HasColumnType("character varying")
-                    .HasColumnName("description");
-
-                entity.Property(e => e.Name)
-                    .HasColumnType("character varying")
-                    .HasColumnName("name");
-
-                entity.Property(e => e.PicUrl)
-                    .HasColumnType("character varying")
-                    .HasColumnName("picUrl");
             });
 
             modelBuilder.Entity<OwnedPicture>(entity =>

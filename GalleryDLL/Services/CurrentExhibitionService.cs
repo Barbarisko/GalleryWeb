@@ -23,15 +23,14 @@ namespace GalleryBLL.Services
 
         public void CountEstimatePrice(int currexhId)
         {
-            int totalprice = 0;
-            List<ExhibitedPicture> picturesFromExh = _unitOfWork.CurrentExhibitionRepository.Get(currexhId).ExhibitedPictures.ToList();
-            foreach (var pic in picturesFromExh)
+            List<ExhibitedPicture> list = _unitOfWork.ExhibitedPictureRepository.GetAll().ToList().FindAll(p=>p.IdCurrExh==currexhId);
+            var exhibition = _unitOfWork.CurrentExhibitionRepository.Get(currexhId);
+            foreach (var pic in list)
             {
-                totalprice += pic.Picture.Price;
+                exhibition.EstimatedPrice += _unitOfWork.PictureRepository.Get(pic.IdPicture).Price;
             }
-            CurrentExhibition ce = _unitOfWork.CurrentExhibitionRepository.Get(currexhId);
-            ce.EstimatedPrice = totalprice;
-            _unitOfWork.CurrentExhibitionRepository.Update(ce);
+            _unitOfWork.CurrentExhibitionRepository.Update(exhibition);
+            _unitOfWork.Save();
         }
 
         public void DeletePicFromExhibition(int picId, int currexhId)
@@ -69,6 +68,11 @@ namespace GalleryBLL.Services
         {
             IEnumerable<CurrentExhibition> exhEntities = _unitOfWork.CurrentExhibitionRepository.GetAll();
             return _mapper.Map<IEnumerable<CurrentExhibitionModel>>(exhEntities);
+        }
+        public IEnumerable<ExhibitedPictureModel> GetAllExhPics()
+        {
+            IEnumerable<ExhibitedPicture> exhEntities = _unitOfWork.ExhibitedPictureRepository.GetAll();
+            return _mapper.Map<IEnumerable<ExhibitedPictureModel>>(exhEntities);
         }
 
         public CurrentExhibitionModel GetCurExhById(int id)

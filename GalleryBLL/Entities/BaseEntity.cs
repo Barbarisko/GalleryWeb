@@ -7,6 +7,7 @@ namespace GalleryDAL.Entities
 {
 	public abstract class BaseEntity : IBaseEntity
 	{
+		[Key]
 		private int _id;
 
 		public int Id { get => _id; set => _id = value; }

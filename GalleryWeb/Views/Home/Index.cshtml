@@ -5,7 +5,10 @@
 }
 @using GalleryBLL.Models
 @model GalleryWeb.Models.HomePageModel
-    <link href="css/site.css" rel="stylesheet" />
+
+
+<link href="~/css/buttons.css" rel="stylesheet" />
+
 <div class="container">
     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
@@ -19,17 +22,21 @@
             {
                 for (int j = 0; j < Model.Exhibitions[i].CurrentExhibitions.Count; j++)
                 {
-                    <div class="carousel-item @(i == 0 ? "active" : "")">
-                        <a asp-controller="Explore" asp-action="ShowCExhibition" asp-route-eId="@Model.Exhibitions[i].Id"
-                           asp-route-ceId="@Model.Exhibitions[i].CurrentExhibitions[j].Id"
-                           style="padding: 0px 0px 0px 0px;">
-                            <img class="d-block w-100" src="@Model.Exhibitions[i].Thumbnail" alt="..." />
-                        </a>
-                        <div class="carousel-caption d-none d-md-block">
-                            <h3>@Model.Exhibitions[i].Name</h3>
-                            <p>Held from @Model.Exhibitions[i].CurrentExhibitions[j].DateBegin.Value.Day  to @Model.Exhibitions[i].CurrentExhibitions[j].DateEnd.Value.Date</p>
+                    if (Model.Exhibitions[i].CurrentExhibitions[j].DateBegin < DateTime.Now)
+                    {
+                        <div class="carousel-item @(i == 0 ? "active" : "")">
+                            <a asp-controller="Explore" asp-action="ShowCExhibition" asp-route-eId="@Model.Exhibitions[i].Id"
+                               asp-route-ceId="@Model.Exhibitions[i].CurrentExhibitions[j].Id"
+                               style="padding: 0px 0px 0px 0px;">
+                                <img class="d-block w-100" src="@Model.Exhibitions[i].Thumbnail" alt="..." />
+                            </a>
+                            <div class="carousel-caption d-none d-md-block">
+                                <h3>@Model.Exhibitions[i].Name</h3>
+                                <p>Held from @Model.Exhibitions[i].CurrentExhibitions[j].DateBegin  to @Model.Exhibitions[i].CurrentExhibitions[j].DateEnd</p>
+                            </div>
                         </div>
-                    </div>
+                    }
+
                 }
 
             }
@@ -94,7 +101,7 @@
         <!-- Page Content-->
         <section class="py-5">
             <div class="container">
-                <h1 class="mb-4">Welcome to GalleryWeb</h1>
+                <h1 class="mb-4">Galleries and Museums We cooperate with</h1>
                 <!-- Marketing Icons Section-->
                 <div class="row">
                     @*@foreach (NewsModel news in Model.NewsItems)
@@ -107,28 +114,45 @@
                             </div>
                         </div>
                     }*@
-                    <div class="row">
+                    <div class="row">                        
                         <div class="col-lg-4 mb-4 mb-lg-0">
                             <div class="card h-100">
-                                <h4 class="card-header">Card Title</h4>
-                                <div class="card-body"><p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p></div>
-                                <div class="card-footer"><a class="btn btn-primary" href="#!">Learn More</a></div>
+                                <h4 class="card-header">@Model.places[3].Name</h4>
+                                <div class="card-body"><p class="card-text">
+                                    @Model.places[3].Description</p></div>
+                                <div class="card-footer">
+                                    @*<a class="btn btn-primary" href="#!">Learn More</a>*@
+
+                                    <div class="btn-2" role="button" style="padding: 5px; align-self:flex-start">
+            <a asp-controller="Home" asp-action="Contacts"><span>Learn more</span></a>
+        </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-lg-4 mb-4 mb-lg-0">
                             <div class="card h-100">
-                                <h4 class="card-header">Card Title</h4>
-                                <div class="card-body"><p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.</p></div>
-                                <div class="card-footer"><a class="btn btn-primary" href="#!">Learn More</a></div>
+                                <h4 class="card-header">@Model.places[5].Name</h4>
+                                <div class="card-body"><p class="card-text">
+                                    @Model.places[5].Description</p></div>
+                                <div class="card-footer">
+                                    <div class="btn-2" role="button" style="padding: 5px; align-self:flex-start">
+                                        <a asp-controller="Home" asp-action="Contacts"><span>Learn more</span></a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-4 mb-4 mb-lg-0">
                             <div class="card h-100">
-                                <h4 class="card-header">Card Title</h4>
-                                <div class="card-body"><p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p></div>
-                                <div class="card-footer"><a class="btn btn-primary" href="#!">Learn More</a></div>
+                                <h4 class="card-header">@Model.places[6].Name</h4>
+                                <div class="card-body"><p class="card-text">
+                                    @Model.places[6].Description</p></div>
+                                <div class="card-footer">
+                                    <div class="btn-2" role="button" style="padding: 5px; align-self:flex-start">
+                                        <a asp-controller="Home" asp-action="Contacts"><span>Learn more</span></a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </div>                      
                     </div>
                 </div>
             </div>
@@ -170,19 +194,25 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <h2 class="mb-4">Our Features</h2>
-                        <p>The Modern Business template by Start Bootstrap includes:</p>
+                        <p>The super modern online gallery site includes:</p>
                         <ul>
-                            <li><strong>Bootstrap 4.6.0</strong></li>
+                            <li><strong>Bootstrap 5.0.1</strong></li>
                             <li>jQuery 3.5.1</li>
                             <li>Font Awesome 5.15.3</li>
-                            <li>Working PHP contact form with validation</li>
-                            <li>Unstyled page elements for easy customization</li>
+                            <li><strong>Awesome developer team(accounted by 1 person)</strong></li>
+                            <li>Working contact form with validation</li>
+                            <li>Working multy-argument filtering by JavaScript</li>
                         </ul>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, omnis doloremque non cum id reprehenderit, quisquam totam aspernatur tempora minima unde aliquid ea culpa sunt. Reiciendis quia dolorum ducimus unde.</p>
+                        <p>I worked hard to accomplish the task, built a big database and slept ~20 hours for the last 8 days.</p>
+                        <p>Also I would be grateful for comments and improvement suggestions! </p>
                     </div>
-                    <div class="col-lg-6"><img class="img-fluid rounded" src="https://via.placeholder.com/700x450" alt="..." /></div>
+                    <div class="col-lg-6">
+                        <img class="img-fluid rounded" src="~/photo_2021-05-31_00-37-50.jpg"
+                             alt="..." />
+                    </div>
                 </div>
             </div>
+            
         </section>
 
         <hr class="my-0" />
@@ -190,8 +220,11 @@
         <aside class="py-5 bg-light">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-8"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p></div>
-                    <div class="col-md-4"><a class="btn btn-lg btn-secondary btn-block" href="#!">Call to Action</a></div>
+                    <div class="col-md-8">
+                    <p><strong>Wanna be a part of our promising team? Or you are a gallery owner, eager to host an event and to be advertised? </p>
+                    <p>Contact us! We look forward to cooperate with you :)</strong></p>
+                    </div>
+                    <div class="col-md-4 btn-2"><a  asp-controller="Home" asp-action="Contacts"><span>Contact us here</span></a></div>
                 </div>
             </div>
         </aside>

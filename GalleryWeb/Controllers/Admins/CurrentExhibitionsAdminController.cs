@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using GalleryDAL;
 using GalleryDAL.Entities;
 using GalleryBLL.Interfaces;
+using GalleryBLL.Models;
+using GalleryWeb.Models;
 
 namespace GalleryWeb.Controllers.Admins
 {
@@ -15,22 +17,31 @@ namespace GalleryWeb.Controllers.Admins
     {
         private readonly GalleryDbContext _context;
         ICurrentExhibitionService currentExhibitionService;
-        public CurrentExhibitionsAdminController(GalleryDbContext context, ICurrentExhibitionService currentExhibitionService)
+        IExhibitionService exhibitionService;
+        IHRService hRService;
+
+        public CurrentExhibitionsAdminController(GalleryDbContext context, ICurrentExhibitionService currentExhibitionService, IExhibitionService exhibitionService, IHRService hRService)
         {
             _context = context;
             this.currentExhibitionService = currentExhibitionService;
+            this.exhibitionService = exhibitionService;
+            this.hRService = hRService;
         }
 
         // GET: CurrentExhibitions
         public async Task<IActionResult> Index()
         {
-            var galleryDbContext = _context.CurrentExhibitions.Include(c => c.Employee).Include(c => c.Exh).Include(c => c.ExhPlace);
-            //var list = currentExhibitionService.GetAllCurrentExhibitions().ToList();
-            //foreach (CurrentExhibitionModel c in list)
-            //{
-            //    currentExhibitionService.CountEstimatePrice(c.Id);
-            //}
-            return View(await galleryDbContext.ToListAsync());
+            //var galleryDbContext = _context.CurrentExhibitions.Include(c => c.Employee).Include(c => c.Exh).Include(c => c.ExhPlace);
+            var list = currentExhibitionService.GetAllCurrentExhibitions().ToList();
+            foreach (CurrentExhibitionModel c in list)
+            {
+                currentExhibitionService.CountEstimatePrice(c.Id);
+                c.Employee = hRService.GetEmployeeById(c.IdEmployee);
+                c.Exhibition = exhibitionService.GetExhById(c.IdExh);
+                c.ExhibitPlace = hRService.GetPlaceById(c.IdExhPlace);
+            }
+            CEViewModel model = new CEViewModel(list);
+            return View(model);
         }
 
         // GET: CurrentExhibitions/Details/5
@@ -59,7 +70,7 @@ namespace GalleryWeb.Controllers.Admins
         {
             ViewData["IdEmployee"] = new SelectList(_context.Employees, "Id", "LastName");
             ViewData["IdExh"] = new SelectList(_context.Exhibitions, "Id", "Name");
-            ViewData["IdExhPlace"] = new SelectList(_context.ExhibitPlaces, "Id", "Id");
+            ViewData["IdExhPlace"] = new SelectList(_context.ExhibitPlaces, "Id", "Name");
             return View();
         }
 
@@ -78,7 +89,7 @@ namespace GalleryWeb.Controllers.Admins
             }
             ViewData["IdEmployee"] = new SelectList(_context.Employees, "Id", "LastName", currentExhibition.IdEmployee);
             ViewData["IdExh"] = new SelectList(_context.Exhibitions, "Id", "Name", currentExhibition.IdExh);
-            ViewData["IdExhPlace"] = new SelectList(_context.ExhibitPlaces, "Id", "Id", currentExhibition.IdExhPlace);
+            ViewData["IdExhPlace"] = new SelectList(_context.ExhibitPlaces, "Id", "Name", currentExhibition.IdExhPlace);
             return View(currentExhibition);
         }
 
@@ -97,7 +108,7 @@ namespace GalleryWeb.Controllers.Admins
             }
             ViewData["IdEmployee"] = new SelectList(_context.Employees, "Id", "LastName", currentExhibition.IdEmployee);
             ViewData["IdExh"] = new SelectList(_context.Exhibitions, "Id", "Name", currentExhibition.IdExh);
-            ViewData["IdExhPlace"] = new SelectList(_context.ExhibitPlaces, "Id", "Id", currentExhibition.IdExhPlace);
+            ViewData["IdExhPlace"] = new SelectList(_context.ExhibitPlaces, "Id", "Name", currentExhibition.IdExhPlace);
             return View(currentExhibition);
         }
 
@@ -135,7 +146,7 @@ namespace GalleryWeb.Controllers.Admins
             }
             ViewData["IdEmployee"] = new SelectList(_context.Employees, "Id", "LastName", currentExhibition.IdEmployee);
             ViewData["IdExh"] = new SelectList(_context.Exhibitions, "Id", "Name", currentExhibition.IdExh);
-            ViewData["IdExhPlace"] = new SelectList(_context.ExhibitPlaces, "Id", "Id", currentExhibition.IdExhPlace);
+            ViewData["IdExhPlace"] = new SelectList(_context.ExhibitPlaces, "Id", "Name", currentExhibition.IdExhPlace);
             return View(currentExhibition);
         }
 
