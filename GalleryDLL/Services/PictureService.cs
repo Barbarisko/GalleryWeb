@@ -142,5 +142,32 @@ namespace GalleryBLL.Services
 			return filtered.OrderBy(o => o.Name).ToList();
         }
 
-	}
+        public List<PictureModel> FilterByTechnique(List<PictureModel> itemsToSort, int techName)
+        {
+			List<PictureModel> filtered = new List<PictureModel>();
+
+			for (int i = 0; i < itemsToSort.Count; i++)
+			{
+				if (itemsToSort[i].IdTechnique == techName)
+				{
+					filtered.Add(itemsToSort[i]);
+				}
+			}
+			return filtered.OrderBy(o => o.Name).ToList();
+		}
+
+        public List<PictureModel> FilterByArtist(List<PictureModel> itemsToSort, int artistName)
+        {
+			List<PictureModel> filtered = new List<PictureModel>();
+
+			for (int i = 0; i < itemsToSort.Count; i++)
+			{
+				if (itemsToSort[i].IdArtist == artistName)
+				{
+					filtered.Add(itemsToSort[i]);
+				}
+			}
+			return filtered.OrderBy(o => o.Name).ToList();
+		}
+    }
 }

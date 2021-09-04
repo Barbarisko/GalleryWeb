@@ -7,9 +7,9 @@ using System.Text;
 
 namespace GalleryBLL
 {
-    public class Mapper:Profile
+    public class CustomMapper:Profile
     {
-        public Mapper()
+        public CustomMapper()
         {
             CreateMap<ArtistModel, Artist>()
                 .ForMember(d => d.Pictures, opt => opt.MapFrom(src => src.Pictures))

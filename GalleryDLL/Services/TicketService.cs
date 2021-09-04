@@ -85,9 +85,7 @@ namespace GalleryBLL.Services
             _unitOfWork.Save();
         }
 
-
-
-        public void DeleteItem(int itemId, int curExId)
+             public void DeleteItem(int itemId, int curExId)
         {
             int quantity = (int)_unitOfWork.TicketsInCartRepository.Get(itemId).Quantity;
 

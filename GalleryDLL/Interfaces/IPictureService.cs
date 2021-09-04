@@ -23,6 +23,8 @@ namespace GalleryBLL.Interfaces
         List<PictureModel> SortPicturesAZ(List<PictureModel> itemsToSort);
         List<PictureModel> SortPicturesZA(List<PictureModel> itemsToSort);
         List<PictureModel> FilterByGenre(List<PictureModel> itemsToSort, string genreName);
+        List<PictureModel> FilterByTechnique(List<PictureModel> itemsToSort, int techName);
+        List<PictureModel> FilterByArtist(List<PictureModel> itemsToSort, int artistName);
 
 
     }

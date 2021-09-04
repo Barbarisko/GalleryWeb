@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "type": "mssql",
+      "connectionId": "Server=165.232.107.123;Database=postgres;Username=postgres;Password=1;PersistSecurityInfo=True;"
+    }
+  }
+}

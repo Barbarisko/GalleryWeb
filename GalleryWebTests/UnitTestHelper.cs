@@ -1,18 +1,17 @@
+using AutoMapper;
+using GalleryBLL;
 using NUnit.Framework;
 
 namespace GalleryWebTests
 {
-    public class Tests
-    {
-        [SetUp]
-        public void Setup()
-        {
-        }
+	internal static class UnitTestsHelper
+	{
+		public static Mapper CreateMapperProfile()
+		{
+			var myProfile = new CustomMapper();
+			var configuration = new MapperConfiguration(cfg => cfg.AddProfile(myProfile));
 
-        [Test]
-        public void Test1()
-        {
-            Assert.Pass();
-        }
-    }
+			return new Mapper(configuration);
+		}
+	}
 }
