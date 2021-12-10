@@ -13,7 +13,6 @@ namespace GalleryDAL.Entities
             Employees = new HashSet<Employee>();
             ExhibitPlaces = new HashSet<ExhibitPlace>();
         }
-
         public string Name { get; set; }
         public int IdCountry { get; set; }
 

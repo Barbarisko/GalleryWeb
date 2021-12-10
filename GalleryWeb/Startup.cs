@@ -52,7 +52,7 @@ namespace GalleryWeb
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            services.AddSingleton(new MapperConfiguration(c => c.AddProfile(new GalleryBLL.Mapper())).CreateMapper());
+            services.AddSingleton(new MapperConfiguration(c => c.AddProfile(new GalleryBLL.CustomMapper())).CreateMapper());
 
             services.AddTransient<IHRService, HRService>();
             services.AddTransient<IArtistService, ArtistService>();
