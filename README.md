@@ -1,8 +1,8 @@
 This is a web-based application for facilitating online exhibitions and, in some cases, promoting offline events with possibility to purchase the tickets and receive them via email. 
 Created as a course work for 1st semester of 4th course as a Bachelor of Kyiv Polytechnic Institute. 
 
-Stack:
-.NET 5.0
+<u>Stack:</u>
+</n>.NET 5.0
   layered achitecture
   MVC as way to control UI actions
 HTML+CSS for UI
